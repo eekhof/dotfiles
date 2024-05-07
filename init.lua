@@ -29,6 +29,11 @@ vim.api.nvim_set_hl(0, "NeogitDiffDelete", { ctermfg=196, ctermbg=NONE, cterm=NO
 vim.api.nvim_set_hl(0, "NeogitHunkHeader", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 vim.api.nvim_set_hl(0, "NeogitHunkHeaderHighlight", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 
+-- Transparency:
+vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, guibd=NONE, ctermbg=NONE, cterm=NONE }) -- For transparency of background
+vim.api.nvim_set_hl(0, "NonText", { ctermfg=153, ctermbg=NONE, cterm=NONE }) -- For transparency of background
+vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=153, ctermbg=NONE, cterm=NONE }) -- For transparency of background
+
 -- General options -----------------------------
 vim.api.nvim_create_autocmd('FileType', { -- Enable spellchecking but only for text files
     pattern = { 'tex', 'text', 'markdown', 'bib' },

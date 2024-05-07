@@ -41,6 +41,7 @@ volume master {
 }
 
 # TODO: The indicator in the statusbar does not yet register changes made by any other way than the FN-Mute-Key
+# TODO: The username is hardcoded here, improve this
 path_exists MICMUTED {
         path = "/home/lucas/.cache/i3/microphoneismuted"
         format = "MIC: Off"

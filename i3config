@@ -150,8 +150,8 @@ bar {
 # Volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && notify-send -i audio-volume-muted-symbolic "Sound is now OFF" || notify-send -i audio-volume-high-symbolic "Sound is now ON" )
 # To get current sink volume use: pactl get-sink-volume @DEFAULT_SINK@ | sed -e "s/front-left: [[:digit:]]* \/  //" -e "s/%.*/%/" -e "2d" # TODO: Does not work yet
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send -i audio-volume-high-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && notify-send -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && notify-send -i audio-volume-high-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
 # monitor brightness
 # bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 10; notify-send 'brightness up'" # TODO: Brightnessctl is too slow, use this instead, but needs to be configured first
 # Source for the following: https://gist.github.com/VicoErv/f1567f33b0f4630339350efcd5496892
@@ -162,7 +162,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && notif
 bindsym XF86WLAN exec notify-send -i network-cellular-signal-excellent-symbolic "Toggle Wifi"
 # Microphone # TODO: The indicator in the statusbar does not yet register changes made by any other way than the FN-Mute-Key
 exec mkdir -p ~/.cache/i3/ && (pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && touch ~/.cache/i3/microphoneismuted || rm ~/.cache/i3/microphoneismuted)
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && notify-send -i microphone-sensitivity-muted-symbolic "Mic is now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && notify-send -i audio-input-microphone-symbolic "Mic is now ON" ) )
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && notify-send -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && notify-send -i audio-input-microphone-symbolic "Mic now ON" ) )
+# Toggle player pause:
+bindsym XF86Tools exec playerctl play-pause && ( playerctl status | grep -q Playing && notify-send -i media-playback-start-symbolic "Player now playing" || notify-send -i media-playback-pause-symbolic "Player now paused" )
 
 ### Further startups:
 # Compositor (To prevent screen tearing):
