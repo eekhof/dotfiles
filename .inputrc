@@ -1,0 +1,15 @@
+# CUSTOM SCRIPTS BY LUCAS EEKHOF
+# Source see https://youtu.be/iKzoYUErEM0 and https://youtu.be/QafaRsG6AHk
+
+
+# Colors:
+set colored-stats on # Show colors in ls (?)
+set colored-completion-prefix on # Show colors in completion so filetypes are more clear
+
+# Completion:
+set show-all-if-ambiguous on # Only needs to hit tab once for autocomplete (is it not on per default?)
+set completion-ignore-case on # Ignore case when tab completing
+
+# History search fix letter:
+"\e[A": history-search-backward
+"\e[B": history-search-forward
