@@ -612,13 +612,6 @@ end, {silent = true})
             { name = 'cmdline' }
         })
     })
--- Autocommand for common Mesa config files in Fortran
-vim.cmd[[
-augroup FortranFiletype
-    autocmd!
-    autocmd BufRead,BufNewFile inlist,inlist_pgstar,inlist_project,history_columns.list,profile_columns.list,gyre.in set filetype=fortran | set syntax=fortran
-augroup END
-]]
 -- Set up lspconfig. # TODO: Maybe use snippet https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
@@ -688,6 +681,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end,
     group = filetype
 })
+-- Autocommand for common Mesa config files in Fortran
+vim.cmd[[
+augroup FortranFiletype
+    autocmd!
+    autocmd BufRead,BufNewFile inlist,inlist_pgstar,inlist_project,history_columns.list,profile_columns.list,gyre.in set filetype=fortran | set syntax=fortran
+augroup END
+]]
 
 -- Statusline etc. -----------------------------
 vim.o.statusline = '%f'                        -- File name without path
