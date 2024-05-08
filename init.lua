@@ -125,6 +125,7 @@ end
 vim.g.mapleader = ' '                           -- Map leader key to space
 vim.g.maplocalleader = ' '                      -- Make local leader key same as leader key, required by vimtex, see https://stackoverflow.com/questions/26837425/vim-how-to-use-the-control-key-as-my-local-leader
 imap('jk', '<Esc>')-- TODO: Does betterescape already manage this?                             -- Map jk to escape from insert mode to prevent reaching for escape - If needing to type literal jk, one has to wait one to two seconds between presses, see https://vim.fandom.com/wiki/Avoid_the_escape_key
+vmap('jk', '<Esc>')
 
 nmap('S', ':%s//gI<Left><Left><Left>')-- TODO: Maybe polish this with below call command?                 -- Map capital S to replace all, I tag needed to make case sensitive after o.ignorecase or so has been set
 -- :autocmd FileType tex          iabbrev fr \frac{ENUMERATOR}{DENOMINATOR}<Esc>?ENUMERATOR<CR>dwh:call InsertInput("Enumerator")<CR><Esc>?DENOMINATOR<CR>dwh:call InsertInput("Denominator")<CR>a<right>
@@ -611,6 +612,13 @@ end, {silent = true})
             { name = 'cmdline' }
         })
     })
+-- Autocommand for common Mesa config files in Fortran
+vim.cmd[[
+augroup FortranFiletype
+    autocmd!
+    autocmd BufRead,BufNewFile inlist,inlist_pgstar,inlist_project,history_columns.list,profile_columns.list,gyre.in set filetype=fortran | set syntax=fortran
+augroup END
+]]
 -- Set up lspconfig. # TODO: Maybe use snippet https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
