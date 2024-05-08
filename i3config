@@ -172,6 +172,8 @@ exec --no-startup-id picom -b --no-fading-openclose --menu-opacity 1.0 --inactiv
 # Clipboard manager:
 exec --no-startup-id xfce4-clipman -b
 bindsym $mod+Shift+v exec xfce4-clipman-history
+# Notification daemon
+exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 
 # Shortcuts for common programs:
 bindsym $mod+F1 exec thunar
