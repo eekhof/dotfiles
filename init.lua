@@ -229,7 +229,7 @@ nmap('<Leader>J', 'i<CR><ESC>k:s/ $//<CR>$')
 nmap('<Leader>t', ':terminal<CR>')
 tmap('<Esc>', '<C-\\><C-N>:bd!<CR>')
 -- Always enter insert mode when entering terminal buffer:
-vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" }, { pattern = "term://*", command = "startinsert" }) -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" }, { pattern = "term://*", command = "setlocal nospell | startinsert" }) -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
 
 -- Mapping to force gf to go edit file even if it does not exist for use in note taking/wiki creation to quickly make new notes:
 nmap('gf', ':e <cfile><CR>')
