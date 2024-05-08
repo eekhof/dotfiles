@@ -25,27 +25,27 @@ alias n='nvim ~/Sonstiges/notes'
 alias todo='nvim ~/Sonstiges/todo_liste_allgemein.txt'
 
 # Further aliases
-alias nvim='nvim -p' # -p is to open files in tabs
-alias vi='nvim -p'
-alias vim='nvim -p'
-alias nv='nvim -p'
-alias v='nvim -p'
-alias snvim='sudo -E nvim -p' # -E to edit file with sudo priviliges while using custom vim config of user
-alias svi='sudo -E nvim -p'
-alias svim='sudo -E nvim -p'
-alias snv='sudo -E nvim -p'
-alias sv='sudo -E nvim -p'
+alias nvim='nvim' # use -p to open files in tabs
+alias vi='nvim'
+alias vim='nvim'
+alias nv='nvim'
+alias v='nvim'
+alias snvim='sudo -E nvim' # -E to edit file with sudo priviliges while using custom vim config of user
+alias svi='sudo -E nvim'
+alias svim='sudo -E nvim'
+alias snv='sudo -E nvim'
+alias sv='sudo -E nvim'
 # Without using undofile, for this option see init.lua:
-alias anonnvim='nvim -p -c "set noundofile"'
-alias anonvi='nvim -p -c "set noundofile"'
-alias anonvim='nvim -p -c "set noundofile"'
-alias anonnv='nvim -p -c "set noundofile"'
-alias anonv='nvim -p -c "set noundofile"'
-alias anonsnvim='sudo -E nvim -p -c "set noundofile"'
-alias anonsvi='sudo -E nvim -p -c "set noundofile"'
-alias anonsvim='sudo -E nvim -p -c "set noundofile"'
-alias anonsnv='sudo -E nvim -p -c "set noundofile"'
-alias anonsv='sudo -E nvim -p -c "set noundofile"'
+alias anonnvim='nvim -c "set noundofile"'
+alias anonvi='nvim -c "set noundofile"'
+alias anonvim='nvim -c "set noundofile"'
+alias anonnv='nvim -c "set noundofile"'
+alias anonv='nvim -c "set noundofile"'
+alias anonsnvim='sudo -E nvim -c "set noundofile"'
+alias anonsvi='sudo -E nvim -c "set noundofile"'
+alias anonsvim='sudo -E nvim -c "set noundofile"'
+alias anonsnv='sudo -E nvim -c "set noundofile"'
+alias anonsv='sudo -E nvim -c "set noundofile"'
 
 alias ff='f(){ groff -ms -dpaper=a4 -Kutf8 "$@" -T pdf > "${@%.*}".pdf; unset -f f; }; f' # To compile groff documents
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
