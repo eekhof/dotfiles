@@ -168,7 +168,7 @@ bindsym XF86Tools exec playerctl play-pause && ( playerctl status | grep -q Play
 
 ### Further startups:
 # Compositor (To prevent screen tearing):
-exec --no-startup-id picom -b --no-fading-openclose --menu-opacity 1.0 --inactive-opacity 1.0 --frame-opacity 0.0
+exec --no-startup-id picom --conf /home/lucas/static-website/longterm/picom.conf
 # Clipboard manager:
 exec --no-startup-id xfce4-clipman -b
 bindsym $mod+Shift+v exec xfce4-clipman-history
