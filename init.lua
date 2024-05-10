@@ -121,6 +121,9 @@ end
 function tmap(shortcut, command)
     map('t', shortcut, command)
 end
+function xmap(shortcut, command)
+    map('x', shortcut, command)
+end
 
 vim.g.mapleader = ' '                           -- Map leader key to space
 vim.g.maplocalleader = ' '                      -- Make local leader key same as leader key, required by vimtex, see https://stackoverflow.com/questions/26837425/vim-how-to-use-the-control-key-as-my-local-leader
@@ -129,6 +132,7 @@ imap('jk', '<Esc>')                             -- Map jk to escape from insert 
 -- Map putting in visual mode so that text stays selected, but not if using capital P . Capital P is normally used to put text in visual mode, and not yank it to register, because small p yanks overwritten text to register
 vmap('p', 'Pgv')
 vmap('P', 'P')
+-- xmap('p', 'c<c-r><c-r>0<esc>') -- Fix visual paste repeat, see https://vi.stackexchange.com/questions/34850/is-it-possible-to-properly-repeat-a-visual-replacement and https://www.reddit.com/r/vim/comments/qhd2pv/is_it_possible_to_properly_repeat_a_visual/
 
 nmap('S', ':%s//gI<Left><Left><Left>')-- TODO: Maybe polish this with below call command?                 -- Map capital S to replace all, I tag needed to make case sensitive after o.ignorecase or so has been set
 -- :autocmd FileType tex          iabbrev fr \frac{ENUMERATOR}{DENOMINATOR}<Esc>?ENUMERATOR<CR>dwh:call InsertInput("Enumerator")<CR><Esc>?DENOMINATOR<CR>dwh:call InsertInput("Denominator")<CR>a<right>
@@ -409,7 +413,6 @@ local plugins = {
 --    'tpope/vim-repeat',
     'tpope/vim-commentary',
     'neovim/nvim-lspconfig',
-    'andymass/vim-visput', -- To fix the visual select repetition issue, see https://vi.stackexchange.com/questions/34850/is-it-possible-to-properly-repeat-a-visual-replacement
     'lervag/vimtex', -- TODO: On the vimtex github it says not to lazyload vimtex, as it will cause inverse search to fail
     { 'iamcco/markdown-preview.nvim',
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
