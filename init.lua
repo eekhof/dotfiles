@@ -409,6 +409,7 @@ local plugins = {
 --    'tpope/vim-repeat',
     'tpope/vim-commentary',
     'neovim/nvim-lspconfig',
+    'andymass/vim-visput', -- To fix the visual select repetition issue, see https://vi.stackexchange.com/questions/34850/is-it-possible-to-properly-repeat-a-visual-replacement
     'lervag/vimtex', -- TODO: On the vimtex github it says not to lazyload vimtex, as it will cause inverse search to fail
     { 'iamcco/markdown-preview.nvim',
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
