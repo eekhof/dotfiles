@@ -80,8 +80,8 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
+# focus the child container (has to be reboudn because of dmenu, has to be bound because mod+a for jump to parent exists)
+bindsym $mod+y focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -185,11 +185,14 @@ bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playl
 # bindsym $mod+F3 exec nvim # TODO: Does not work yet
 
 ### Cosmetics:
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 4
+default_floating_border pixel 4
 hide_edge_borders both
 
 ## Monitor Layout (Get monitor layout by xrandr --listmonitors):
+# Monitors at home desktop:
 exec xrandr --output DP-1 --auto --right-of HDMI-1
 bindsym $mod+o move workspace to output left
 bindsym $mod+p move workspace to output right
+# Monitors at work desktop:
+exec xrandr --output DP-3 --pos -3840x-400--auto --primary --output eDP-1 --auto
