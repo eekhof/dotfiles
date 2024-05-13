@@ -143,7 +143,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status -c ~/static-website/longterm/i3statusconfig
+        status_command i3status -c ~/static-website/longterm/i3statusconfig_$HOSTNAME
         font pango:DejaVu Sans Mono 12
         separator_symbol " ⁞ "
         position top
@@ -152,9 +152,12 @@ bar {
 # FN-Keys Laptop:
 # Volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" )
+bindsym mod5+F4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" )
 # To get current sink volume use: pactl get-sink-volume @DEFAULT_SINK@ | sed -e "s/front-left: [[:digit:]]* \/  //" -e "s/%.*/%/" -e "2d" # TODO: Does not work yet
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
+bindsym mod5+F5 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
+bindsym mod5+F6 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
 # monitor brightness
 # bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 10; dunstify 'brightness up'" # TODO: Brightnessctl is too slow, use this instead, but needs to be configured first
 # Source for the following: https://gist.github.com/VicoErv/f1567f33b0f4630339350efcd5496892
@@ -166,8 +169,10 @@ bindsym XF86WLAN exec dunstify -h string:x-dunst-stack-tag:wifi -i network-cellu
 # Microphone # TODO: The indicator in the statusbar does not yet register changes made by any other way than the FN-Mute-Key
 exec mkdir -p ~/.cache/i3/ && (pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && touch ~/.cache/i3/microphoneismuted || rm ~/.cache/i3/microphoneismuted)
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
+bindsym mod5+F7 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
 # Toggle player pause:
 bindsym XF86Tools exec playerctl play-pause && ( playerctl status | grep -q Playing && dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-start-symbolic "Player now playing" || dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-pause-symbolic "Player now paused" )
+bindsym mod5+F10 exec playerctl play-pause && ( playerctl status | grep -q Playing && dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-start-symbolic "Player now playing" || dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-pause-symbolic "Player now paused" )
 
 ### Further startups:
 # Compositor (To prevent screen tearing):
@@ -196,3 +201,7 @@ bindsym $mod+o move workspace to output left
 bindsym $mod+p move workspace to output right
 # Monitors at work desktop:
 exec xrandr --output DP-3 --pos -3840x-400--auto --primary --output eDP-1 --auto
+
+# Put workspaces in right order (wrong numeric order to start focus on correct monitor):
+exec i3-msg "workspace 2, move workspace to output DP-1"
+exec i3-msg "workspace 1, move workspace to output HDMI-1"
