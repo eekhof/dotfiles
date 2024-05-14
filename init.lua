@@ -52,6 +52,8 @@ vim.o.cursorcolumn = true                       -- Highlight current column
 
 vim.o.undofile = true                           -- Enable persistent undo
 
+vim.o.shell = '/bin/bash'                       -- Use bash as shell to fix $PATH not being same as system path, causing problems with e. g. finding latexmk, source: https://stackoverflow.com/questions/13402899/why-does-my-vim-command-line-path-differ-from-my-shell-path/13460579#13460579 # TODO: Probably unneccessary when not using dev version of vim
+
 vim.o.clipboard = 'unnamed,unnamedplus'         -- Set the default register to the clipboard that is accessed by CTRL+C and CTRL+V, together with the line above it just takes the last one of the two that was used (I mostly use the latter) (Note the plus instead of caret, it is necessary here) Source for both: https://www.reddit.com/r/vim/comments/3ae4qf/psa_set_clipboardunnamed/
 vim.api.nvim_create_autocmd('TextYankPost', { -- Highlight yanked text, useful if yanking outside of visual mode, source: https://github.com/VonHeikemen/nvim-starter/blob/00-minimal/init.lua
     group = grp,
@@ -448,7 +450,21 @@ local plugins = {
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
+            -- TO surround word with latex funcxtion use ysiwc and get prompted for command, to surround visual selection in environment press c , for the source see https://github.com/kylechui/nvim-surround/discussions/53#discussioncomment-3142459
+                surrounds = {
+                    ["c"] = {
+                        add = function()
+                            local cmd = require("nvim-surround.config").get_input "Command: "
+                            return { { "\\" .. cmd .. "{" }, { "}" } }
+                        end,
+                    },
+                    ["e"] = {
+                        add = function()
+                            local env = require("nvim-surround.config").get_input "Environment: "
+                            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
+                        end,
+                    },
+                },
             })
         end
     }
