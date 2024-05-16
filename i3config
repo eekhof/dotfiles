@@ -161,8 +161,8 @@ bindsym mod5+F6 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% &&
 # monitor brightness
 # bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 10; dunstify 'brightness up'" # TODO: Brightnessctl is too slow, use this instead, but needs to be configured first
 # Source for the following: https://gist.github.com/VicoErv/f1567f33b0f4630339350efcd5496892
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && dunstify -i daytime-sunrise-symbolic "Brightness $(($(brightnessctl get) / 960 ))%" -h string:x-canonical-private-synchronous:brightness_percentage --app-name System
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && dunstify -i daytime-sunset-symbolic "Brightness $(($(brightnessctl get) / 960 ))%" -h string:x-canonical-private-synchronous:brightness_percentage --app-name System
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +10% && dunstify -h string:x-dunst-stack-tag:volume -i daytime-sunrise-symbolic "Brightness $(($(brightnessctl get) / 960 ))%"
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && dunstify -h string:x-dunst-stack-tag:volume -i daytime-sunset-symbolic "Brightness $(($(brightnessctl get) / 960 ))%"
 # Wifi
 # Toggling wifi adapter works without explicit command, seems to be bound to the key hardwareside:
 bindsym XF86WLAN exec dunstify -h string:x-dunst-stack-tag:wifi -i network-cellular-signal-excellent-symbolic "Toggle Wifi"
@@ -206,4 +206,4 @@ exec xrandr --output DP-3 --pos -3840x-400--auto --primary --output eDP-1 --auto
 
 # Put workspaces in right order (wrong numeric order to start focus on correct monitor):
 exec i3-msg "workspace 2, move workspace to output DP-1"
-exec i3-msg "workspace 1, move workspace to output HDMI-1"
+exec i3-msg "workspace 1, move workspace to output HDMI-1, workspace 1"
