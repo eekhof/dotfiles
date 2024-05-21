@@ -151,7 +151,7 @@ bar {
 
 # FN-Keys Laptop:
 # Volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" )
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" ) # TODO: Change this to amixer set Master toggle, see https://askubuntu.com/questions/26068/how-do-you-mute-from-the-command-line to affect all
 bindsym mod5+F4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" )
 # To get current sink volume use: pactl get-sink-volume @DEFAULT_SINK@ | sed -e "s/front-left: [[:digit:]]* \/  //" -e "s/%.*/%/" -e "2d" # TODO: Does not work yet
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
@@ -167,6 +167,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && dunst
 # Toggling wifi adapter works without explicit command, seems to be bound to the key hardwareside:
 bindsym XF86WLAN exec dunstify -h string:x-dunst-stack-tag:wifi -i network-cellular-signal-excellent-symbolic "Toggle Wifi"
 # Microphone # TODO: The indicator in the statusbar does not yet register changes made by any other way than the FN-Mute-Key
+exec pactl set-default-source 4 # Set default source to hardware microphone, find out its id with pactl list sources short command, and look for the one that is "RUNNING" when mic is turned on
 exec mkdir -p ~/.cache/i3/ && (pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && touch ~/.cache/i3/microphoneismuted || rm ~/.cache/i3/microphoneismuted)
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
 bindsym mod5+F7 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
