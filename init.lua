@@ -664,7 +664,7 @@ end, {silent = true})
     vim.api.nvim_create_autocmd("BufNewFile", {
         pattern = "*.tex",
         callback = function()
-            vim.api.nvim_put({ '\\documentclass{article}', '\\usepackage{eekhof}', '', '\\title{}', '\\begin{document}', '', 'CONTENT', '', '\\end{document}', '% vim: wrap :' }, 'l', false, false) -- Insert template
+            vim.api.nvim_put({ '\\documentclass{article}', '\\usepackage{eekhof}', '', '\\title{}', '\\begin{document}', '', 'CONTENT', '', '\\dobibliography', '\\end{document}', '% vim: wrap :' }, 'l', false, false) -- Insert template
             vim.api.nvim_win_set_cursor(0, { 4, 7 }) -- Go to position where the title is to be written
         end,
         group = templates
