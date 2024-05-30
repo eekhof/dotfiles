@@ -11,23 +11,23 @@
 -- TODO: Die Completionvorschläge brechen ab, wenn im vorgeschlagenen Wort ein Umlaut ist (Zumindest bei reinen Textvorschlägen)
 
 -- Colorscheme -----------------------------
-vim.cmd.colorscheme('evening')
-vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Prevent vim from changing background color, see https://www.reddit.com/r/vim/comments/5u5ujc/suggestions_on_black_dark_colorscheme/
-vim.api.nvim_set_hl(0, "CursorColumn", { ctermfg=NONE, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
-vim.api.nvim_set_hl(0, "CursorLine", { ctermfg=NONE, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
-vim.api.nvim_set_hl(0, "CursorLineNr", { ctermfg=226, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
-vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=153, ctermbg=000, cterm=NONE }) -- Change bg to true black
-vim.api.nvim_set_hl(0, "StatusLine", { ctermfg=000, ctermbg=231, cterm=bold }) -- Change fg to true black
-vim.api.nvim_set_hl(0, "StatusLineNC", { ctermfg=000, ctermbg=252, cterm=NONE }) -- Change fg to true black
-vim.api.nvim_set_hl(0, "TabLineSel", { ctermfg=000, ctermbg=231, cterm=bold }) -- Change fg to true black
-vim.api.nvim_set_hl(0, "TabLine", { ctermfg=000, ctermbg=252, cterm=NONE }) -- Change fg to true black
-vim.api.nvim_set_hl(0, "NonText", { ctermfg=153, ctermbg=000, cterm=NONE }) -- Change bg to true black
-vim.api.nvim_set_hl(0, "Ignore", { ctermfg=000, ctermbg=NONE, cterm=NONE }) -- Change fg to true black
-vim.api.nvim_set_hl(0, "FloatBorder", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Change window border color to black and white, this should be default, but somehow doesn't work when calling nvim_open_win
-vim.api.nvim_set_hl(0, "NeogitDiffAdd", { ctermfg=46, ctermbg=NONE, cterm=NONE }) -- TODO: Do some NeoGit colors manually, but this should work automatically, see https://github.com/NeogitOrg/neogit/issues/600 and https://github.com/NeogitOrg/neogit/blob/master/lua/neogit/lib/hl.lua
-vim.api.nvim_set_hl(0, "NeogitDiffDelete", { ctermfg=196, ctermbg=NONE, cterm=NONE }) -- TODO: See above
-vim.api.nvim_set_hl(0, "NeogitHunkHeader", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
-vim.api.nvim_set_hl(0, "NeogitHunkHeaderHighlight", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
+-- vim.cmd.colorscheme('evening')
+-- vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Prevent vim from changing background color, see https://www.reddit.com/r/vim/comments/5u5ujc/suggestions_on_black_dark_colorscheme/
+-- vim.api.nvim_set_hl(0, "CursorColumn", { ctermfg=NONE, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
+-- vim.api.nvim_set_hl(0, "CursorLine", { ctermfg=NONE, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
+-- vim.api.nvim_set_hl(0, "CursorLineNr", { ctermfg=226, ctermbg=237, cterm=NONE }) -- Change bg to darker grey to match true black
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=153, ctermbg=000, cterm=NONE }) -- Change bg to true black
+-- vim.api.nvim_set_hl(0, "StatusLine", { ctermfg=000, ctermbg=231, cterm=bold }) -- Change fg to true black
+-- vim.api.nvim_set_hl(0, "StatusLineNC", { ctermfg=000, ctermbg=252, cterm=NONE }) -- Change fg to true black
+-- vim.api.nvim_set_hl(0, "TabLineSel", { ctermfg=000, ctermbg=231, cterm=bold }) -- Change fg to true black
+-- vim.api.nvim_set_hl(0, "TabLine", { ctermfg=000, ctermbg=252, cterm=NONE }) -- Change fg to true black
+-- vim.api.nvim_set_hl(0, "NonText", { ctermfg=153, ctermbg=000, cterm=NONE }) -- Change bg to true black
+-- vim.api.nvim_set_hl(0, "Ignore", { ctermfg=000, ctermbg=NONE, cterm=NONE }) -- Change fg to true black
+-- vim.api.nvim_set_hl(0, "FloatBorder", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Change window border color to black and white, this should be default, but somehow doesn't work when calling nvim_open_win
+-- vim.api.nvim_set_hl(0, "NeogitDiffAdd", { ctermfg=46, ctermbg=NONE, cterm=NONE }) -- TODO: Do some NeoGit colors manually, but this should work automatically, see https://github.com/NeogitOrg/neogit/issues/600 and https://github.com/NeogitOrg/neogit/blob/master/lua/neogit/lib/hl.lua
+-- vim.api.nvim_set_hl(0, "NeogitDiffDelete", { ctermfg=196, ctermbg=NONE, cterm=NONE }) -- TODO: See above
+-- vim.api.nvim_set_hl(0, "NeogitHunkHeader", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
+-- vim.api.nvim_set_hl(0, "NeogitHunkHeaderHighlight", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 
 -- Transparency:
 vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, guibd=NONE, ctermbg=NONE, cterm=NONE }) -- For transparency of background
@@ -135,6 +135,8 @@ imap('jk', '<Esc>')                             -- Map jk to escape from insert 
 vmap('p', 'Pgv')
 vmap('P', 'P')
 -- xmap('p', 'c<c-r><c-r>0<esc>') -- Fix visual paste repeat, see https://vi.stackexchange.com/questions/34850/is-it-possible-to-properly-repeat-a-visual-replacement and https://www.reddit.com/r/vim/comments/qhd2pv/is_it_possible_to_properly_repeat_a_visual/
+-- Map to visually select last pasted text:
+nmap('gp', "`[v`]")
 
 nmap('S', ':%s//gI<Left><Left><Left>')-- TODO: Maybe polish this with below call command?                 -- Map capital S to replace all, I tag needed to make case sensitive after o.ignorecase or so has been set
 -- :autocmd FileType tex          iabbrev fr \frac{ENUMERATOR}{DENOMINATOR}<Esc>?ENUMERATOR<CR>dwh:call InsertInput("Enumerator")<CR><Esc>?DENOMINATOR<CR>dwh:call InsertInput("Denominator")<CR>a<right>
@@ -435,6 +437,7 @@ local plugins = {
     'petertriho/cmp-git',
     'hrsh7th/cmp-omni', -- For Latex support, see https://github.com/lervag/vimtex/issues/2215
     'hrsh7th/cmp-cmdline',
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { 'zbirenbaum/copilot-cmp', -- See https://www.reddit.com/r/neovim/comments/twe45i/copilotlua_copilotcmp_pure_lua_plugins_for_github/ , for this installation thing see https://github.com/zbirenbaum/copilot-cmp
         config = function()
             require('copilot_cmp').setup()
@@ -461,7 +464,7 @@ local plugins = {
                     ["e"] = {
                         add = function()
                             local env = require("nvim-surround.config").get_input "Environment: "
-                            return { { "\\begin{" .. env .. "}" }, { "\\end{" .. env .. "}" } }
+                            return { { "\\begin{" .. env .. "}", "" }, { "\\end{" .. env .. "}" } }
                         end,
                     },
                 },
@@ -647,7 +650,36 @@ end, {silent = true})
         neogit.open({})
     end
     vim.keymap.set('n', '<Leader>g', git_status)
+-- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
+require("catppuccin").setup {
+    color_overrides = {
+        all = {
+            text = "#ffffff",
+        },
+        latte = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+        },
+        frappe = {            
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+        },
+        macchiato = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+        },
+        mocha = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
 
+        },
+    }
+}
+vim.cmd.colorscheme('catppuccin')
 
 -- Templates -----------------------------
 -- augroup templates
@@ -708,14 +740,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.cmd[[
 augroup FortranFiletype
     autocmd!
-    autocmd BufRead,BufNewFile inlist,inlist_pgstar,inlist_project,history_columns.list,profile_columns.list,gyre.in set filetype=fortran | set syntax=fortran
+    autocmd BufRead,BufNewFile inlist*,history_columns.list,profile_columns.list,gyre.in set filetype=fortran | set syntax=fortran
 augroup END
 ]]
 
 -- Statusline etc. -----------------------------
-vim.o.statusline = '%f'                        -- File name without path
-vim.o.statusline = vim.o.statusline .. '%='    -- Switch to the right side
-vim.o.statusline = vim.o.statusline .. 'CWD: %-1{getcwd()}    ' -- Current working directory
+vim.o.statusline = ''
+-- vim.o.statusline = vim.o.statusline .. '%f'                        -- File name with relative path (e. g. only filename if in cwd)
+vim.o.statusline = vim.o.statusline .. '%F'                        -- File name with full path
+vim.o.statusline = vim.o.statusline .. ' %= '    -- Switch to the right side
 vim.o.statusline = vim.o.statusline .. 'Ln: %3l/%L    ' -- Lines out of total lines
 vim.o.statusline = vim.o.statusline .. 'Col: %-3c    ' -- Current column
 vim.o.statusline = vim.o.statusline .. '(%-3p%%)    ' -- Percentage through file
@@ -736,6 +769,7 @@ vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally,
 -- TODO: Insert functionality that when using e. g. "da(" while not inside brackets, it just applies the operation to the next bracket
 -- TODO: Make f F t and T and also ;, work on multiple lines (Possible Source: https://stackoverflow.com/questions/3925230/using-vims-f-command-over-multiple-lines/10564049#10564049 but this causes repetition like 3fx to not work anymore)
 -- TODO: Add custom latex package to snippets. It seems this can be done straight with the VSCode-Snipped file that the eekhof-plugin-installer generates anyway, as "Friendly-Snippets" makes use of such files too.
+-- TODO: The issue where neovim freezes on pasting the clipboard is due to a bug in XClip, see https://www.reddit.com/r/neovim/comments/r7h538/clipboard_error_error_target_string_not_available/ and https://github.com/astrand/xclip/issues/38
 
 -- Uninstall -----------------------------
 -- To uninstall this script and all changes made by it, delete '~/.config/nvim' and ... -- TODO: Add location where plugins are installed by lazy.nvim
