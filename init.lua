@@ -437,6 +437,8 @@ local plugins = {
     'petertriho/cmp-git',
     'hrsh7th/cmp-omni', -- For Latex support, see https://github.com/lervag/vimtex/issues/2215
     'hrsh7th/cmp-cmdline',
+    'vim-airline/vim-airline',
+    'vim-airline/vim-airline-themes',
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { 'zbirenbaum/copilot-cmp', -- See https://www.reddit.com/r/neovim/comments/twe45i/copilotlua_copilotcmp_pure_lua_plugins_for_github/ , for this installation thing see https://github.com/zbirenbaum/copilot-cmp
         config = function()
@@ -677,9 +679,10 @@ require("catppuccin").setup {
             crust = "#000000",
 
         },
-    }
+    },
 }
 vim.cmd.colorscheme('catppuccin')
+vim.cmd("AirlineTheme catppuccin") -- Set airline theme to catppuccin
 
 -- Templates -----------------------------
 -- augroup templates
