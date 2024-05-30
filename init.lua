@@ -708,6 +708,7 @@ vim.cmd("AirlineTheme catppuccin") -- Set airline theme to catppuccin
         pattern = "*.md",
         callback = function()
             vim.api.nvim_put({ '# TITLE' }, 'l', false, true) -- Insert template and follow cursor to position where title is to be written
+            vim.o.conceallevel = 2 -- Conceal markdown syntax, enable link hiding since neovim v10+
         end,
         group = templates
     })
