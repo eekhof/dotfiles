@@ -659,30 +659,30 @@ end, {silent = true})
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
     color_overrides = {
-        all = {
-            text = "#ffffff",
-        },
-        latte = {
-            base = "#000000",
-            mantle = "#000000",
-            crust = "#000000",
-        },
-        frappe = {            
-            base = "#000000",
-            mantle = "#000000",
-            crust = "#000000",
-        },
-        macchiato = {
-            base = "#000000",
-            mantle = "#000000",
-            crust = "#000000",
-        },
-        mocha = {
-            base = "#000000",
-            mantle = "#000000",
-            crust = "#000000",
-
-        },
+        -- all = {
+        --     text = "#ffffff",
+        -- },
+        -- latte = {
+        --     base = "#000000",
+        --     mantle = "#000000",
+        --     crust = "#000000",
+        -- },
+        -- frappe = {            
+        --     base = "#000000",
+        --     mantle = "#000000",
+        --     crust = "#000000",
+        -- },
+        -- macchiato = {
+        --     base = "#000000",
+        --     mantle = "#000000",
+        --     crust = "#000000",
+        -- },
+        -- mocha = {
+        --     base = "#000000",
+        --     mantle = "#000000",
+        --     crust = "#000000",
+        --
+        -- },
     },
 }
 vim.cmd.colorscheme('catppuccin')
