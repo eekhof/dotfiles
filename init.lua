@@ -133,6 +133,12 @@ vim.g.maplocalleader = ' '                      -- Make local leader key same as
 imap('jk', '<Esc>')                             -- Map jk to escape from insert mode to prevent reaching for escape - If needing to type literal jk, one has to wait one to two seconds between presses, see https://vim.fandom.com/wiki/Avoid_the_escape_key
 vmap('jk', '<Esc>')                             -- Map jk to escape from visual mode
 
+-- Colemak navigation keys:
+nmap('<A-n>', 'h')
+nmap('<A-e>', 'j')
+nmap('<A-i>', 'k')
+nmap('<A-o>', 'l')
+
 -- Map putting in visual mode so that text stays selected, but not if using capital P . Capital P is normally used to put text in visual mode, and not yank it to register, because small p yanks overwritten text to register
 vmap('p', 'Pgv')
 vmap('P', 'P')
