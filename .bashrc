@@ -55,6 +55,9 @@ alias anonsv='sudo -E nvim -c "set noundofile"'
 alias ff='f(){ groff -ms -dpaper=a4 -Kutf8 "$@" -T pdf > "${@%.*}".pdf; unset -f f; }; f' # To compile groff documents
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
+alias colemak='sudo setxkbmap us -variant colemak_dh_iso'
+alias qwerty='sudo setxkbmap de'
+
 # set -o vi # Enable bash mode mode to use vim keybindings
 bind '"jk":vi-movement-mode' # Use jk to exit normal vim mode in bash and go back to insert mode, see https://unix.stackexchange.com/questions/74075/custom-key-bindings-for-vi-shell-mode-ie-set-o-vi/74079#74079
 # Add some handy emacs-bindings for bash terminal eventhough vi mode is activated:
