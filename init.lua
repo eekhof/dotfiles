@@ -49,6 +49,7 @@ vim.o.relativenumber = true                     -- Display relative line number 
 vim.o.signcolumn = 'yes'                        -- Always show sign column, so that line numbers do not jump around when language server blends in warnings and errors when switching out of insert mode
 vim.o.cursorline = true                         -- Highlight current line
 vim.o.cursorcolumn = true                       -- Highlight current column
+vim.o.whichwrap = 'b,s,h,l,<,>,[,]'             -- Allow wrapping around lines
 
 vim.o.undofile = true                           -- Enable persistent undo
 
