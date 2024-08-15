@@ -218,8 +218,9 @@ exec pactl set-default-source 4 # Set default source to hardware microphone, fin
 exec mkdir -p ~/.cache/i3/ && (pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && touch ~/.cache/i3/microphoneismuted || rm ~/.cache/i3/microphoneismuted)
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
 bindsym mod5+F7 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && ( touch ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i microphone-sensitivity-muted-symbolic "Mic now OFF" ) || ( rm ~/.cache/i3/microphoneismuted && dunstify -h string:x-dunst-stack-tag:microphone -i audio-input-microphone-symbolic "Mic now ON" ) )
-# Toggle player pause:
+# Toggle player pause (for laptop, cheapino and desktop):
 bindsym XF86Tools exec playerctl play-pause && ( playerctl status | grep -q Playing && dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-start-symbolic "Player now playing" || dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-pause-symbolic "Player now paused" )
+bindsym XF86AudioPlay exec playerctl play-pause && ( playerctl status | grep -q Playing && dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-start-symbolic "Player now playing" || dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-pause-symbolic "Player now paused" )
 bindsym mod5+F10 exec playerctl play-pause && ( playerctl status | grep -q Playing && dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-start-symbolic "Player now playing" || dunstify -h string:x-dunst-stack-tag:mediaplayer -i media-playback-pause-symbolic "Player now paused" )
 
 ### Further startups:
