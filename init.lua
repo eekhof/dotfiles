@@ -9,6 +9,8 @@
 -- TODO: Make opening tabs the new default when calling vim command with multiple files, instead of multiple buffers, see https://vi.stackexchange.com/questions/310/how-do-i-make-opening-new-tabs-the-default/2197#2197
 -- TODO: Jumping from PDF in Zathura to latex source code with ctrl+click does not yet work, for start of solution see maybe https://www.ejmastnak.com/tutorials/vim-latex/pdf-reader/
 -- TODO: Die Completionvorschläge brechen ab, wenn im vorgeschlagenen Wort ein Umlaut ist (Zumindest bei reinen Textvorschlägen)
+-- TODO: Ersetze completion plugin mit https://vim.fandom.com/wiki/Improve_completion_popup_menu und https://georgebrock.github.io/talks/vim-completion/
+-- TODO: Ersetze pyright mit basedpyright, ist besser, community driven und braucht kein node-js sondern nur pip zur installation
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
