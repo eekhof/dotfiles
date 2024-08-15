@@ -239,6 +239,10 @@ nmap('<Leader>b', ':buffers<CR>:buffer<Space>') -- To go to previous buffer use 
 nmap('<Leader>z', '[s1z=gi<ESC>l')
 nmap('<Leader>Z', ']s1z=gi<ESC>l')
 
+-- LSP mappings:
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts) -- source https://blog.pabuisson.com/2022/08/neovim-modern-features-treesitter-and-lsp/
+
+
 -- Map capital U to redo instead of ctrl+r and restore state of last changed line to leader+capital U instead of capital U:
 nmap('U', '<C-R>')
 nmap('<Leader>U', 'U')
