@@ -88,6 +88,8 @@ PATH=/home/lucas/.bin:/home/lucas/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/s
 
 # Add TexLive binaries path to path:
 PATH=/usr/local/texlive/2024/bin/x86_64-linux/:$PATH
+# Add rust cargo installed bin folder to path:
+PATH=/home/lucas/.cargo/bin:$PATH
 
 # Change paths to conform to XDG Base Directory Specification: # TODO: Does not work yet
 # export XDG_CONFIG_HOME=$HOME/.config
