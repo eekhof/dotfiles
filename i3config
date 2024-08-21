@@ -256,6 +256,9 @@ exec xrandr --output DP-3 --pos -3840x-400--auto --primary --output eDP-1 --auto
 # Monitors at laptop:
 exec xrandr --output HDMI-1 --mode 1280x720 --same-as eDP-1
 
+# Set all monitors to mirror and resolution to same value (See https://unix.stackexchange.com/questions/371793/how-to-duplicate-desktop-in-linux-with-xrandr/615746#615746):
+exec "RESOLUTION=1920x1080 ; xrandr --listmonitors | sed -n '1!p' | sed -e 's/\s[0-9].*\s\([a-zA-Z0-9\-]*\)$/\1/g' | xargs -n 1 -- bash -xc 'xrandr --output $0 --mode '$RESOLUTION' --pos 0x0 --rotate normal'"
+
 # Put workspaces in right order (wrong numeric order to start focus on correct monitor):
 exec i3-msg "workspace 2, move workspace to output DP-1"
 exec i3-msg "workspace 1, move workspace to output HDMI-1, workspace 1"
