@@ -196,8 +196,8 @@ bar {
 }
 
 # FN-Keys Laptop:
-# Volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" ) # TODO: Change this to amixer set Master toggle, see https://askubuntu.com/questions/26068/how-do-you-mute-from-the-command-line to affect all
+# Volume # TODO: Change this to amixer set Master toggle, see https://askubuntu.com/questions/26068/how-do-you-mute-from-the-command-line to affect all
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic 'Sound is now OFF' || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic 'Sound is now ON' )"
 bindsym mod5+F4 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-muted-symbolic "Sound is now OFF" || dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-high-symbolic "Sound is now ON" )
 # To get current sink volume use: pactl get-sink-volume @DEFAULT_SINK@ | sed -e "s/front-left: [[:digit:]]* \/  //" -e "s/%.*/%/" -e "2d" # TODO: Does not work yet
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && dunstify -h string:x-dunst-stack-tag:volume -i audio-volume-low-symbolic "Volume $( pactl get-sink-volume @DEFAULT_SINK@ | grep -o [0-9]*% | grep -o [0-9]*% -m 1 )"
