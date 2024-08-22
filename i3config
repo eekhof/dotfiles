@@ -236,6 +236,7 @@ exec nextcloud
 # Shortcuts for common programs:
 bindsym $mod+F1 exec thunar
 bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec pavucontrol
 bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playlist
 bindsym Print exec xfce4-screenshooter -r -c && dunstify -i daytime-sunset-symbolic "Region saved to clipboard"
 bindsym Shift+Print exec xfce4-screenshooter -w
