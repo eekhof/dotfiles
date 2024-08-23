@@ -1,6 +1,7 @@
 -- For rewriting init.vim in lua, see https://www.notonlycode.org/neovim-lua-config/ and https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 -- FOR INSTALL: Run the console commands, and run github authentification for copilot
--- sudo pacman -S git zathura zathura-pdf-mupdf pyright bash-language-server ripgrep fzy
+-- sudo pacman -S git zathura zathura-pdf-mupdf pyright bash-language-server ripgrep fzy gitui
+-- pip install nvr # For neovim remote opening into same window, as well as editor commands called by nvim terminal opening in parent neovim instance
 -- TODO: Markdown preview does not work yet (It does work on a fresh linux installation)
 -- TODO: When having initialized a new git repo in a folder in which the main latex document lies, the GIT.gitignore does not yet get generated, as per the eekhof-latex-package, when compiled with vimtex
 -- TODO: Neogit throws an error after committing
@@ -30,6 +31,13 @@
 -- vim.api.nvim_set_hl(0, "NeogitDiffDelete", { ctermfg=196, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 -- vim.api.nvim_set_hl(0, "NeogitHunkHeader", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 -- vim.api.nvim_set_hl(0, "NeogitHunkHeaderHighlight", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
+
+-- Colemak remapping idea:
+-- hjkl -> neio
+-- n -> k (because old key from qwerty is n)
+-- e -> j (because seldomly used and j is weird to reach in colemak, and j is close to b in colemak, which orders the navigation keys nicely)
+-- i -> l (because often used and l is easy to reach in colemak)
+-- o -> h (relatively comfortable to reach)
 
 -- Transparency:
 vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, guibd=NONE, ctermbg=NONE, cterm=NONE }) -- For transparency of background
@@ -260,8 +268,8 @@ nmap('<Leader>J', 'i<CR><ESC>k:s/ $//<CR>$')
 -- Mappings for terminal mode, see https://gist.github.com/mahemoff/8967b5de067cffc67cec174cb3a9f49d
 nmap('<Leader>t', ':terminal<CR>')
 tmap('<Esc>', '<C-\\><C-N>:bd!<CR>')
--- Always enter insert mode when entering terminal buffer:
-vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter" }, { pattern = "term://*", command = "setlocal nospell | startinsert" }) -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+-- Always enter insert mode when entering terminal buffer (important e. g. when returning to gitui window from edit):
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { pattern = "term://*", command = "setlocal nospell nonumber norelativenumber | startinsert" }) -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
 
 -- Mapping to force gf to go edit file even if it does not exist for use in note taking/wiki creation to quickly make new notes:
 nmap('gf', ':e <cfile><CR>')
