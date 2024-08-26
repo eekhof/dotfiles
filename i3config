@@ -57,7 +57,9 @@ floating_modifier $mod
 focus_wrapping no
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+set $TERMINAL alacritty
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
