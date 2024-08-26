@@ -12,6 +12,7 @@
 -- TODO: Die Completionvorschläge brechen ab, wenn im vorgeschlagenen Wort ein Umlaut ist (Zumindest bei reinen Textvorschlägen)
 -- TODO: Ersetze completion plugin mit https://vim.fandom.com/wiki/Improve_completion_popup_menu und https://georgebrock.github.io/talks/vim-completion/
 -- TODO: Ersetze pyright mit basedpyright, ist besser, community driven und braucht kein node-js sondern nur pip zur installation
+-- TODO: Ersetze surrounding pair defs mit mini.pairs, und surrounds mit mini.surround
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
@@ -461,6 +462,7 @@ local plugins = {
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/nvim-treesitter-refactor', -- Use refactor functionality to implement jump to definition etc, see https://github.com/nvim-treesitter/nvim-treesitter-refactor?tab=readme-ov-file#navigation
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'petertriho/cmp-git',
