@@ -4,7 +4,6 @@
 -- pip install nvr # For neovim remote opening into same window, as well as editor commands called by nvim terminal opening in parent neovim instance
 -- TODO: Markdown preview does not work yet (It does work on a fresh linux installation)
 -- TODO: When having initialized a new git repo in a folder in which the main latex document lies, the GIT.gitignore does not yet get generated, as per the eekhof-latex-package, when compiled with vimtex
--- TODO: Neogit throws an error after committing
 -- TODO: A weird bug with nvim-cmp occured after typing a linebreak, which displayed some red error message in the console, inserted the last completion that was made at that wrong spot, and crashed the completion so that no other completions were suggested in that buffer, until it was restarted
 -- TODO: Add new keybind in insert mode, CTRL + S that quits insert mode and saves the file, to save a keystroke. For this to work modification of bashrc with `stty stop ""` is needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim
 -- TODO: Make opening tabs the new default when calling vim command with multiple files, instead of multiple buffers, see https://vi.stackexchange.com/questions/310/how-do-i-make-opening-new-tabs-the-default/2197#2197
@@ -28,10 +27,6 @@
 -- vim.api.nvim_set_hl(0, "NonText", { ctermfg=153, ctermbg=000, cterm=NONE }) -- Change bg to true black
 -- vim.api.nvim_set_hl(0, "Ignore", { ctermfg=000, ctermbg=NONE, cterm=NONE }) -- Change fg to true black
 -- vim.api.nvim_set_hl(0, "FloatBorder", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Change window border color to black and white, this should be default, but somehow doesn't work when calling nvim_open_win
--- vim.api.nvim_set_hl(0, "NeogitDiffAdd", { ctermfg=46, ctermbg=NONE, cterm=NONE }) -- TODO: Do some NeoGit colors manually, but this should work automatically, see https://github.com/NeogitOrg/neogit/issues/600 and https://github.com/NeogitOrg/neogit/blob/master/lua/neogit/lib/hl.lua
--- vim.api.nvim_set_hl(0, "NeogitDiffDelete", { ctermfg=196, ctermbg=NONE, cterm=NONE }) -- TODO: See above
--- vim.api.nvim_set_hl(0, "NeogitHunkHeader", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
--- vim.api.nvim_set_hl(0, "NeogitHunkHeaderHighlight", { ctermfg=226, ctermbg=NONE, cterm=NONE }) -- TODO: See above
 
 -- Colemak remapping idea:
 -- hjkl -> neio
@@ -49,7 +44,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=153, ctermbg=NONE, cterm=NONE })
 vim.api.nvim_create_autocmd('FileType', { -- Enable spellchecking but only for text files
     pattern = { 'tex', 'text', 'markdown', 'bib' },
     callback = function()
-        vim.o.spell = true                              -- Enable spell checking per default # TODO: Disable spell checking in neogit window, but not in commit window
+        vim.o.spell = true                              -- Enable spell checking per default
         vim.o.spelllang = 'en_us'                       -- Default spell checking language to US English
     end,
     group = spelling
@@ -475,12 +470,6 @@ local plugins = {
         config = function()
             require('copilot_cmp').setup()
         end },
-    { 'NeogitOrg/neogit', -- For installation see https://github.com/NeogitOrg/neogit#installation
-      dependencies = {
-        'nvim-lua/plenary.nvim', -- required
-      },
-      config = true
-    },
     { "kylechui/nvim-surround",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
@@ -677,12 +666,6 @@ end, {silent = true})
     require('lspconfig')['pyright'].setup {
         capabilities = capabilities
     }
--- Set up NeoGit, source see https://gitea.valeth.me/valeth/nvim-config/commit/19c453974fcd6768417d8aab960f9a80a1eea750?style=unified&whitespace=ignore-change
-    local neogit = require("neogit")
-    local function git_status()
-        neogit.open({})
-    end
-    -- vim.keymap.set('n', '<Leader>g', git_status)
     vim.keymap.set('n', '<Leader>g', ':tab term gitu<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
