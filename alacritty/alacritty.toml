@@ -1,0 +1,14 @@
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+# Needed for catppuccin theme:
+[env]
+TERM = "xterm-256color"
+
+[window]
+title = "Terminal"
+class = { instance = "Alacritty", general = "Alacritty" }
+
+[font]
+size = 15.0
