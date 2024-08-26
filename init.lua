@@ -5,8 +5,6 @@
 -- TODO: Markdown preview does not work yet (It does work on a fresh linux installation)
 -- TODO: When having initialized a new git repo in a folder in which the main latex document lies, the GIT.gitignore does not yet get generated, as per the eekhof-latex-package, when compiled with vimtex
 -- TODO: A weird bug with nvim-cmp occured after typing a linebreak, which displayed some red error message in the console, inserted the last completion that was made at that wrong spot, and crashed the completion so that no other completions were suggested in that buffer, until it was restarted
--- TODO: Add new keybind in insert mode, CTRL + S that quits insert mode and saves the file, to save a keystroke. For this to work modification of bashrc with `stty stop ""` is needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim
--- TODO: Make opening tabs the new default when calling vim command with multiple files, instead of multiple buffers, see https://vi.stackexchange.com/questions/310/how-do-i-make-opening-new-tabs-the-default/2197#2197
 -- TODO: Jumping from PDF in Zathura to latex source code with ctrl+click does not yet work, for start of solution see maybe https://www.ejmastnak.com/tutorials/vim-latex/pdf-reader/
 -- TODO: Die Completionvorschläge brechen ab, wenn im vorgeschlagenen Wort ein Umlaut ist (Zumindest bei reinen Textvorschlägen)
 -- TODO: Ersetze completion plugin mit https://vim.fandom.com/wiki/Improve_completion_popup_menu und https://georgebrock.github.io/talks/vim-completion/
@@ -353,7 +351,7 @@ vmap('>', '>gv')
 vmap('//', 'y/\\V<C-R>=escape(@",\'/\\\')<CR><CR>') -- See https://vim.fandom.com/wiki/Search_for_visually_selected_text#Simple
 
 -- Save and quit file from insert mode:
-imap('<C-S>', '<Esc>:x<CR>')
+imap('<C-S>', '<Esc>:x<CR>') -- TODO: For this to work a modification of .bashrc with `stty stop ""` might be needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim , but so far everything works fine
 
 -- Brackets and Braces completion (Source: https://vim.fandom.com/wiki/Automatically_append_closing_characters) TODO: THIS CAUSES MUCH LAG WHEN TYPING IN FRONT OF CLOSING BRACKET or similar
 -- Curly Brackets:
