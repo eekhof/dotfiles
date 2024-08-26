@@ -683,7 +683,7 @@ end, {silent = true})
         neogit.open({})
     end
     -- vim.keymap.set('n', '<Leader>g', git_status)
-    vim.keymap.set('n', '<Leader>g', ':tab term gitui<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
+    vim.keymap.set('n', '<Leader>g', ':tab term gitu<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
     color_overrides = {
