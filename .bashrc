@@ -88,13 +88,50 @@ function screenmirror() {
     echo "All connected monitors set to mirror at resolution $RESOLUTION"
 }
 
+# Helper function to get the name of connected monitors, where n is the first argument
+get_connected_monitors() {
+    while read p; do
+        connected_monitors+=("$p")
+    done < <(xrandr | grep " connected")
+    connected_monitors=("${connected_monitors[@]%% *}")
+}
+
+function screenextend () {
+    # Function to get the maximum resolution of a monitor, where the first argument is the monitor name
+    get_monitor_max_resolution() {
+        xrandr | grep -A1 "$1" | grep -P '^\s+\d+x\d+' | awk '{print $1}' | \
+            while read -r resolution; do
+                echo $resolution
+            done | sort -n | tail -n 1
+    }
+
+    # Set arguments
+    get_connected_monitors # this sets the connected_monitors array
+    OUTPUT1=${1:-${connected_monitors[0]}}
+    OUTPUT2=${2:-${connected_monitors[1]}}
+    RESOLUTION1=${3:-$(get_monitor_max_resolution $OUTPUT1)}
+    RESOLUTION2=${4:-$(get_monitor_max_resolution $OUTPUT2)}
+
+    # Execute xrandr command
+    xrandr --output "$OUTPUT1" --mode "$RESOLUTION1" --primary --output "$OUTPUT2" --mode "$RESOLUTION2" --right-of "$OUTPUT1"
+    echo "Connected monitors $OUTPUT1 and $OUTPUT2 set to extend with resolutions $RESOLUTION1 and $RESOLUTION2"
+}
+
+screentablet() {
+    # Set the tablet to the right of the primary monitor
+    TABLETID=$(xinput | grep -oP 'Huion Tablet Pen Pen.*\tid=\K[0-9]+') # the (0) in the tablet name was left out because it causes problems with the grep command
+    get_connected_monitors
+    OUTPUT=${1:-${connected_monitors[0]}}
+    xinput map-to-output "$TABLETID" "$OUTPUT"
+    echo "Set tablet $TABLETID to output $OUTPUT"
+}
+
 # set -o vi # Enable bash mode mode to use vim keybindings
 bind '"jk":vi-movement-mode' # Use jk to exit normal vim mode in bash and go back to insert mode, see https://unix.stackexchange.com/questions/74075/custom-key-bindings-for-vi-shell-mode-ie-set-o-vi/74079#74079
 # Add some handy emacs-bindings for bash terminal eventhough vi mode is activated:
 bind '"\C-k":kill-line' # Use CTRL+k to kill rest of line behind cursor
 bind '"\C-a":beginning-of-line' # Use CTRL+k to kill rest of line behind cursor
 bind '"\C-e":end-of-line' # Use CTRL+k to kill rest of line behind cursor
-export EDITOR=nvim # Set default editor to NeoVim
 
 # Make CTRL+S scroll forward through matching history, because CTRL#R searches backward (Source: https://stackoverflow.com/questions/791765/unable-to-forward-search-bash-history-similarly-as-with-ctrl-r/791800#791800)
 [[ $- == *i* ]] && stty -ixon
