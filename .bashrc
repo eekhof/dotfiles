@@ -57,8 +57,36 @@ alias anonsv='sudo -E nvim -c "set noundofile"'
 alias ff='f(){ groff -ms -dpaper=a4 -Kutf8 "$@" -T pdf > "${@%.*}".pdf; unset -f f; }; f' # To compile groff documents
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
-alias colemak='sudo setxkbmap us -variant colemak_dh_iso'
-alias qwerty='sudo setxkbmap de'
+alias colemak='sudo setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key
+alias qwerty='setxkbmap "us, de" pc105 ", nodeadkeys" "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
+alias qwertz='setxkbmap "de, us" pc105 "nodeadkeys, " "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
+
+
+# Function to set all connected monitors to the same resolution
+function screenmirror() {
+    # Function to get the highest resolution of the lowest quality monitor, so all connected monitors can show the full image
+    get_lowest_max_resolution() {
+        # Extract monitor names and their highest available resolution
+        xrandr | grep -A1 " connected" | grep -P '^\s+\d+x\d+' | awk '{print $1}' | \
+        while read -r resolution; do
+            echo $resolution
+        done | sort -n | head -n 1
+    }
+
+    # Check if a resolution argument is provided, set to lowest max resolution otherwise
+    if [ -z "$1" ]
+    then
+        RESOLUTION=$(get_lowest_max_resolution)
+    else
+        RESOLUTION=$1
+    fi
+
+    # Apply resolution to all connected monitors
+    xrandr --listmonitors | sed -n '1!p' | sed -e 's/.*\s\([a-zA-Z0-9\-]*\)$/\1/g' | \
+    xargs -n 1 bash -c 'xrandr --output "$0" --mode '"$RESOLUTION"' --pos 0x0 --rotate normal'
+
+    echo "All connected monitors set to mirror at resolution $RESOLUTION"
+}
 
 # set -o vi # Enable bash mode mode to use vim keybindings
 bind '"jk":vi-movement-mode' # Use jk to exit normal vim mode in bash and go back to insert mode, see https://unix.stackexchange.com/questions/74075/custom-key-bindings-for-vi-shell-mode-ie-set-o-vi/74079#74079
