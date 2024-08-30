@@ -31,8 +31,9 @@ alias todo='nvim ~/Sonstiges/todo_liste_allgemein.txt'
 
 # Further aliases
 # To start neovim server on startup do "nvr -s" (starts a new nvim process with the server address set to /tmp/nvimsocket), all the following processes will attach to it with nvr --remote
-export EDITOR="nvr -s" # Set default editor to nvr in order for processes started from the NeoVim Terminal to always send their output to the parent nvim instance
-alias nvim="nvr -s"
+# export EDITOR="nvr -s" # Set default editor to nvr in order for processes started from the NeoVim Terminal to always send their output to the parent nvim instance
+export EDITOR="nvim" # Set default editor to nvim
+# alias nvim="nvr -s"
 alias vi='nvim'
 alias vim='nvim'
 alias nv='nvim'
