@@ -375,7 +375,7 @@ imap('{}', '{}')
 imap('}', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"}\" ? \"\\<lt>Right>\" : \"}\"<CR>')-- Skip placement of closing brackets if already present, used backward compatible vim version which does not use <expr> matching but register instead, because otherwise it would not work with lua, see https://vim.fandom.com/wiki/Automatically_append_closing_characters#Backwards-compatible_closing_brace_skip
 -- Parentheses:
 imap('(', '()<Left>')
-imap('(<CR>', '()<CR>)<Esc>O')
+imap('(<CR>', '(<CR>)<Esc>O')
 imap('((', '(')
 imap('()', '()')
 imap(')', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \")\" ? \"\\<lt>Right>\" : \")\"<CR>')-- Skip placement of closing brackets if already present
