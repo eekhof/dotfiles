@@ -154,12 +154,12 @@ HISTFILESIZE=5000 # Number of commands to log in histfile after terminal session
 # Read in path for custom binaries
 export PATH="$HOME/.bin:$PATH"
 # TODO Why is the following line needed?:
-PATH=/home/lucas/.bin:/home/lucas/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/lucas/.dotnet/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/lucas/.local/bin
+PATH=$HOME/.bin:/home/lucas/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/lucas/.dotnet/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/lucas/.local/bin
 
 # Add TexLive binaries path to path:
 PATH=/usr/local/texlive/2024/bin/x86_64-linux/:$PATH
 # Add rust cargo installed bin folder to path:
-PATH=/home/lucas/.cargo/bin:$PATH
+PATH=$HOME/.cargo/bin:$PATH
 
 # Change paths to conform to XDG Base Directory Specification: # TODO: Does not work yet
 # export XDG_CONFIG_HOME=$HOME/.config
