@@ -261,9 +261,22 @@ nmap('<Leader>J', 'i<CR><ESC>k:s/ $//<CR>$')
 
 -- Mappings for terminal mode, see https://gist.github.com/mahemoff/8967b5de067cffc67cec174cb3a9f49d
 nmap('<Leader>t', ':terminal<CR>')
-tmap('<Esc>', '<C-\\><C-N>:bd!<CR>')
 -- Always enter insert mode when entering terminal buffer (important e. g. when returning to gitui window from edit):
-vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { pattern = "term://*", command = "setlocal nospell nonumber norelativenumber | startinsert" }) -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+    pattern = "term://*",
+    callback = function()
+        -- Set terminal-specific options
+        vim.opt_local.spell = false
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+
+        -- Terminal mode escape key mapping
+        vim.api.nvim_buf_set_keymap(0, 't', '<Esc>', '<C-\\><C-N>:bd!<CR>', { noremap = true, silent = true })
+
+        -- Start terminal in insert mode
+        vim.cmd("startinsert")
+    end
+})
 
 -- Mapping to force gf to go edit file even if it does not exist for use in note taking/wiki creation to quickly make new notes:
 nmap('gf', ':e <cfile><CR>')
