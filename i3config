@@ -236,7 +236,7 @@ exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 exec nextcloud
 
 # Shortcuts for common programs:
-bindsym $mod+F1 exec thunar
+bindsym $mod+F1 exec $TERMINAL -e ranger
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec pavucontrol
 bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playlist
