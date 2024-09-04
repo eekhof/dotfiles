@@ -678,7 +678,20 @@ end, {silent = true})
     require('lspconfig')['pyright'].setup {
         capabilities = capabilities
     }
-    vim.keymap.set('n', '<Leader>g', ':terminal export EDITOR=nvr && export GIT_EDITOR=nvim && /home/lucas/Sonstiges/Programmierung/github_contributions/altsem_gitu/gitu/target/release/gitu<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
+    vim.keymap.set('n', '<Leader>g', ':terminal export EDITOR=nvr && export GIT_EDITOR=nvim && gitu<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
+    vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+        pattern = "term://*gitu",
+        callback = function()
+            vim.api.nvim_buf_del_keymap(0, 't', '<Esc>') -- Unmap <Esc> in terminal buffer so gitu can use it
+            -- Force end buffer on closing terminal so message [Process exited 0] does not show after finishing gitu
+            vim.api.nvim_create_autocmd("TermClose", {
+                buffer = 0, -- Apply to the current buffer
+                callback = function()
+                  vim.cmd("bd!") -- Close the buffer forcefully after the process exits
+                end
+              })
+        end
+    })
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
     color_overrides = {
