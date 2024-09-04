@@ -389,12 +389,12 @@ imap(']', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"]\" ? \"\\<lt>Rig
 -- Double Quotes (Same character comletions are a little different in the last line, see source):
 imap('\"', '\"\"<Left>')
 imap('\"<CR>', '\"<CR>\"<Esc>O')
-imap('\"\"', '\"\"')
+imap('\"\"', '\"')
 vim.api.nvim_set_keymap('i', '"', 'strpart(getline("."), col(".")-1, 1) == "\\"" ? "\\<Right>" : "\\"\\"\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present (Notice the expr option in contrast to the default imap function)
 -- Single Quotes:
 imap("\'", "\'\'<Left>")
 imap("\'<CR>", "\'<CR>\'<Esc>O")
-imap("\'\'", "\'\'")
+imap("\'\'", "\'")
 vim.api.nvim_set_keymap('i', "'", 'strpart(getline("."), col(".")-1, 1) == "\'" ? "\\<Right>" : "\'\'\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
 -- Dollar Sign (only in tex and bib files, annoying otherwise):
 vim.api.nvim_create_autocmd('FileType', {
