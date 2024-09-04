@@ -364,7 +364,7 @@ vmap('>', '>gv')
 vmap('//', 'y/\\V<C-R>=escape(@",\'/\\\')<CR><CR>') -- See https://vim.fandom.com/wiki/Search_for_visually_selected_text#Simple
 
 -- Save and quit file from insert mode:
-imap('<C-S>', '<Esc>:x<CR>') -- TODO: For this to work a modification of .bashrc with `stty stop ""` might be needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim , but so far everything works fine
+imap('<C-S>', '<Esc>:w | bd!<CR>') -- TODO: For this to work a modification of .bashrc with `stty stop ""` might be needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim , but so far everything works fine
 
 -- Brackets and Braces completion (Source: https://vim.fandom.com/wiki/Automatically_append_closing_characters) TODO: THIS CAUSES MUCH LAG WHEN TYPING IN FRONT OF CLOSING BRACKET or similar
 -- Curly Brackets:
