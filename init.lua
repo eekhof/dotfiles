@@ -10,6 +10,7 @@
 -- TODO: Ersetze completion plugin mit https://vim.fandom.com/wiki/Improve_completion_popup_menu und https://georgebrock.github.io/talks/vim-completion/
 -- TODO: Ersetze pyright mit basedpyright, ist besser, community driven und braucht kein node-js sondern nur pip zur installation
 -- TODO: Ersetze surrounding pair defs mit mini.pairs, und surrounds mit mini.surround
+-- TODO: Nutze die Treesitter-Plugins https://github.com/windwp/nvim-ts-autotag , https://github.com/nvim-treesitter/nvim-treesitter-context , https://github.com/nvim-treesitter/nvim-treesitter-textobjects , https://github.com/nvim-treesitter/nvim-treesitter-refactor
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
