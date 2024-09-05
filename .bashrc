@@ -62,9 +62,6 @@ alias colemak='sudo setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, 
 alias qwerty='setxkbmap "us, de" pc105 ", nodeadkeys" "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
 alias qwertz='setxkbmap "de, us" pc105 "nodeadkeys, " "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
 
-# Make ranger open at last opened directory (see https://superuser.com/questions/1043806/how-to-exit-the-ranger-file-explorer-back-to-command-prompt-but-keep-the-current#comment2246278_1329678):
-alias ranger='. ranger'
-
 # Function to set all connected monitors to the same resolution
 function screenmirror() {
     # Function to get the highest resolution of the lowest quality monitor, so all connected monitors can show the full image
