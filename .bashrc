@@ -55,7 +55,6 @@ alias anonsvim='sudo -E nvim -c "set noundofile"'
 alias anonsnv='sudo -E nvim -c "set noundofile"'
 alias anonsv='sudo -E nvim -c "set noundofile"'
 
-alias ff='f(){ groff -ms -dpaper=a4 -Kutf8 "$@" -T pdf > "${@%.*}".pdf; unset -f f; }; f' # To compile groff documents
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
 alias colemak='sudo setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key
