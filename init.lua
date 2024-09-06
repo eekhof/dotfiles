@@ -415,8 +415,18 @@ vim.api.nvim_create_autocmd('FileType', {
         imap('<F5>', '<ESC>:!python3 %<CR>') -- Execute python code
         nmap('<F5>', ':!python3 %<CR>') -- Execute python code
     end,
+    group = compile_execute
+})
+-- Compile groff document
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'groff' },
+    callback = function()
+        imap('<F5>', '<Esc>:!ff %<CR>') -- Compile groff document
+        nmap('<F5>', ':!ff %<CR>') -- Compile groff document
+    end,
     group = templates
 })
+
 
 -- Make each character in list below work as text object for latex selection, see https://vi.stackexchange.com/questions/12146/refer-to-text-between-arbitrary-delimiting-characters
 local chars = { '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '$', '=', "<Space>" }
