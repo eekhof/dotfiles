@@ -2,6 +2,30 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
+### Begin additions from https://yazi-rs.github.io/docs/tips/
+[[manager.prepend_keymap]]
+# Drop to shell:
+on   = "<C-s>"
+run  = 'shell "$SHELL" --block --confirm'
+desc = "Open shell here"
+# Smart enter:
+[[manager.prepend_keymap]]
+on   = "l"
+run  = "plugin --sync smart-enter"
+desc = "Enter the child directory, or open the file"
+[[manager.prepend_keymap]]
+on   = "<Right>"
+run  = "plugin --sync smart-enter"
+desc = "Enter the child directory, or open the file"
+# Copy to clipboard when yanking:
+[[manager.prepend_keymap]]
+on  = "y"
+run = [ '''
+	shell 'echo "$@" | xfce4-clipman -i -selection clipboard -t text/uri-list' --confirm
+''', "yank" ]
+# TODO: Fix clipboard, add drag and drop, whab is Close input by once Esc press, show git, prevent netrw, etc, see tips
+### End additions from yazi tips
+
 [manager]
 
 keymap = [
@@ -68,7 +92,7 @@ keymap = [
 	{ on = "Y",         run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "d",         run = "remove",                      desc = "Trash selected files" },
-	{ on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
+	# { on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
 	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
