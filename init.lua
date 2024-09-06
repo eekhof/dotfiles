@@ -364,8 +364,9 @@ vmap('>', '>gv')
 -- Mapping to search for visually selected text:
 vmap('//', 'y/\\V<C-R>=escape(@",\'/\\\')<CR><CR>') -- See https://vim.fandom.com/wiki/Search_for_visually_selected_text#Simple
 
--- Save and quit file from insert mode:
-imap('<C-S>', '<Esc>:w | bd!<CR>') -- TODO: For this to work a modification of .bashrc with `stty stop ""` might be needed, see https://superuser.com/questions/1390977/pressing-ctrl-s-by-mistake-while-using-vim , but so far everything works fine
+-- Save and quit file from insert and normal mode:
+imap('<C-s>', '<Esc>:lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
+nmap('<C-s>', ':lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
 
 -- Brackets and Braces completion (Source: https://vim.fandom.com/wiki/Automatically_append_closing_characters) TODO: THIS CAUSES MUCH LAG WHEN TYPING IN FRONT OF CLOSING BRACKET or similar
 -- Curly Brackets:
