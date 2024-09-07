@@ -882,6 +882,14 @@ require'nvim-treesitter.configs'.setup {
         end,
         group = templates
     })
+-- Groff
+    vim.api.nvim_create_autocmd("BufNewFile", {
+        pattern = "*.ff",
+        callback = function()
+            vim.api.nvim_put({ '\\" vim: set wrap:','.TL','Titel','','.NH','Sectionheader', '.LP', 'Lorem ipsom dolor...', '', '.NH 1', 'Subsection heading', '.LP', 'Lorem ipsum dolor...'}, 'l', false, true) -- Insert template and follow cursor to position where code is to be written
+        end,
+        group = templates
+    })
 --     Start in insert mode at cursor position for any new file: -- TODO: This heavily slows down vim startup, so maybe remove it
     -- vim.api.nvim_create_autocmd("BufNewFile", {
     --     callback = function()
