@@ -11,4 +11,5 @@ title = "Terminal"
 class = { instance = "Alacritty", general = "Alacritty" }
 
 [font]
-size = 16.0
+#size = 16.0
+size = 13.0
