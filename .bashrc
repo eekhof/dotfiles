@@ -18,6 +18,13 @@ PS1="\\[\e[1;31m\\][\u@\h \\[\e[m\\]\W\\[\e[1;31m\\]]# \\[\e[m\\]"
 else # normal
 PS1="\\[\e[1;32m\\][\u@\h \\[\e[m\\]\W\\[\e[1;32m\\]]$ \\[\e[m\\]"
 fi
+
+# Zoxide
+# This must be at the end of the bashrc according to the docs, but apply it to noninteractive shell it must be here: Set up Zoxide directory history (see https://github.com/ajeetdsouza/zoxide , requires fzf, zoxide used by yazi)
+eval "$(zoxide init bash)"
+# For Zoxide to work properly/to record history:
+alias cd="z"
+
 # DEFINE COLORED ls AS DEFAULT, AND DISPLAY HIDDEN FILES PER DEFAULT
 alias ls='ls -a --color=auto'
 # DEFINE grep AND diff COMMANDS TO USE COLORS PER DEFAULT
