@@ -886,7 +886,7 @@ require'nvim-treesitter.configs'.setup {
     vim.api.nvim_create_autocmd("BufNewFile", {
         pattern = "*.ff",
         callback = function()
-            vim.api.nvim_put({ '\\" vim: set wrap:','.TL','Titel','','.NH','Sectionheader', '.LP', 'Lorem ipsom dolor...', '', '.NH 1', 'Subsection heading', '.LP', 'Lorem ipsum dolor...'}, 'l', false, true) -- Insert template and follow cursor to position where code is to be written
+            vim.api.nvim_put({ '\\" vim: set wrap:','.TL','Titel','','.NH','Sectionheader', '.LP', 'Lorem ipsom dolor...', '', '.NH 2', 'Subsection heading', '.LP', 'Lorem ipsum dolor...'}, 'l', false, true) -- Insert template and follow cursor to position where code is to be written
         end,
         group = templates
     })
