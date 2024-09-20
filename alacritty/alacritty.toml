@@ -13,3 +13,11 @@ class = { instance = "Alacritty", general = "Alacritty" }
 [font]
 #size = 16.0
 size = 13.0
+
+[keyboard]
+bindings = [
+    { key = "PageUp", action = "ScrollLineUp" },
+    { key = "PageUp", mods = "Shift", action = "ScrollHalfPageUp"},
+    { key = "PageDown", action = "ScrollLineDown" },
+    { key = "PageDown", mods = "Shift", action = "ScrollHalfPageDown"}
+]
