@@ -417,6 +417,15 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
     group = compile_execute
 })
+-- Compile and execute Rust code with cargo run
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'rust' },
+    callback = function()
+        imap('<F5>', '<ESC>:!cargo run<CR>') -- Execute python code
+        nmap('<F5>', ':!cargo run<CR>') -- Execute python code
+    end,
+    group = compile_execute
+})
 -- Compile groff document
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'groff' },
