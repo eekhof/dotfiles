@@ -58,8 +58,6 @@ vim.o.whichwrap = 'b,s,h,l,<,>,[,]'             -- Allow wrapping around lines
 
 vim.o.undofile = true                           -- Enable persistent undo
 
-vim.o.shell = '/bin/bash'                       -- Use bash as shell to fix $PATH not being same as system path, causing problems with e. g. finding latexmk, source: https://stackoverflow.com/questions/13402899/why-does-my-vim-command-line-path-differ-from-my-shell-path/13460579#13460579 # TODO: Probably unneccessary when not using dev version of vim
-
 vim.o.clipboard = 'unnamed,unnamedplus'         -- Set the default register to the clipboard that is accessed by CTRL+C and CTRL+V, together with the line above it just takes the last one of the two that was used (I mostly use the latter) (Note the plus instead of caret, it is necessary here) Source for both: https://www.reddit.com/r/vim/comments/3ae4qf/psa_set_clipboardunnamed/
 vim.api.nvim_create_autocmd('TextYankPost', { -- Highlight yanked text, useful if yanking outside of visual mode, source: https://github.com/VonHeikemen/nvim-starter/blob/00-minimal/init.lua
     group = grp,
