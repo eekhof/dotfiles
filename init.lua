@@ -11,6 +11,7 @@
 -- TODO: Ersetze pyright mit basedpyright, ist besser, community driven und braucht kein node-js sondern nur pip zur installation
 -- TODO: Ersetze surrounding pair defs mit mini.pairs, und surrounds mit mini.surround
 -- TODO: Nutze die Treesitter-Plugins https://github.com/windwp/nvim-ts-autotag , https://github.com/nvim-treesitter/nvim-treesitter-context , https://github.com/nvim-treesitter/nvim-treesitter-textobjects , https://github.com/nvim-treesitter/nvim-treesitter-refactor
+-- TODO: Implementiere true-false-switch mit CTRL-x/a , siehe z.b. https://vi.stackexchange.com/questions/5213/swap-values-true-and-false-via-ctrla-ctrlx
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
