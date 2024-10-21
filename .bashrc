@@ -24,6 +24,15 @@ fi
 eval "$(zoxide init bash)"
 # For Zoxide to work properly/to record history:
 alias cd="z"
+# Yazi
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
 
 # DEFINE COLORED ls AS DEFAULT, AND DISPLAY HIDDEN FILES PER DEFAULT
 alias ls='ls -a --color=auto'
@@ -65,9 +74,14 @@ alias anonsv='sudo -E nvim -c "set noundofile"'
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
 alias colemak='setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key
+alias canary='setxkbmap canary -variant lucas "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key
 alias qwerty='setxkbmap "us, de" pc105 ", nodeadkeys" "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
 alias qwertz='setxkbmap "de, us" pc105 "nodeadkeys, " "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
 alias eurkey='setxkbmap eu && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
+
+alias db-wifi-help='echo Wenn sich das loginportal im browser nicht öffnet, versuche auf eine http statt https-seite zu navigieren, z. b. "http://http.rip"'
+
+alias sshfs-cascade='sshfs cascade:/ ~/mnt/cascade -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)' # The latter options ore for correct permissions, see https://wiki.ubuntuusers.de/FUSE/sshfs/#User-Mapping ; the former is to stabilize against connection drops, see https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect/639735#639735
 
 # Function to set all connected monitors to the same resolution
 function screenmirror() {

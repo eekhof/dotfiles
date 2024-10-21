@@ -3,11 +3,6 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 ### Begin additions from https://yazi-rs.github.io/docs/tips/
-[[manager.prepend_keymap]]
-# Drop to shell:
-on   = "<C-s>"
-run  = 'shell "$SHELL" --block --confirm'
-desc = "Open shell here"
 # Smart enter:
 [[manager.prepend_keymap]]
 on   = "l"
@@ -22,11 +17,11 @@ on   = "<Enter>"
 run  = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
 # Copy to clipboard when yanking:
-[[manager.prepend_keymap]]
-on  = "y"
-run = [ '''
-	shell 'echo "$@" | xfce4-clipman -i -selection clipboard -t text/uri-list' --confirm
-''', "yank" ]
+#[[manager.prepend_keymap]]
+#on  = "y"
+#run = [ '''
+#	shell 'echo "$@" | xfce4-clipman -i -selection clipboard -t text/uri-list' --confirm
+#''', "yank" ]
 # TODO: Fix clipboard, add drag and drop, whab is Close input by once Esc press, show git, prevent netrw, etc, see tips
 ### End additions from yazi tips
 
