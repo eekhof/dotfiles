@@ -434,6 +434,15 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
     group = templates
 })
+-- Compile and execute Fortran code with gfortran:
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'fortran' },
+    callback = function()
+        imap('<F5>', '<ESC>:!gfortran % -o %:r<CR>:!./%:r<CR>') -- Compile and execute Fortran code
+        nmap('<F5>', ':!gfortran % -o %:r<CR>:!./%:r<CR>') -- Compile and execute Fortran code
+    end,
+    group = compile_execute
+})
 
 
 -- Make each character in list below work as text object for latex selection, see https://vi.stackexchange.com/questions/12146/refer-to-text-between-arbitrary-delimiting-characters
