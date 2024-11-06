@@ -498,7 +498,13 @@ local plugins = {
     -- 'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
     { 'yioneko/nvim-cmp', -- See https://www.reddit.com/r/neovim/comments/1f1rxtx/share_a_tip_to_improve_your_experience_in_nvimcmp/
         branch = "perf",
-        event = "InsertEnter"
+        event = "InsertEnter",
+        opts = {
+            performance = {
+                debounce = 0, -- default is 60ms
+                throttle = 0, -- default is 30ms
+            },
+        }
     },
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
     'nvim-treesitter/nvim-treesitter',
