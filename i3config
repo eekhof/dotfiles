@@ -236,7 +236,7 @@ exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 exec nextcloud
 
 # Shortcuts for common programs:
-bindsym $mod+F1 exec $TERMINAL -e bash -i -c 'yazi' # -i is to force alacritty/bash to use login shell in order to source .bashrc
+bindsym $mod+F1 exec $TERMINAL -e bash -i -c 'y' # -i is to force alacritty/bash to use login shell in order to source .bashrc
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec pavucontrol
 bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playlist
