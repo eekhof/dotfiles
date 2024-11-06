@@ -130,6 +130,13 @@ previewers = [
 	{ name = "*", run = "file" },
 ]
 
+[[plugin.prepend_preloaders]]
+name = "/home/*/mnt/**"
+run  = "noop"
+[[plugin.prepend_previewers]]
+name = "/home/*/mnt/**"
+run  = "noop"
+
 [input]
 cursor_blink = false
 
