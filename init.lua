@@ -32,8 +32,10 @@
 -- hjkl -> neio
 -- n -> k (because old key from qwerty is n)
 -- e -> j (because seldomly used and j is weird to reach in colemak, and j is close to b in colemak, which orders the navigation keys nicely)
--- i -> l (because often used and l is easy to reach in colemak)
--- o -> h (relatively comfortable to reach)
+-- i -> h (because often used and l is easy to reach in colemak)
+-- o -> l (relatively comfortable to reach)
+
+-- Make shift + arrow and alt+neio move cursor to top/bottom of window, as capital hjkl do that too https://www.reddit.com/r/vim/comments/14o2l0m/how_to_move_really_efficiently_in_vim/
 
 -- Transparency:
 vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, guibd=NONE, ctermbg=NONE, cterm=NONE }) -- For transparency of background
