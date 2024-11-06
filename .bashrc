@@ -25,7 +25,7 @@ eval "$(zoxide init bash)"
 # For Zoxide to work properly/to record history:
 alias cd="z"
 # Yazi
-function y() {
+function yazi_wrapper() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
@@ -33,6 +33,8 @@ function y() {
     fi
     rm -f -- "$tmp"
 }
+alias y="yazi_wrapper"
+
 
 # DEFINE COLORED ls AS DEFAULT, AND DISPLAY HIDDEN FILES PER DEFAULT
 alias ls='ls -a --color=auto'
