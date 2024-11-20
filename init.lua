@@ -859,6 +859,10 @@ require'nvim-treesitter.configs'.setup {
             if ok and stats and stats.size > max_filesize then
                 return true
             end
+            -- Disable for filetype latex, because vimtex highlighting better than treesitter, see https://blog.epheme.re/software/nvim-latex.html :
+            if lang == 'latex' then
+                return true
+            end
         end,
 
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
