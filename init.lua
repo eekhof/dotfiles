@@ -1,6 +1,6 @@
 -- For rewriting init.vim in lua, see https://www.notonlycode.org/neovim-lua-config/ and https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/
 -- FOR INSTALL: Run the console commands, and run github authentification for copilot
--- sudo pacman -S git zathura zathura-pdf-mupdf pyright bash-language-server ripgrep fzy gitui
+-- sudo pacman -S git zathura zathura-pdf-mupdf pyright bash-language-server texlab ripgrep fzy gitui tree-sitter-cli
 -- pip install nvr # For neovim remote opening into same window, as well as editor commands called by nvim terminal opening in parent neovim instance
 -- TODO: Markdown preview does not work yet (It does work on a fresh linux installation)
 -- TODO: When having initialized a new git repo in a folder in which the main latex document lies, the GIT.gitignore does not yet get generated, as per the eekhof-latex-package, when compiled with vimtex
@@ -12,6 +12,7 @@
 -- TODO: Ersetze surrounding pair defs mit mini.pairs, und surrounds mit mini.surround
 -- TODO: Nutze die Treesitter-Plugins https://github.com/windwp/nvim-ts-autotag , https://github.com/nvim-treesitter/nvim-treesitter-context , https://github.com/nvim-treesitter/nvim-treesitter-textobjects , https://github.com/nvim-treesitter/nvim-treesitter-refactor
 -- TODO: Implementiere true-false-switch mit CTRL-x/a , siehe z.b. https://vi.stackexchange.com/questions/5213/swap-values-true-and-false-via-ctrla-ctrlx
+-- TODO: Fuer Jupyter-Support nutze https://github.com/dccsillag/magma-nvim
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
