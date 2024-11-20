@@ -236,13 +236,13 @@ exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 exec nextcloud
 
 # Shortcuts for common programs:
-# Open a yazi terminal and drop out to shell in current folder, verify by running in terminal and setting $TERMINAL=alacritty:
-bindsym $mod+F1 exec $TERMINAL -e bash --login -i -c 'y && exec bash -i'
-bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec pavucontrol
-bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playlist
-bindsym Print exec xfce4-screenshooter -r -c && dunstify -i daytime-sunset-symbolic "Region saved to clipboard"
-bindsym Shift+Print exec xfce4-screenshooter -w
+# Open a yazi terminal and drop out to shell in current folder, verify by running in terminal and setting $TERMINAL=alacritty: # TODO: The sourcing is necessary, because otherwise NeovimLSP will not get loaded properly for example. There might also be other issues which have not yet been resolved and might cause weird effects in the shell opened from such yazi windows
+bindsym $mod+F1 exec --no-startup-id $TERMINAL -e bash -ilc 'source ~/.bashrc && yazi_wrapper && exec bash -i'
+bindsym $mod+F2 exec --no-startup-id firefox
+bindsym $mod+F3 exec --no-startup-id pavucontrol
+bindsym $mod+F10 exec --no-startup-id vlc ~/Sonstiges/Musik/Playlist/PlaylistDaten/ # Play playlist
+bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r -c && dunstify -i daytime-sunset-symbolic "Region saved to clipboard"
+bindsym Print exec --no-startup-id xfce4-screenshooter -w
 # bindsym $mod+F3 exec nvim # TODO: Does not work yet
 
 ### Cosmetics:
