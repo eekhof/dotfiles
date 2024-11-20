@@ -101,7 +101,8 @@ alias eurkey='setxkbmap eu && xmodmap -e "keycode 105 = dead_greek dead_greek de
 
 alias db-wifi-help='echo Wenn sich das loginportal im browser nicht öffnet, versuche auf eine http statt https-seite zu navigieren, z. b. "http://http.rip"'
 
-alias sshfs-cascade='sshfs cascade:/ ~/mnt/cascade -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)' # The latter options ore for correct permissions, see https://wiki.ubuntuusers.de/FUSE/sshfs/#User-Mapping ; the former is to stabilize against connection drops, see https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect/639735#639735
+alias sshfs-cascade='sshfs cascade:/ ~/mnt/cascade -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)' # The latter options are for correct permissions, see https://wiki.ubuntuusers.de/FUSE/sshfs/#User-Mapping ; the former is to stabilize against connection drops, see https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect/639735#639735
+alias sshfs-eekhof='sshfs eekhof:/ ~/mnt/eekhof -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)'
 
 # Function to set all connected monitors to the same resolution
 function screenmirror() {
