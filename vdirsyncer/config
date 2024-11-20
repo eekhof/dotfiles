@@ -1,0 +1,37 @@
+[general]
+status_path = "~/.local/state/vdirsyncer/status/"
+
+[pair my_contacts]
+a = "my_contacts_local"
+b = "my_contacts_remote"
+collections = ["from a", "from b"]
+conflict_resolution = "b wins"
+
+[storage my_contacts_local]
+type = "filesystem"
+path = "~/.local/share/vdirsyncer/contacts/"
+fileext = ".vcf"
+
+[storage my_contacts_remote]
+type = "carddav"
+url = "https://cloud.eekhof.org/remote.php/dav"
+username = "lucas"
+password.fetch = ["command", "pass", "websites/eekhof.org/lucas"]
+
+[pair my_calendar]
+a = "my_calendar_local"
+b = "my_calendar_remote"
+collections = ["from a", "from b"]
+conflict_resolution = "b wins"
+metadata = ["color", "displayname", "description", "order"]
+
+[storage my_calendar_local]
+type = "filesystem"
+path = "~/.local/share/vdirsyncer/calendar/"
+fileext = ".ics"
+
+[storage my_calendar_remote]
+type = "caldav"
+url = "https://cloud.eekhof.org/remote.php/dav"
+username = "lucas"
+password.fetch = ["command", "pass", "websites/eekhof.org/lucas"]

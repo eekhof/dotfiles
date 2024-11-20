@@ -1,0 +1,18 @@
+[calendars]
+[[studium]]
+path = ~/.local/share/vdirsyncer/calendar/studium/
+[[ehrenamt]]
+path = ~/.local/share/vdirsyncer/calendar/ehrenamt/
+[[personal]]
+path = ~/.local/share/vdirsyncer/calendar/personal/
+[[gesundheit]]
+path = ~/.local/share/vdirsyncer/calendar/gesundheit/
+
+[locale]
+local_timezone= Europe/Berlin
+default_timezone= Europe/Berlin
+timeformat= %H:%M
+dateformat= %d.%m.
+longdateformat= %d.%m.%y
+datetimeformat= %d.%m. %H:%M
+longdatetimeformat= %d.%m.%y %H:%M

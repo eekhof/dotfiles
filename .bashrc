@@ -35,6 +35,23 @@ function yazi_wrapper() {
 }
 alias y="yazi_wrapper"
 
+# Calendar and contact syncing:
+function comsync() {
+    vdirsyncer sync
+    vdirsyncer metasync
+}
+# Interactive calendar preceded and superceded by calendar syncing:
+function cal() {
+    { comsync & } 2>/dev/null # Wrapping and redirect is for silent, because otherwise the sync prints into the ikhal tui
+    ikhal # ikhal will periodically automatically check for changes due to syncing, but the interval for this is very long
+    { comsync & } 2>/dev/null # Here it is to get immediate terminal access after closing ikhal
+}
+# Contact syncing preceded and superceded by contact syncing:
+function con() {
+    { comsync & } 2>/dev/null
+    khard "$@"
+    { comsync & } 2>/dev/null
+}
 
 # DEFINE COLORED ls AS DEFAULT, AND DISPLAY HIDDEN FILES PER DEFAULT
 alias ls='ls -a --color=auto'
