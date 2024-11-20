@@ -59,7 +59,7 @@ focus_wrapping no
 # start a terminal
 set $TERMINAL alacritty
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+q kill
