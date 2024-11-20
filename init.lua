@@ -508,6 +508,7 @@ local plugins = {
         }
     },
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
+    { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- For wrapping lsp inline diagnostics in new lines
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-refactor', -- Use refactor functionality to implement jump to definition etc, see https://github.com/nvim-treesitter/nvim-treesitter-refactor?tab=readme-ov-file#navigation
@@ -604,10 +605,11 @@ require('gitsigns').setup({ -- Setup gitsigns plugin, see Source: https://github
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 end
 })
-require'lspconfig'.pyright.setup{} -- Setup pyright language server for python - IF THIS FAILS, MAY NEED TO RUN CONSOLE COMMAND 'npm i -g pyright', see Source: https://github.com/neovim/nvim-lspconfig -- TODO: In the github it says: "nvim-lspconfig does not set keybindings or enable completion by default" - so look at "suggested configuration" paragraph -- TODO: Install html, shell and latex language servers/lsps # TODO: Add suggested keybindings, especially for "jump to definition"
+-- require'lspconfig'.pyright.setup{} -- Setup pyright language server for python - IF THIS FAILS, MAY NEED TO RUN CONSOLE COMMAND 'npm i -g pyright', see Source: https://github.com/neovim/nvim-lspconfig -- TODO: In the github it says: "nvim-lspconfig does not set keybindings or enable completion by default" - so look at "suggested configuration" paragraph -- TODO: Install html, shell and latex language servers/lsps # TODO: Add suggested keybindings, especially for "jump to definition"
 -- TODO: For basedpyright install see https://github.com/LazyVim/LazyVim/discussions/3350
 require'lspconfig'.bashls.setup{} -- Setup bash language server, for config of filetypes see https://smarttech101.com/nvim-lsp-configure-language-servers-shortcuts-highlights/#configure_each_server_separately
 require("luasnip.loaders.from_vscode").lazy_load() -- This is needed in case of luasnips, otherwise vim may load very slowly, see https://github.com/rafamadriz/friendly-snippets#with-lazynvim
+require'lspconfig'.texlab.setup{}
 
 -- Options for plugins
 -- VIMTEX
@@ -745,6 +747,18 @@ end, {silent = true})
               })
         end
     })
+
+-- LSP Line:
+require("lsp_lines").setup()
+vim.diagnostic.config({
+  virtual_text = false, -- Disable virtual_text since it's redundant due to lsp_lines.
+  virtual_lines = {
+    only_current_line = true,
+    highlight_whole_line = false,
+    wrap_long_lines = true, -- Wrap the line if it's still too long. -- TODO: This does not yet work, because this option is not yet merged into the release version of the plugin as of 2024-11-11. this will work in the future, and the whole plugin might go upstream to neovim, making this redundant, see https://lists.sr.ht/~whynothugo/lsp_lines.nvim/%3CD3FSJHV4IWFK.2P7DVELWNKS88@gpanders.com%3E
+  },
+})
+
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
     color_overrides = {
