@@ -6,15 +6,15 @@
 # Smart enter:
 [[manager.prepend_keymap]]
 on   = "l"
-run  = "plugin --sync smart-enter"
+run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 [[manager.prepend_keymap]]
 on   = "<Right>"
-run  = "plugin --sync smart-enter"
+run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 [[manager.prepend_keymap]]
 on   = "<Enter>"
-run  = "plugin --sync smart-enter"
+run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 # Copy to clipboard when yanking:
 #[[manager.prepend_keymap]]
@@ -24,6 +24,39 @@ desc = "Enter the child directory, or open the file"
 #''', "yank" ]
 # TODO: Fix clipboard, add drag and drop, whab is Close input by once Esc press, show git, prevent netrw, etc, see tips
 ### End additions from yazi tips
+### Begin additions for Plugins
+# Restore plugin
+[[manager.prepend_keymap]]
+on = "u"
+run = "plugin restore"
+desc = "Restore last deleted files/folders"
+# Open with plugin
+[[manager.prepend_keymap]]
+on   = "o"
+run  = "plugin open-with-cmd"
+desc = "Open with command"
+[[manager.prepend_keymap]]
+on   = "O"
+run  = "plugin open-with-cmd --args=block"
+desc = "Open with command in the terminal"
+### End additions for Plugins
+[[manager.prepend_keymap]]
+on   = "A"
+run  = "create --dir"
+desc = "Create a directory"
+[[manager.prepend_keymap]]
+on   = "q"
+run  = "close"
+desc = "Close the current tab, or quit if it is last tab"
+[[manager.prepend_keymap]]
+on   = "Q"
+run  = "close --no-cwd-file"
+desc = "Close the current tab, or quit if it is last tab, without writing cwd-file"
+[[manager.prepend_keymap]]
+on   = "<C-c>"
+run  = "quit --no-cwd-file"
+desc = "Exit the process without writing to cwd-file"
+
 
 [manager]
 
@@ -105,7 +138,7 @@ keymap = [
 
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Set linemode to size" },
-	{ on = [ "m", "p" ], run = "linemode permissions", desc = "Set linemode to permissions" },
+	{ on = [ "m", "p" ], run = "linemode perm", desc = "Set linemode to permissions" },
 	{ on = [ "m", "c" ], run = "linemode ctime",       desc = "Set linemode to ctime" },
 	{ on = [ "m", "m" ], run = "linemode mtime",       desc = "Set linemode to mtime" },
 	{ on = [ "m", "o" ], run = "linemode owner",       desc = "Set linemode to owner" },
@@ -127,10 +160,10 @@ keymap = [
 	{ on = "N", run = "find_arrow --previous",   desc = "Go to the previous found" },
 
 	# Sorting
-	{ on = [ ",", "m" ], run = [ "sort modified --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
-	{ on = [ ",", "M" ], run = [ "sort modified --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
-	{ on = [ ",", "c" ], run = [ "sort created --reverse=no", "linemode ctime" ],  desc = "Sort by created time" },
-	{ on = [ ",", "C" ], run = [ "sort created --reverse", "linemode ctime" ],     desc = "Sort by created time (reverse)" },
+	{ on = [ ",", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
+	{ on = [ ",", "M" ], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
+	{ on = [ ",", "c" ], run = [ "sort btime --reverse=no", "linemode ctime" ],  desc = "Sort by created time" },
+	{ on = [ ",", "C" ], run = [ "sort btime --reverse", "linemode ctime" ],     desc = "Sort by created time (reverse)" },
 	{ on = [ ",", "e" ], run = "sort extension --reverse=no",                      desc = "Sort by extension" },
 	{ on = [ ",", "E" ], run = "sort extension --reverse",                         desc = "Sort by extension (reverse)" },
 	{ on = [ ",", "a" ], run = "sort alphabetical --reverse=no",                   desc = "Sort alphabetically" },
@@ -145,6 +178,7 @@ keymap = [
 	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
+	{ on = [ "g", "t" ],       run = "cd ~/.local/share/Trash/files",   desc = "Go to the trash directory" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
 	# Tabs
