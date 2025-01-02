@@ -1034,9 +1034,9 @@ vim.o.title = true                              -- Show title in window
 vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally, 'titlelen=70' was appended to the line, but this did get printed out literally, so it was removed, see source https://medium.com/usevim/changing-vims-title-713001d4049c
 
 
-vim.api.nvim_set_keymap('n', 'n', '<LEFT>',  { noremap = true })
-vim.api.nvim_set_keymap('n', 'e', '<DOWN>',  { noremap = true })
-vim.api.nvim_set_keymap('n', 'i', '<UP>',    { noremap = true })
+vim.api.nvim_set_keymap('n', 'n', '<LEFT>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'e', '<DOWN>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'i', '<UP>', { noremap = true })
 vim.api.nvim_set_keymap('n', 'o', '<RIGHT>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'l', 'n', { noremap = false })
