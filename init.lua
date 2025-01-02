@@ -145,12 +145,6 @@ vim.g.maplocalleader = ' '                      -- Make local leader key same as
 -- imap('jk', '<Esc>')                             -- Map jk to escape from insert mode to prevent reaching for escape - If needing to type literal jk, one has to wait one to two seconds between presses, see https://vim.fandom.com/wiki/Avoid_the_escape_key
 -- vmap('jk', '<Esc>')                             -- Map jk to escape from visual mode
 
--- Colemak navigation keys:
-nmap('<A-n>', 'h')
-nmap('<A-e>', 'j')
-nmap('<A-i>', 'k')
-nmap('<A-o>', 'l')
-
 -- Map putting in visual mode so that text stays selected, but not if using capital P . Capital P is normally used to put text in visual mode, and not yank it to register, because small p yanks overwritten text to register
 vmap('p', 'Pgv')
 vmap('P', 'P')
@@ -161,8 +155,8 @@ nmap('gp', "`[v`]")
 nmap('S', ':%s//gI<Left><Left><Left>')-- TODO: Maybe polish this with below call command?                 -- Map capital S to replace all, I tag needed to make case sensitive after o.ignorecase or so has been set
 -- :autocmd FileType tex          iabbrev fr \frac{ENUMERATOR}{DENOMINATOR}<Esc>?ENUMERATOR<CR>dwh:call InsertInput("Enumerator")<CR><Esc>?DENOMINATOR<CR>dwh:call InsertInput("Denominator")<CR>a<right>
 
-nmap('oo', 'o<Esc>')                           -- Insert empty line below current line
-nmap('OO', 'O<Esc>')                            -- Insert empty line above current line
+nmap('kk', 'o<Esc>')                           -- Insert empty line below current line
+nmap('KK', 'O<Esc>')                            -- Insert empty line above current line
 
 -- Delete without yanking
 nmap('d', '"_d')
@@ -209,10 +203,10 @@ nmap('cc', '_"_C') -- need "_ so yank also gets blackholed
 -- TODO: Maybe make CC use the old behavior of cc, so that it deletes the indentation? But would mean delay when using single C
 
 -- Map for easier window tile navigation
-nmap('<C-J>', '<C-W><C-J>')
-nmap('<C-K>', '<C-W><C-K>')
-nmap('<C-L>', '<C-W><C-L>')
-nmap('<C-H>', '<C-W><C-H>')
+nmap('<C-e>', '<C-W><C-J>')
+nmap('<C-i>', '<C-W><C-K>')
+nmap('<C-o>', '<C-W><C-L>')
+nmap('<C-n>', '<C-W><C-H>')
 -- Map for easier window tile resizing
 nmap('<C-Up>', '<C-W>+')
 nmap('<C-Down>', '<C-W>-')
@@ -264,7 +258,7 @@ nmap('<Leader>p', 'a <ESC>p')
 nmap('<Leader>P', 'pbJ')
 
 -- Mapping to split line at cursor (inverse to capital J) (and also remove trailing space if there is one in the remaining upper line):
-nmap('<Leader>J', 'i<CR><ESC>k:s/ $//<CR>$')
+nmap('<Leader>E', 'i<CR><ESC>k:s/ $//<CR>$')
 
 -- Mappings for terminal mode, see https://gist.github.com/mahemoff/8967b5de067cffc67cec174cb3a9f49d
 nmap('<Leader>t', ':terminal<CR>')
@@ -612,7 +606,7 @@ require('gitsigns').setup({ -- Setup gitsigns plugin, see Source: https://github
     map('n', '<leader>hp', gs.preview_hunk)
     map('n', '<leader>hd', gs.diffthis) -- TODO: This throws errors
     map('n', '<leader>hD', function() gs.diffthis('~') end)
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    map({'o', 'x'}, 'ah', ':<C-U>Gitsigns select_hunk<CR>') -- TODO: here default ih mapping might collide with colemak navkeys, using ah instead of ih, check if this works
 end
 })
 -- require'lspconfig'.pyright.setup{} -- Setup pyright language server for python - IF THIS FAILS, MAY NEED TO RUN CONSOLE COMMAND 'npm i -g pyright', see Source: https://github.com/neovim/nvim-lspconfig -- TODO: In the github it says: "nvim-lspconfig does not set keybindings or enable completion by default" - so look at "suggested configuration" paragraph -- TODO: Install html, shell and latex language servers/lsps # TODO: Add suggested keybindings, especially for "jump to definition"
@@ -651,9 +645,9 @@ vim.g.mkdp_port = '3415' -- Set port for preview, otherwise it would be chosen a
 vim.g.mkdp_theme = 'dark' -- Set dark theme for markdown preview
 -- LUA-SNIPPETS, see https://www.reddit.com/r/neovim/comments/tbtiy9/choice_nodes_in_luasnip/
 ls = require("luasnip")
-vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+vim.keymap.set({"i"}, "<C-i>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-o>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-e>", function() ls.jump(-1) end, {silent = true})
 
 vim.keymap.set({"i", "s"}, "<C-E>", function()
     if ls.choice_active() then
@@ -674,8 +668,8 @@ end, {silent = true})
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-            ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-            ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion -- hint: For commandline completion it is necessary to use the key <TAB>
+            ["<C-i>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+            ["<C-e>"] = cmp.mapping.select_next_item(), -- next suggestion -- hint: For commandline completion it is necessary to use the key <TAB>
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
@@ -710,7 +704,7 @@ end, {silent = true})
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline({ -- These mappings are necessary, otherwise selection in commandline only works via tab and shift+tab, source: https://github.com/hrsh7th/cmp-cmdline/issues/70
-            ['<C-k>'] = {
+            ['<C-i>'] = {
                 c = function()
                     local cmp = require('cmp')
                     if cmp.visible() then
@@ -720,7 +714,7 @@ end, {silent = true})
                     end
                 end,
             },
-            ['<C-j>'] = {
+            ['<C-e>'] = {
                 c = function()
                     local cmp = require('cmp')
                     if cmp.visible() then
@@ -1033,16 +1027,54 @@ vim.o.statusline = vim.o.statusline .. '(%-3p%%)    ' -- Percentage through file
 vim.o.title = true                              -- Show title in window
 vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally, 'titlelen=70' was appended to the line, but this did get printed out literally, so it was removed, see source https://medium.com/usevim/changing-vims-title-713001d4049c
 
+-- --------------------------
+-- Get all the default mappings from view-source:https://vim.rtorr.com/
+-- Map navkeys to neio colemak homerow
+nmap('n', 'h')
+vmap('n', 'h')
+nmap('N', 'H') -- move to top of page
+vmap('N', 'H') -- move to top of page
+imap('<C+n>', '<C+h>') -- delete character before cursor in insert mode
 
-vim.api.nvim_set_keymap('n', 'n', '<LEFT>',  { noremap = true })
-vim.api.nvim_set_keymap('n', 'e', '<DOWN>',  { noremap = true })
-vim.api.nvim_set_keymap('n', 'i', '<UP>',    { noremap = true })
-vim.api.nvim_set_keymap('n', 'o', '<RIGHT>', { noremap = true })
+nmap('e', 'j')
+vmap('e', 'j')
+nmap('E', 'J') -- join lines
+imap('<C+e>', '<C+j>') -- add linebreak at current position
 
-vim.api.nvim_set_keymap('n', 'l', 'n', { noremap = false })
-vim.api.nvim_set_keymap('n', 'h', 'e', { noremap = false })
-vim.api.nvim_set_keymap('n', 'j', 'i', { noremap = false })
-vim.api.nvim_set_keymap('n', 'k', 'o', { noremap = false })
+nmap('i', 'k')
+vmap('i', 'k')
+nmap('I', 'K') -- open manpage for word under cursor
+
+nmap('o', 'l')
+vmap('o', 'l')
+nmap('O', 'L') -- move to bottom of screen
+vmap('O', 'L') -- move to bottom of screen
+
+-- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
+nmap('l', 'n')
+vmap('l', 'n')
+nmap('L', 'N') -- search in other direction
+vmap('L', 'N') -- search in other direction
+imap('<C+l>', '<C+n>') -- insert (auto-complete) next match before the cursor during insert mode
+
+nmap('h', 'e')
+vmap('h', 'e')
+nmap('H', 'E') -- back word end
+vmap('H', 'E') -- back word end
+nmap('<C+h>', '<C+e>') -- move screen down one line without moving cursor
+vmap('<C+h>', '<C+e>') -- move screen down one line without moving cursor
+
+nmap('j', 'i')
+nmap('J', 'I') -- insert at beginning of line
+nmap('<C+j>', '<C+i>') -- go to newer position in jumplist
+-- TODO: Eventuell ib, iB und it in visual mode
+
+nmap('k', 'o')
+vmap('k', 'o') -- move to other end of marked area
+vmap('K', 'O') -- move to other end of block
+nmap('<C+k>', '<C+o>') -- go to older position in jumplist
+--nmap('K', 'O') this has been done above with kk and KK
+
 
 -- TODOs -----------------------------
 -- TODO: Pyright does work, but pyright- command line commands do not work yet
