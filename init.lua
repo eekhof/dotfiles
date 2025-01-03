@@ -204,7 +204,7 @@ nmap('cc', '_"_C') -- need "_ so yank also gets blackholed
 
 -- Map for easier window tile navigation
 nmap('<C-e>', '<C-W><C-J>')
-nmap('<C-i>', '<C-W><C-K>')
+nmap('', '<C-W><C-K>') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
 nmap('<C-o>', '<C-W><C-L>')
 nmap('<C-n>', '<C-W><C-H>')
 -- Map for easier window tile resizing
@@ -645,7 +645,8 @@ vim.g.mkdp_port = '3415' -- Set port for preview, otherwise it would be chosen a
 vim.g.mkdp_theme = 'dark' -- Set dark theme for markdown preview
 -- LUA-SNIPPETS, see https://www.reddit.com/r/neovim/comments/tbtiy9/choice_nodes_in_luasnip/
 ls = require("luasnip")
-vim.keymap.set({"i"}, "<C-i>", function() ls.expand() end, {silent = true})
+-- see alacritty config for the meaning of the character, or https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work:
+vim.keymap.set({"i"}, "", function() ls.expand() end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-o>", function() ls.jump( 1) end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-e>", function() ls.jump(-1) end, {silent = true})
 
@@ -668,7 +669,7 @@ end, {silent = true})
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-            ["<C-i>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+            [""] = cmp.mapping.select_prev_item(), -- previous suggestion -- see alacritty config for the meaning of the character, or link above
             ["<C-e>"] = cmp.mapping.select_next_item(), -- next suggestion -- hint: For commandline completion it is necessary to use the key <TAB>
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -704,7 +705,7 @@ end, {silent = true})
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline({ -- These mappings are necessary, otherwise selection in commandline only works via tab and shift+tab, source: https://github.com/hrsh7th/cmp-cmdline/issues/70
-            ['<C-i>'] = {
+            [''] = {
                 c = function()
                     local cmp = require('cmp')
                     if cmp.visible() then
@@ -1066,7 +1067,7 @@ vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
 
 nmap('j', 'i')
 nmap('J', 'I') -- insert at beginning of line
-nmap('<C-j>', '<C-i>') -- go to newer position in jumplist
+nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
 -- TODO: Eventuell ib, iB und it in visual mode
 
 nmap('k', 'o')
@@ -1074,6 +1075,8 @@ vmap('k', 'o') -- move to other end of marked area
 vmap('K', 'O') -- move to other end of block
 nmap('<C-k>', '<C-o>') -- go to older position in jumplist
 --nmap('K', 'O') this has been done above with kk and KK
+
+-- imap('', '<Tab>')
 
 
 -- TODOs -----------------------------
