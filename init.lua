@@ -1034,12 +1034,12 @@ nmap('n', 'h')
 vmap('n', 'h')
 nmap('N', 'H') -- move to top of page
 vmap('N', 'H') -- move to top of page
-imap('<C+n>', '<C+h>') -- delete character before cursor in insert mode
+imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
 
 nmap('e', 'j')
 vmap('e', 'j')
 nmap('E', 'J') -- join lines
-imap('<C+e>', '<C+j>') -- add linebreak at current position
+imap('<C-e>', '<C-j>') -- add linebreak at current position
 
 nmap('i', 'k')
 vmap('i', 'k')
@@ -1055,24 +1055,24 @@ nmap('l', 'n')
 vmap('l', 'n')
 nmap('L', 'N') -- search in other direction
 vmap('L', 'N') -- search in other direction
-imap('<C+l>', '<C+n>') -- insert (auto-complete) next match before the cursor during insert mode
+imap('<C-l>', '<C-n>') -- insert (auto-complete) next match before the cursor during insert mode
 
 nmap('h', 'e')
 vmap('h', 'e')
 nmap('H', 'E') -- back word end
 vmap('H', 'E') -- back word end
-nmap('<C+h>', '<C+e>') -- move screen down one line without moving cursor
-vmap('<C+h>', '<C+e>') -- move screen down one line without moving cursor
+nmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
 
 nmap('j', 'i')
 nmap('J', 'I') -- insert at beginning of line
-nmap('<C+j>', '<C+i>') -- go to newer position in jumplist
+nmap('<C-j>', '<C-i>') -- go to newer position in jumplist
 -- TODO: Eventuell ib, iB und it in visual mode
 
 nmap('k', 'o')
 vmap('k', 'o') -- move to other end of marked area
 vmap('K', 'O') -- move to other end of block
-nmap('<C+k>', '<C+o>') -- go to older position in jumplist
+nmap('<C-k>', '<C-o>') -- go to older position in jumplist
 --nmap('K', 'O') this has been done above with kk and KK
 
 
