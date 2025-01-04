@@ -557,17 +557,7 @@ local plugins = {
     },
     --'evesdropper/luasnip-latex-snippets.nvim', -- Do work, but are not good. See also plugin friendly-snippets.
     'saadparwaiz1/cmp_luasnip',
-    -- 'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
-    { 'yioneko/nvim-cmp', -- See https://www.reddit.com/r/neovim/comments/1f1rxtx/share_a_tip_to_improve_your_experience_in_nvimcmp/
-        branch = "perf",
-        event = "InsertEnter",
-        opts = {
-            performance = {
-                debounce = 0, -- default is 60ms
-                throttle = 0, -- default is 30ms
-            },
-        }
-    },
+    'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
     { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- For wrapping lsp inline diagnostics in new lines
     'nvim-treesitter/nvim-treesitter',
