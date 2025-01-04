@@ -1,0 +1,8 @@
+[bindings]
+root.move_up = ["i", "<up>"]
+root.move_down = ["e", "<down>"]
+root.move_up_line = ["", "<ctrl+up>"]
+root.move_down_line = ["<ctrl+e>", "<ctrl+down>"]
+root.move_prev_section = ["<alt+i>", "<alt+up>"]
+root.move_next_section = ["<alt+e>", "<alt+down>"]
+root.move_parent_section = ["<alt+n>", "<alt+left>"]
