@@ -702,15 +702,14 @@ vim.g.mkdp_theme = 'dark' -- Set dark theme for markdown preview
 -- LUA-SNIPPETS, see https://www.reddit.com/r/neovim/comments/tbtiy9/choice_nodes_in_luasnip/
 ls = require("luasnip")
 -- see alacritty config for the meaning of the character, or https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work:
-vim.keymap.set({"i"}, "", function() ls.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-o>", function() ls.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "<C-e>", function() ls.jump(-1) end, {silent = true})
-
-vim.keymap.set({"i", "s"}, "<C-E>", function()
-    if ls.choice_active() then
-        ls.change_choice(1)
-    end
-end, {silent = true})
+-- vim.keymap.set({"i"}, "", function() ls.expand() end, {silent = true}) -- TODO: This seems to be unused
+-- vim.keymap.set({"i", "s"}, "<C-o>", function() ls.jump( 1) end, {silent = true}) -- TODO: This seems to be unused
+-- vim.keymap.set({"i", "s"}, "<C-e>", function() ls.jump(-1) end, {silent = true}) -- TODO: This seems to be unused
+-- vim.keymap.set({"i", "s"}, "<C-E>", function() -- TODO: This seems to be unused
+--     if ls.choice_active() then
+--         ls.change_choice(1)
+--     end
+-- end, {silent = true})
 
 -- Set up nvim-cmp: -- Hint: To limit width of suggestion and documentation window see https://github.com/hrsh7th/nvim-cmp/discussions/609
     local cmp = require'cmp'
