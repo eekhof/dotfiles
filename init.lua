@@ -139,6 +139,60 @@ function xmap(shortcut, command)
     map('x', shortcut, command)
 end
 
+
+-- --------------------------
+-- Get all the default mappings from view-source:https://vim.rtorr.com/
+-- Map navkeys to neio colemak homerow
+nmap('n', 'h')
+vmap('n', 'h')
+nmap('N', 'H') -- move to top of page
+vmap('N', 'H') -- move to top of page
+imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
+
+nmap('e', 'j')
+vmap('e', 'j')
+nmap('E', 'J') -- join lines
+imap('<C-e>', '<C-j>') -- add linebreak at current position
+
+nmap('i', 'k')
+vmap('i', 'k')
+nmap('I', 'K') -- open manpage for word under cursor
+
+nmap('o', 'l')
+vmap('o', 'l')
+nmap('O', 'L') -- move to bottom of screen
+vmap('O', 'L') -- move to bottom of screen
+
+-- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
+nmap('l', 'n')
+vmap('l', 'n')
+nmap('L', 'N') -- search in other direction
+vmap('L', 'N') -- search in other direction
+imap('<C-l>', '<C-n>') -- insert (auto-complete) next match before the cursor during insert mode
+
+nmap('h', 'e')
+vmap('h', 'e')
+nmap('H', 'E') -- back word end
+vmap('H', 'E') -- back word end
+nmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+
+nmap('j', 'i')
+nmap('J', 'I') -- insert at beginning of line
+nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
+-- TODO: Eventuell ib, iB und it in visual mode
+
+nmap('k', 'o')
+vmap('k', 'o') -- move to other end of marked area
+vmap('K', 'O') -- move to other end of block
+nmap('<C-k>', '<C-o>') -- go to older position in jumplist
+--nmap('K', 'O') this has been done above with kk and KK
+
+-- imap('', '<Tab>')
+-- --------------------------
+
+
+
 vim.g.mapleader = ' '                           -- Map leader key to space
 vim.g.maplocalleader = ' '                      -- Make local leader key same as leader key, required by vimtex, see https://stackoverflow.com/questions/26837425/vim-how-to-use-the-control-key-as-my-local-leader
 -- TODO: The following lines are disabled because they do not make sense on colemak
@@ -1046,56 +1100,6 @@ vim.o.statusline = vim.o.statusline .. '(%-3p%%)    ' -- Percentage through file
 
 vim.o.title = true                              -- Show title in window
 vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally, 'titlelen=70' was appended to the line, but this did get printed out literally, so it was removed, see source https://medium.com/usevim/changing-vims-title-713001d4049c
-
--- --------------------------
--- Get all the default mappings from view-source:https://vim.rtorr.com/
--- Map navkeys to neio colemak homerow
-nmap('n', 'h')
-vmap('n', 'h')
-nmap('N', 'H') -- move to top of page
-vmap('N', 'H') -- move to top of page
-imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
-
-nmap('e', 'j')
-vmap('e', 'j')
-nmap('E', 'J') -- join lines
-imap('<C-e>', '<C-j>') -- add linebreak at current position
-
-nmap('i', 'k')
-vmap('i', 'k')
-nmap('I', 'K') -- open manpage for word under cursor
-
-nmap('o', 'l')
-vmap('o', 'l')
-nmap('O', 'L') -- move to bottom of screen
-vmap('O', 'L') -- move to bottom of screen
-
--- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
-nmap('l', 'n')
-vmap('l', 'n')
-nmap('L', 'N') -- search in other direction
-vmap('L', 'N') -- search in other direction
-imap('<C-l>', '<C-n>') -- insert (auto-complete) next match before the cursor during insert mode
-
-nmap('h', 'e')
-vmap('h', 'e')
-nmap('H', 'E') -- back word end
-vmap('H', 'E') -- back word end
-nmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
-vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
-
-nmap('j', 'i')
-nmap('J', 'I') -- insert at beginning of line
-nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
--- TODO: Eventuell ib, iB und it in visual mode
-
-nmap('k', 'o')
-vmap('k', 'o') -- move to other end of marked area
-vmap('K', 'O') -- move to other end of block
-nmap('<C-k>', '<C-o>') -- go to older position in jumplist
---nmap('K', 'O') this has been done above with kk and KK
-
--- imap('', '<Tab>')
 
 
 -- TODOs -----------------------------
