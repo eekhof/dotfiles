@@ -620,6 +620,7 @@ require'lspconfig'.texlab.setup{}
 vim.g.vimtex_view_method = 'zathura' -- Use zathura as pdf viewer
 -- Exit vim if quickfix window is last window on screen (Source https://vim.fandom.com/wiki/Automatically_quit_Vim_if_quickfix_window_is_the_last):
 vim.g.vimtex_complete_bib_simple = 1 -- Enable sorting after accuracy of match in citation completion, see https://github.com/lervag/vimtex/issues/1265#issuecomment-443894124
+vim.g.vimtex_indent_lists = {} -- disable indentation of lists, and thus items in itemize, temporary fix to weird default vimtex indentation, see https://github.com/lervag/vimtex/issues/2599
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         -- if the window is quickfix go on
@@ -631,6 +632,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
         end
     end,
     group = grp
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
+    callback = function()
+        vim.keymap.set("i", "<CR>", function()
+            return vim.fn.getline("."):match("^%s*\\item%s+.+$")
+                and "<esc>o\\item <esc>a"
+                or "<CR>"
+        end, { expr = true, buffer = true })
+    end,
 })
 -- VIMTEX-LIVE-PREVIEW
 -- vim.g.livepreview_previewer = 'zathura' -- Use zathura as pdf viewer-- TODO:It seems to work without this line, so maybe it is not needed, but this is a little suspicious, would only make sense if zathura is the only compatible reader it can find
@@ -1093,6 +1104,7 @@ nmap('<C-k>', '<C-o>') -- go to older position in jumplist
 -- TODO: Make f F t and T and also ;, work on multiple lines (Possible Source: https://stackoverflow.com/questions/3925230/using-vims-f-command-over-multiple-lines/10564049#10564049 but this causes repetition like 3fx to not work anymore)
 -- TODO: Add custom latex package to snippets. It seems this can be done straight with the VSCode-Snipped file that the eekhof-plugin-installer generates anyway, as "Friendly-Snippets" makes use of such files too.
 -- TODO: The issue where neovim freezes on pasting the clipboard is due to a bug in XClip, see https://www.reddit.com/r/neovim/comments/r7h538/clipboard_error_error_target_string_not_available/ and https://github.com/astrand/xclip/issues/38
+-- TODO: After compiling (leader+ll) vimtex periodically flickers the cursor when in insert mode, probably because of periodic recompiling of the pdf, disable the flicker
 
 -- Uninstall -----------------------------
 -- To uninstall this script and all changes made by it, delete '~/.config/nvim' and ... -- TODO: Add location where plugins are installed by lazy.nvim
