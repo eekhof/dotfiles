@@ -749,7 +749,7 @@ end, {silent = true})
     require('lspconfig')['pyright'].setup {
         capabilities = capabilities
     }
-    vim.keymap.set('n', '<Leader>g', ':terminal export EDITOR=nvr && export GIT_EDITOR=nvim && gitu<CR>') -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
+    vim.keymap.set('n', '<Leader>g', function() vim.cmd('terminal export EDITOR=nvr && export GIT_EDITOR="nvr --remote-wait" && gitu') end) -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
     vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
         pattern = "term://*gitu",
         callback = function()
@@ -763,6 +763,14 @@ end, {silent = true})
               })
         end
     })
+    -- Delete git buffer after quitting, so nvr --remote-wait finishes waiting, see autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "gitcommit", "gitrebase", "gitconfig" },
+        callback = function()
+            vim.bo.bufhidden = "delete"
+        end,
+    })
+
 
 -- LSP Line:
 require("lsp_lines").setup()
@@ -1105,6 +1113,7 @@ nmap('<C-k>', '<C-o>') -- go to older position in jumplist
 -- TODO: Add custom latex package to snippets. It seems this can be done straight with the VSCode-Snipped file that the eekhof-plugin-installer generates anyway, as "Friendly-Snippets" makes use of such files too.
 -- TODO: The issue where neovim freezes on pasting the clipboard is due to a bug in XClip, see https://www.reddit.com/r/neovim/comments/r7h538/clipboard_error_error_target_string_not_available/ and https://github.com/astrand/xclip/issues/38
 -- TODO: After compiling (leader+ll) vimtex periodically flickers the cursor when in insert mode, probably because of periodic recompiling of the pdf, disable the flicker
+-- TODO: The behavior of gitu commits is still inconsistent, if a commit window from nvim is closed with wq the commit does not happen, if gitu is opened from the terminal and closed with wq it does happen
 
 -- Uninstall -----------------------------
 -- To uninstall this script and all changes made by it, delete '~/.config/nvim' and ... -- TODO: Add location where plugins are installed by lazy.nvim
