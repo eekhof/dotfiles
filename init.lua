@@ -566,6 +566,7 @@ local plugins = {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'petertriho/cmp-git',
+    'nvim-lua/plenary.nvim', -- dependency of cmp-git
     'hrsh7th/cmp-omni', -- For Latex support, see https://github.com/lervag/vimtex/issues/2215
     'hrsh7th/cmp-cmdline',
     'vim-airline/vim-airline',
@@ -748,6 +749,8 @@ end, {silent = true})
             { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
         }, {
             { name = 'buffer' },
+        }, {
+            { name = 'path' },
         })
     })
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -787,6 +790,7 @@ end, {silent = true})
             { name = 'cmdline' }
         })
     })
+require("cmp_git").setup()
 -- Set up lspconfig. # TODO: Maybe use snippet https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
