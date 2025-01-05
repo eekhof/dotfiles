@@ -32,15 +32,6 @@
 -- vim.api.nvim_set_hl(0, "Ignore", { ctermfg=000, ctermbg=NONE, cterm=NONE }) -- Change fg to true black
 -- vim.api.nvim_set_hl(0, "FloatBorder", { ctermfg=231, ctermbg=000, cterm=NONE }) -- Change window border color to black and white, this should be default, but somehow doesn't work when calling nvim_open_win
 
--- Colemak remapping idea:
--- hjkl -> neio
--- n -> k (because old key from qwerty is n)
--- e -> j (because seldomly used and j is weird to reach in colemak, and j is close to b in colemak, which orders the navigation keys nicely)
--- i -> h (because often used and l is easy to reach in colemak)
--- o -> l (relatively comfortable to reach)
--- TODO: Maybe do e->h and i->j instead, because e is relatively frequently used now, and i should not be used, using a is better (even capital I is not often used if commenting shortcut works
--- bind escape to caps, as rolling ei happens often in writing
-
 -- Transparency:
 vim.api.nvim_set_hl(0, "Normal", { ctermfg=231, guibd=NONE, ctermbg=NONE, cterm=NONE }) -- For transparency of background
 vim.api.nvim_set_hl(0, "NonText", { ctermfg=153, ctermbg=NONE, cterm=NONE }) -- For transparency of background
@@ -1111,6 +1102,8 @@ vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally,
 -- TODO: The issue where neovim freezes on pasting the clipboard is due to a bug in XClip, see https://www.reddit.com/r/neovim/comments/r7h538/clipboard_error_error_target_string_not_available/ and https://github.com/astrand/xclip/issues/38
 -- TODO: After compiling (leader+ll) vimtex periodically flickers the cursor when in insert mode, probably because of periodic recompiling of the pdf, disable the flicker
 -- TODO: The behavior of gitu commits is still inconsistent, if a commit window from nvim is closed with wq the commit does not happen, if gitu is opened from the terminal and closed with wq it does happen
+-- TODO: Snippets are now native neovim feature, use them instead of luasnips, see https://github.com/neovim/neovim/pull/25301
+-- TODO: Treesitter is native neovim feature, check if it is used instead of other treesitter plugin
 
 -- Uninstall -----------------------------
 -- To uninstall this script and all changes made by it, delete '~/.config/nvim' and ... -- TODO: Add location where plugins are installed by lazy.nvim
