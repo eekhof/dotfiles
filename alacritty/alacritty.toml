@@ -33,5 +33,5 @@ bindings = [
     { key = "PageUp", mods = "Shift", action = "ScrollPageUp"},
     { key = "PageDown", action = "ScrollLineDown" },
     { key = "PageDown", mods = "Shift", action = "ScrollPageDown"},
-    { key = "i", mods = "Control", chars = "\uE000" } # Use custom PUA-like sequence to map Ctrl+i seperately from tab in vim, see https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work and https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51 and https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode
+    { key = "i", mods = "Control", chars = "ႭჃႳ" } # Use custom PUA-like sequence to map Ctrl+i seperately from tab in vim, see https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work and https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51 and https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode
 ]
