@@ -715,13 +715,16 @@ ls = require("luasnip")
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-            [""] = cmp.mapping.select_prev_item(), -- previous suggestion -- see alacritty config for the meaning of the character, or link above
-            ["<C-e>"] = cmp.mapping.select_next_item(), -- next suggestion -- hint: For commandline completion it is necessary to use the key <TAB>
+            -- ["<C-i>"] = cmp.mapping.select_prev_item(), -- previous suggestion -- see alacritty config for the meaning of the character, or link above
+            -- The above mapping cannot work with the special character bound to ctrl i in alacritty, since nvim-cmp only checks for specific alphanumeric characters and certain ascii ones, see https://github.com/hrsh7th/nvim-cmp/pull/2073 and for a solution see code below, and also https://github.com/hrsh7th/nvim-cmp/issues/1849
+            ["ႭჃႳ"] = cmp.mapping.select_prev_item(),
+            ["<C-e>"] = cmp.mapping.select_next_item(),
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.abort(),
+            ['<C-n>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items, and to true to have to scroll through list to select something.
+            ['<C-o>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items, and to true to have to scroll through list to select something.
         }),
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
@@ -745,34 +748,26 @@ ls = require("luasnip")
     })
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline({
+            -- The following mappings deviate in syntax from those in insert mode. This is necessary for it to work, but is considered to be a bug, see the link afterwards. If this gets fixed, adjust this to follow consistent syntax. Source: https://github.com/hrsh7th/nvim-cmp/issues/1835
+            ["ႭჃႳ"] = { c = cmp.mapping.select_prev_item() },
+            ["<C-e>"] = { c = cmp.mapping.select_next_item() },
+            ["<C-n>"] = { c = cmp.mapping.abort() },
+            ["<C-o>"] = { c = cmp.mapping.confirm() },
+
+        }),
         sources = {
             { name = 'buffer' }
         }
     })
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline({ -- These mappings are necessary, otherwise selection in commandline only works via tab and shift+tab, source: https://github.com/hrsh7th/cmp-cmdline/issues/70
-            [''] = {
-                c = function()
-                    local cmp = require('cmp')
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    else
-                        cmp.complete()
-                    end
-                end,
-            },
-            ['<C-e>'] = {
-                c = function()
-                    local cmp = require('cmp')
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    else
-                        cmp.complete()
-                    end
-                end,
-            },
+        mapping = cmp.mapping.preset.cmdline({
+            -- The following mappings deviate in syntax from those in insert mode. This is necessary for it to work, but is considered to be a bug, see the link afterwards. If this gets fixed, adjust this to follow consistent syntax. Source: https://github.com/hrsh7th/nvim-cmp/issues/1835
+            ["ႭჃႳ"] = { c = cmp.mapping.select_prev_item() },
+            ["<C-e>"] = { c = cmp.mapping.select_next_item() },
+            ["<C-n>"] = { c = cmp.mapping.abort() },
+            ["<C-o>"] = { c = cmp.mapping.confirm() },
         }),
         sources = cmp.config.sources({
             { name = 'path' }
@@ -781,6 +776,7 @@ ls = require("luasnip")
         })
     })
 require("cmp_git").setup()
+
 -- Set up lspconfig. # TODO: Maybe use snippet https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
