@@ -661,6 +661,8 @@ vim.g.vimtex_view_method = 'zathura' -- Use zathura as pdf viewer
 -- Exit vim if quickfix window is last window on screen (Source https://vim.fandom.com/wiki/Automatically_quit_Vim_if_quickfix_window_is_the_last):
 vim.g.vimtex_complete_bib_simple = 1 -- Enable sorting after accuracy of match in citation completion, see https://github.com/lervag/vimtex/issues/1265#issuecomment-443894124
 vim.g.vimtex_indent_lists = {} -- disable indentation of lists, and thus items in itemize, temporary fix to weird default vimtex indentation, see https://github.com/lervag/vimtex/issues/2599
+vim.g.vimtex_quickfix_open_on_warning = 0
+vim.g.vimtex_quickfix_ignore_filters = { 'Overfull', 'Underfull'}
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         -- if the window is quickfix go on
