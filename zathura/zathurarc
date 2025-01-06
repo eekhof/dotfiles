@@ -1,9 +1,21 @@
+# Colemak mappings:
+map n scroll left
+map e scroll down
+map i scroll up
+map o scroll right
+map l search forward
+map L search backward
+map k focus_inputbar :open 
+map K focus_inputbar :open  append_filepath
+
 # zoom and scroll step size
 set zoom-step 20
 set scroll-step 80
-# zoom mappings
+# zoom mappings (Overlap with default jumplist bindings, remap those to ctrl shift)
 map <C-i> zoom in
 map <C-o> zoom out
+map <C-O> jumplist backward
+map <C-I> jumplist forward
 
 # copy selection to system clipboard
 set selection-clipboard clipboard
