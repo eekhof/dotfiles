@@ -249,9 +249,13 @@ nmap('cc', '_"_C') -- need "_ so yank also gets blackholed
 
 -- Map for easier window tile navigation
 nmap('<C-e>', '<C-W><C-J>')
-nmap('', '<C-W><C-K>') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
+nmap('ႭჃႳ', '<C-W><C-K>') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
 nmap('<C-o>', '<C-W><C-L>')
 nmap('<C-n>', '<C-W><C-H>')
+nmap('<C-E>', '<C-W>J')
+nmap('ႴႭჃႳ', '<C-W>K') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
+nmap('<C-O>', '<C-W>L')
+nmap('<C-N>', '<C-W>H')
 -- Map for easier window tile resizing
 nmap('<C-Up>', '<C-W>+')
 nmap('<C-Down>', '<C-W>-')
