@@ -190,15 +190,27 @@ HISTCONTROL=ignorespace
 HISTSIZE=5000 # Number of commands to log in one terminal session
 HISTFILESIZE=5000 # Number of commands to log in histfile after terminal session is closed
 
-# Read in path for custom binaries
-export PATH="$HOME/.bin:$PATH"
-# TODO Why is the following line needed?:
-PATH=$HOME/.bin:/home/lucas/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/home/lucas/.dotnet/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/lucas/.local/bin
+# Add Android development tools/flutter to path:
+export ANDROID_HOME=/usr/src/debug/android-sdk
 
-# Add TexLive binaries path to path:
-PATH=/usr/local/texlive/2024/bin/x86_64-linux/:$PATH
-# Add rust cargo installed bin folder to path:
-PATH=$HOME/.cargo/bin:$PATH
+# TODO Why is the following line needed?:
+PATH=$HOME/.bin:\
+/usr/local/bin:\
+/usr/bin:\
+/bin:\
+/usr/local/sbin:\
+/home/lucas/.dotnet/tools:\
+/usr/lib/jvm/default/bin:\
+/usr/bin/site_perl:\
+/usr/bin/vendor_perl:\
+/usr/bin/core_perl:\
+/home/lucas/.local/bin:\
+/usr/local/texlive/2024/bin/x86_64-linux/:\
+$HOME/.cargo/bin:\
+$ANDROID_HOME/cmdline-tools/tools/bin:\
+$ANDROID_HOME/platform-tools:\
+$PATH
+
 
 # Change paths to conform to XDG Base Directory Specification: # TODO: Does not work yet
 # export XDG_CONFIG_HOME=$HOME/.config
