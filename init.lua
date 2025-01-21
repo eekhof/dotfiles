@@ -1018,14 +1018,6 @@ require'nvim-treesitter.configs'.setup {
 }
 -- Templates -----------------------------
 -- augroup templates
--- When buffer is git commit message edit buffer, jump into insert mode:
-    vim.api.nvim_create_autocmd("BufReadPost", {
-        pattern = "COMMIT_EDITMSG",
-        callback = function()
-            vim.api.nvim_input('i') -- Enter insert mode
-        end,
-        group = templates
-    })
 -- TODO: All of these below here seem to slow the loading of vim quite a bit, even more than just using vimscript commands (?):
 --     LaTeX
     vim.api.nvim_create_autocmd("BufNewFile", {
