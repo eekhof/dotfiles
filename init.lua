@@ -601,8 +601,7 @@ local plugins = {
     }
 }
 local opts = {}
-require("lazy").setup({ plugins, opts }) -- Start lazy.nvim
--- Other plugin starts: -- TODO: Does lazyloading need to be enabled in these setup lines, so the plugins dont load automatically every time?
+require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
 require('copilot').setup({
     suggestion = { enabled = false },
     panel = { enabled = false },
