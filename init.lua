@@ -684,6 +684,35 @@ vim.api.nvim_create_autocmd("FileType", {
                 and "<esc>o\\item <esc>a"
                 or "<CR>"
         end, { expr = true, buffer = true })
+        -- -------- Provide functionality to only compile on save:
+        -- Initialize buffer local flag vimtex_compile to false:
+        vim.b.vimtex_compile = false
+        -- Overwrite leader+ll keymap to toggle vimtex_compile flag true and if true, compile document as single shot:
+        vim.keymap.set("n", "<Leader>ll", function()
+            vim.b.vimtex_compile = not vim.b.vimtex_compile
+            if vim.b.vimtex_compile then
+                vim.cmd("VimtexCompileSS")
+            end
+        end, { buffer = true })
+        -- Overwrite save command to do a single shot compile if vimtex_compile flag is true:
+        function compile_tex_ifflag()
+            if vim.b.vimtex_compile then
+                vim.cmd("VimtexCompileSS")  -- Trigger VimtexCompileSS for LaTeX compilation
+            end
+        end
+        vim.cmd([[
+            command! -buffer -nargs=* WRITECOMPILETEX write <args> | lua compile_tex_ifflag()
+        ]])
+        -- Hack to circumvent lowercase user defined command prohibition, source:
+        vim.cmd([[
+fun! SetupCommandAlias(from, to)
+  exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfun
+call SetupCommandAlias("w","WRITECOMPILETEX")
+]])
+
     end,
 })
 -- VIMTEX-LIVE-PREVIEW
@@ -1103,10 +1132,12 @@ vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally,
 -- TODO: Make f F t and T and also ;, work on multiple lines (Possible Source: https://stackoverflow.com/questions/3925230/using-vims-f-command-over-multiple-lines/10564049#10564049 but this causes repetition like 3fx to not work anymore)
 -- TODO: Add custom latex package to snippets. It seems this can be done straight with the VSCode-Snipped file that the eekhof-plugin-installer generates anyway, as "Friendly-Snippets" makes use of such files too.
 -- TODO: The issue where neovim freezes on pasting the clipboard is due to a bug in XClip, see https://www.reddit.com/r/neovim/comments/r7h538/clipboard_error_error_target_string_not_available/ and https://github.com/astrand/xclip/issues/38
--- TODO: After compiling (leader+ll) vimtex periodically flickers the cursor when in insert mode, probably because of periodic recompiling of the pdf, disable the flicker
+-- TODO: After compiling (leader+ll) vimtex periodically flickers the cursor when in insert mode, probably because of periodic recompiling of the pdf, disable the flicker. This does not occur when using single shot :VimtexCompileSS as opposed to the usual :VimtexCompile , see https://ejmastnak.com/tutorials/vim-latex/compilation/
 -- TODO: The behavior of gitu commits is still inconsistent, if a commit window from nvim is closed with wq the commit does not happen, if gitu is opened from the terminal and closed with wq it does happen
 -- TODO: Snippets are now native neovim feature, use them instead of luasnips, see https://github.com/neovim/neovim/pull/25301
 -- TODO: Treesitter is native neovim feature, check if it is used instead of other treesitter plugin
+-- TODO: Latex compile alias COMPILETEX for w does also apply to bib files, and possibly other files opened in the same buffer
+-- TODO: For the latex errors, make it so that only fatal compilation breaking errors are shown as red E errors on the left bar, missing refereces are shown as yellow W warnings and under/overfull is shown as green H hint
 
 -- Uninstall -----------------------------
 -- To uninstall this script and all changes made by it, delete '~/.config/nvim' and ... -- TODO: Add location where plugins are installed by lazy.nvim
