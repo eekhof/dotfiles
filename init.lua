@@ -126,13 +126,16 @@ end
 function tmap(shortcut, command)
     map('t', shortcut, command)
 end
-function xmap(shortcut, command)
+function xmap(shortcut, command) -- This is very niche, it applies a mapping to visual mode only, while vmap applies to visual AND select mode, see :h mapmode-x or :h map-modes
     map('x', shortcut, command)
 end
-
+function smap(shortcut, command) -- This is very niche, it applies a mapping to select mode only, while vmap applies to visual AND select mode, see :h mapmode-s or :h map-modes
+    map('s', shortcut, command)
+end
 
 -- --------------------------
 -- Get all the default mappings from view-source:https://vim.rtorr.com/
+-- TODO: Potentially switch up l and j, because there seems to be no way to make ij mapping work only in visual mode, thus ylw would be much easier to do than yjw, see vmap(i) mapping
 -- Map navkeys to neio colemak homerow
 nmap('n', 'h')
 vmap('n', 'h')
@@ -146,7 +149,7 @@ nmap('E', 'J') -- join lines
 imap('<C-e>', '<C-j>') -- add linebreak at current position
 
 nmap('i', 'k')
-vmap('i', 'k')
+vmap('i', 'k') -- TODO: This works, but in visual mode i first waits for another character because of text objects, e.g. "i(", this leads to delay and accidental overpresses of i. For possible solution see https://www.reddit.com/r/vim/comments/be2sik/remap_textobject_commands/
 nmap('I', 'K') -- open manpage for word under cursor
 
 nmap('o', 'l')
@@ -170,6 +173,8 @@ vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
 
 nmap('j', 'i')
 nmap('J', 'I') -- insert at beginning of line
+vmap('j', 'i')
+vmap('J', 'I') -- insert at beginning of line
 nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
 -- TODO: Eventuell ib, iB und it in visual mode
 
