@@ -182,6 +182,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status -c ~/static-website/longterm/i3statusconfig_$(cat /etc/hostname) # TODO: Temporarily use this slower solution instead of $HOSTNAME because on arch laptop the hostname variable is blank shortly after session start for some reason
         font pango:Noto Sans Mono 13
+        height 26
         separator_symbol " ⁞ "
         position top
   colors {
