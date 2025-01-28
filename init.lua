@@ -507,6 +507,15 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
     group = compile_execute
 })
+-- compile and execute C++ code with g++:
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'cpp' },
+    callback = function()
+        imap('<F5>', '<ESC>:!g++ % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C++ code
+        nmap('<F5>', ':!g++ % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C++ code
+    end,
+    group = compile_execute
+})
 
 
 -- Make each character in list below work as text object for latex selection, see https://vi.stackexchange.com/questions/12146/refer-to-text-between-arbitrary-delimiting-characters
