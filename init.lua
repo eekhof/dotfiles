@@ -12,7 +12,7 @@
 -- TODO: Ersetze surrounding pair defs mit mini.pairs, und surrounds mit mini.surround
 -- TODO: Nutze die Treesitter-Plugins https://github.com/windwp/nvim-ts-autotag , https://github.com/nvim-treesitter/nvim-treesitter-context , https://github.com/nvim-treesitter/nvim-treesitter-textobjects , https://github.com/nvim-treesitter/nvim-treesitter-refactor
 -- TODO: Implementiere true-false-switch mit CTRL-x/a , siehe z.b. https://vi.stackexchange.com/questions/5213/swap-values-true-and-false-via-ctrla-ctrlx
--- TODO: Fuer Jupyter-Support nutze https://github.com/dccsillag/magma-nvim
+-- TODO: Fuer Jupyter-Support nutze Molten.Nvim, https://github.com/benlubas/molten-nvim , ist ein successor von https://github.com/dccsillag/magma-nvim . Eigentlich wäre https://www.vim.org/scripts/script.php?script_id=6064 also https://github.com/PhilGrunewald/vim-py-kid cooler, aber funktioniert nicht
 -- TODO: Remap Ctrl+6 so that it goes to last existing buffer instead of last buffer, otherwise going back a buffer breaks when using the vim file browser
 -- TODO: Use yazi as file browser
 -- TODO: Make F5 execution only execute the program if compilation was successful
@@ -183,6 +183,8 @@ vmap('k', 'o') -- move to other end of marked area
 vmap('K', 'O') -- move to other end of block
 nmap('<C-k>', '<C-o>') -- go to older position in jumplist
 --nmap('K', 'O') this has been done above with kk and KK
+
+-- TODO: Add colemak mappings for CTRL-W + hjkl for changing split windows, and also rearranging them
 
 -- imap('', '<Tab>')
 -- --------------------------
@@ -607,7 +609,8 @@ local plugins = {
                 },
             })
         end
-    }
+    },
+    --"PhilGrunewald/vim-py-kid", -- TODO: This was an alternative to a jupyter notebook, but it does not work well
 }
 local opts = {}
 require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
