@@ -33,7 +33,7 @@ set $crust #11111b
 client.focused           $lavender $base $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-client.urgent            $peach    $base $red $overlay0  $red
+client.urgent            $peach    $base $red   $overlay0  $red
 client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 ###
