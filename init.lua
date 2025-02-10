@@ -679,7 +679,7 @@ vim.g.vimtex_complete_bib_simple = 1 -- Enable sorting after accuracy of match i
 vim.g.vimtex_indent_lists = {} -- disable indentation of lists, and thus items in itemize, temporary fix to weird default vimtex indentation, see https://github.com/lervag/vimtex/issues/2599
 vim.g.vimtex_quickfix_open_on_warning = 0
 vim.g.vimtex_quickfix_ignore_filters = { 'Overfull', 'Underfull'}
-vim.g.vimtex_quickfix_autoclose_after_keystrokes = 1 -- TODO: This closes the quickfix window when work on the document is resumed, but close on successful compilation wound be preferable, possibly with binding <Leader>ll (compilation shortcut) to compilation+closing quickfix window, but that would also need to be done for saving
+--vim.g.vimtex_quickfix_autoclose_after_keystrokes = 1 -- TODO: This closes the quickfix window when work on the document is resumed, but close on successful compilation wound be preferable, possibly with binding <Leader>ll (compilation shortcut) to compilation+closing quickfix window, but that would also need to be done for saving
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         -- if the window is quickfix go on
