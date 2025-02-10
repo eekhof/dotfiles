@@ -90,6 +90,11 @@ alias anonsvi='sudo -E nvim -c "set noundofile"'
 alias anonsvim='sudo -E nvim -c "set noundofile"'
 alias anonsnv='sudo -E nvim -c "set noundofile"'
 alias anonsv='sudo -E nvim -c "set noundofile"'
+# Vimdiff aliases:
+alias vimdiff='nvim -d'
+alias svimdiff='sudo -E nvim -d'
+alias anonvimdiff='nvim -d -c "set noundofile"'
+alias anonsvimdiff='sudo -E nvim -d -c "set noundofile"'
 
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
