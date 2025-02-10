@@ -17,12 +17,17 @@ border.fg=#11111b
 border.bold=true
 
 msglist_unread.bold=true
+msglist_unread.bg=#313244
+msglist_unread.bold=true
 msglist_flagged.fg=#f9e2af
 msglist_flagged.bold=true
 msglist_result.fg=#89b4fa
 msglist_result.bold=true
-msglist_*.selected.bold=true
-msglist_*.selected.bg=#313244
+msglist_*.selected.bg=#b4befe
+msglist_*.selected.fg=#11111b
+msglist_marked.italic=true
+msglist_marked.fg=#f38ba8
+msglist_marked.selected.fg=#f38ba8
 
 dirlist_*.selected.bold=true
 dirlist_*.selected.bg=#313244
@@ -33,6 +38,9 @@ statusline_error.bold=true
 statusline_success.bold=true
 
 completion_default.selected.bg=#313244
+completion_description.selected.bg=#313244
+completion_default.bg=#181825
+completion_description.bg=#181825
 
 [viewer]
 url.fg=#89b4fa
