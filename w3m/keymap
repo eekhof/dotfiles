@@ -1,0 +1,57 @@
+# Vimlike keybindings, modified from the following source https://gist.githubusercontent.com/Lovebird-Connoisseur/a11b9dbc5c056d705d1f0e1053de35af/raw/92b30d2ca4cf67b5816146f86f5d920b4bdfc492/keymap
+
+# For all keybindings see https://wiki.webevaluation.nl/w3m_keybindings
+
+# Navigation
+keymap $ LINE_END
+keymap ^ LINE_BEGIN
+keymap 0 LINE_BEGIN
+keymap G END
+keymap gg BEGIN
+keymap ESC-g GOTO_LINE
+
+keymap w NEXT_WORD
+keymap b PREV_WORD
+keymap TAB NEXT_LINK
+keymap S-TAB PREV_LINK
+keymap W NEXT_LINK
+keymap B PREV_LINK
+
+keymap o GOTO_LINK
+keymap n BACK
+
+# NPage Navigation
+keymap e COMMAND "MOVE_DOWN1"
+keymap i COMMAND "MOVE_UP1"
+
+# Undo
+keymap U REDO
+
+#keymap C-f NEXT_PAGE
+keymap C-f COMMAND "NEXT_PAGE"
+#keymap C-b PREV_PAGE
+keymap C-b COMMAND "PREV_PAGE"
+keymap r RELOAD
+
+# Tab stuff
+keymap E NEXT_TAB
+keymap I PREV_TAB
+keymap k GOTO
+keymap K TAB_GOTO
+
+# Search
+keymap / WHEREIS
+keymap ? SEARCH_BACK
+keymap l SEARCH_NEXT
+keymap L SEARCH_PREV
+
+# Commands
+keymap :: COMMAND
+keymap :help HELP
+keymap :downloads DOWNLOAD_LIST
+#keymap :hist HISTORY
+keymap :q EXIT
+keymap :settings OPTIONS
+
+# copy url to clipboard
+keymap yy EXTERN 'printf %s | xclip -selection clipboard'
