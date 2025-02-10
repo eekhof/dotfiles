@@ -34,5 +34,9 @@ bindings = [
     { key = "PageDown", action = "ScrollLineDown" },
     { key = "PageDown", mods = "Shift", action = "ScrollPageDown"},
     { key = "i", mods = "Control", chars = "ႭჃႳ" }, # Use custom PUA-like sequence to map Ctrl+i seperately from tab in vim, see https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work and https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51 and https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode
-    { key = "i", mods = "Control|Shift", chars = "ႴႭჃႳ" } # Use custom PUA-like sequence to map Ctrl+i seperately from tab in vim, see https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work and https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51 and https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode
+    { key = "i", mods = "Control|Shift", chars = "ႴႭჃႳ" }, # Use custom PUA-like sequence to map Ctrl+i seperately from tab in vim, see https://stackoverflow.com/questions/3336188/gvim-tab-key-doesnt-work and https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51 and https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode
+    { key = "Back", mods= "Control", chars="\u0017"}, # Delete back word
+    { key = "Back", mods= "Control|Shift", chars="\u0015"}, # Delete back line
+    { key = "Left", mods = "Control|Shift", chars = "\u0001"}, # Go to beginning of line, alternative to Ctrl+a
+    { key = "Right", mods = "Control|Shift", chars = "\u0005"}, # Go to end of line, alternative to Ctrl+e
 ]
