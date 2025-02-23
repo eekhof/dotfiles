@@ -145,11 +145,15 @@ imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
 
 nmap('e', 'j')
 vmap('e', 'j')
+nmap('ge', 'gj') -- move to next line
+vmap('ge', 'gj') -- move to next line
 nmap('E', 'J') -- join lines
 imap('<C-e>', '<C-j>') -- add linebreak at current position
 
 nmap('i', 'k')
 vmap('i', 'k') -- TODO: This works, but in visual mode i first waits for another character because of text objects, e.g. "i(", this leads to delay and accidental overpresses of i. For possible solution see https://www.reddit.com/r/vim/comments/be2sik/remap_textobject_commands/
+nmap('gi', 'gk') -- move to previous line
+vmap('gi', 'gk') -- move to previous line
 nmap('I', 'K') -- open manpage for word under cursor
 
 nmap('o', 'l')
@@ -334,6 +338,18 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://
         vim.cmd("startinsert")
     end
 })
+
+-- Mapping to open float with list of lsp errors on current line:
+nmap('go', ':lua vim.diagnostic.open_float()<CR>') -- the usual keymap is "gl", which becomes "go" in colemak
+vim.diagnostic.config({
+  float = {
+    border = "rounded", -- Rounded borders for the floating window
+    source = "always",  -- Show the source of the diagnostic
+    header = "",        -- Remove the "Diagnostics" header
+    prefix = "‣ ",      -- Add a bullet point before each message
+  }
+})
+-- vim.api.nvim_set_hl(0, "NormalFloat", {bg="#FFFFFF"}) -- TODO Bkg is not usual color
 
 -- Mapping to force gf to go edit file even if it does not exist for use in note taking/wiki creation to quickly make new notes:
 nmap('gf', ':e <cfile><CR>')
@@ -570,7 +586,6 @@ local plugins = {
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
-    { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- For wrapping lsp inline diagnostics in new lines
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-refactor', -- Use refactor functionality to implement jump to definition etc, see https://github.com/nvim-treesitter/nvim-treesitter-refactor?tab=readme-ov-file#navigation
@@ -580,6 +595,7 @@ local plugins = {
     'nvim-lua/plenary.nvim', -- dependency of cmp-git
     'hrsh7th/cmp-omni', -- For Latex support, see https://github.com/lervag/vimtex/issues/2215
     'hrsh7th/cmp-cmdline',
+    -- { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- For wrapping lsp inline diagnostics in new lines
     'vim-airline/vim-airline',
     'vim-airline/vim-airline-themes',
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
@@ -611,6 +627,7 @@ local plugins = {
         end
     },
     --"PhilGrunewald/vim-py-kid", -- TODO: This was an alternative to a jupyter notebook, but it does not work well
+    "gentoo/gentoo-syntax"
 }
 local opts = {}
 require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
@@ -623,6 +640,8 @@ require('copilot').setup({
           help = true,
           svn = true,
           cvs = false,
+          gitcommit = true,
+          gitrebase = true,
           ["."] = true,
     },
 })
@@ -669,7 +688,31 @@ end
 -- TODO: For basedpyright install see https://github.com/LazyVim/LazyVim/discussions/3350
 require'lspconfig'.bashls.setup{} -- Setup bash language server, for config of filetypes see https://smarttech101.com/nvim-lsp-configure-language-servers-shortcuts-highlights/#configure_each_server_separately
 require("luasnip.loaders.from_vscode").lazy_load() -- This is needed in case of luasnips, otherwise vim may load very slowly, see https://github.com/rafamadriz/friendly-snippets#with-lazynvim
-require'lspconfig'.texlab.setup{}
+--
+-- Texlab latex language server setup:
+require'lspconfig'.texlab.setup{
+    settings = {
+        texlab = {
+            build = {
+                -- useFileList = true, -- This enables bibliography and images in subfolders defined in seperate packages etc. to be recognized by texlab (https://github.com/latex-lsp/texlab/issues/1145), but may drastically reduce startup time if .fls file is too big (https://github.com/latex-lsp/texlab/pull/1160)
+                -- TODO the issue with the undefined references is fixed by adding \bibliography{name.bib}{} in the beginning of the document. This is what the personal custom package does in dobibliography, but  
+            },
+            experimental = {
+                followPackageLinks = true, -- for including definitions from custom userdefined packages
+                mathEnvironments = {'align', 'equation', 'align*', 'equation*'}, -- Otherwise these environments are not recognized in part
+                enumEnvironments = {'enumerate', 'itemize'}, -- Otherwise these environments are not recognized in part
+                -- Recognize custom include figures for quick completion:
+                labelDefinitionCommands = {'incfig'},
+                labelDefinitionPrefixes = {{'incfig', 'fig:'}},
+            }
+        }
+    }
+}
+-- See e.g. https://github.com/latex-lsp/texlab/wiki/Configuration#texlabexperimentalfollowpackagelinks
+--vim.g.texlab.experimental.followPackageLinks = true -- for including definitions from custom userdefined packages
+--vim.g.texlab.experimental.mathEnvironments = {'align', 'equation', 'align*', 'equation*'} -- Otherwise these environments are not recognized in part
+--vim.g.texlab.experimental.enumEnvironments = {'enumerate', 'itemize'} -- Otherwise these environments are not recognized in part
+-- texlab.experimental.citationCommands = {}, -- Just for reference, there are also some more options like this one and the one above
 
 -- Options for plugins
 -- VIMTEX
@@ -728,6 +771,7 @@ fun! SetupCommandAlias(from, to)
 endfun
 call SetupCommandAlias("w","WRITECOMPILETEX")
 ]])
+-- TODO: Maybe setup command alias in LUA instead, see https://stackoverflow.com/questions/3878692/how-to-create-an-alias-for-a-command-in-vim/69951171#69951171
 
     end,
 })
@@ -830,44 +874,49 @@ ls = require("luasnip")
 require("cmp_git").setup()
 
 -- Set up lspconfig. # TODO: Maybe use snippet https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-    require('lspconfig')['pyright'].setup {
-        capabilities = capabilities
-    }
-    vim.keymap.set('n', '<Leader>g', function() vim.cmd('terminal export EDITOR=nvr && export GIT_EDITOR="nvr --remote-wait" && gitu') end) -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
-    vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
-        pattern = "term://*gitu",
-        callback = function()
-            vim.api.nvim_buf_del_keymap(0, 't', '<Esc>') -- Unmap <Esc> in terminal buffer so gitu can use it
-            -- Force end buffer on closing terminal so message [Process exited 0] does not show after finishing gitu
-            vim.api.nvim_create_autocmd("TermClose", {
-                buffer = 0, -- Apply to the current buffer
-                callback = function()
-                  vim.cmd("bd!") -- Close the buffer forcefully after the process exits
-                end
-              })
-        end
-    })
-    -- Delete git buffer after quitting, so nvr --remote-wait finishes waiting, see autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "gitcommit", "gitrebase", "gitconfig" },
-        callback = function()
-            vim.bo.bufhidden = "delete"
-        end,
-    })
-
-
--- LSP Line:
-require("lsp_lines").setup()
-vim.diagnostic.config({
-  virtual_text = false, -- Disable virtual_text since it's redundant due to lsp_lines.
-  virtual_lines = {
-    only_current_line = true,
-    highlight_whole_line = false,
-    wrap_long_lines = true, -- Wrap the line if it's still too long. -- TODO: This does not yet work, because this option is not yet merged into the release version of the plugin as of 2024-11-11. this will work in the future, and the whole plugin might go upstream to neovim, making this redundant, see https://lists.sr.ht/~whynothugo/lsp_lines.nvim/%3CD3FSJHV4IWFK.2P7DVELWNKS88@gpanders.com%3E
-  },
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['pyright'].setup {
+    capabilities = capabilities
+}
+vim.keymap.set('n', '<Leader>g', function() vim.cmd('terminal export EDITOR=nvr && export GIT_EDITOR="nvr --remote-wait" && gitu') end) -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
+    pattern = "term://*gitu",
+    callback = function()
+        vim.api.nvim_buf_del_keymap(0, 't', '<Esc>') -- Unmap <Esc> in terminal buffer so gitu can use it
+        -- Force end buffer on closing terminal so message [Process exited 0] does not show after finishing gitu
+        vim.api.nvim_create_autocmd("TermClose", {
+            buffer = 0, -- Apply to the current buffer
+            callback = function()
+              vim.cmd("bd!") -- Close the buffer forcefully after the process exits
+            end
+          })
+    end
 })
+-- Delete git buffer after quitting, so nvr --remote-wait finishes waiting, see autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "gitcommit", "gitrebase", "gitconfig" },
+    callback = function()
+        vim.bo.bufhidden = "delete"
+    end,
+})
+vim.api.nvim_create_autocmd("BufRead", { -- TODO this should not be necessary, this should be on by default, maybe defaults for gitcommit get overwritten somewhere
+    pattern = "COMMIT_EDITMSG",
+    callback = function()
+        vim.cmd("set syntax=gitcommit")
+    end,
+})
+
+-- LSP Line: -- TODO: Maybe use https://neovimcraft.com/plugin/rachartier/tiny-inline-diagnostic.nvim/ instead
+-- require("lsp_lines").setup()
+-- vim.diagnostic.config({
+--   virtual_text = false, -- Disable virtual_text since it's redundant due to lsp_lines.
+--   virtual_lines = {
+--     only_current_line = true,
+--     highlight_whole_line = false,
+--     wrap_long_lines = true, -- Wrap the line if it's still too long. -- TODO: This does not yet work, because this option is not yet merged into the release version of the plugin as of 2024-11-11. this will work in the future, and the whole plugin might go upstream to neovim, making this redundant, see https://lists.sr.ht/~whynothugo/lsp_lines.nvim/%3CD3FSJHV4IWFK.2P7DVELWNKS88@gpanders.com%3E
+--   },
+-- })
 
 -- catppuccin overwrite black to be true black (source see https://github.com/nullchilly/CatNvim/blob/3ad12ec6f3e7a0408f04eb23a887286fe752a1a8/lua/plugins/colorscheme.lua#L27-L33):
 require("catppuccin").setup {
