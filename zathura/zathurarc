@@ -8,9 +8,13 @@ map L search backward
 map k focus_inputbar :open 
 map K focus_inputbar :open  append_filepath
 
+# Open document in fit-width mode by default (see https://gist.github.com/michaelmrose/9595075b43f24aa903fa)
+set adjust-open "best-fit"
+
 # zoom and scroll step size
 set zoom-step 20
-set scroll-step 80
+set scroll-step 100
+set scroll-page-aware "true" # So when jumping pages it will align with top of page regardless of scroll step
 # zoom mappings (Overlap with default jumplist bindings, remap those to ctrl shift)
 map <C-i> zoom in
 map <C-o> zoom out
@@ -28,8 +32,8 @@ set incremental-search true
 #autocmd * execute "normal! s"
 
 # Invert text, but not images and other media (PDF-Images will be inverted nonetheless)
-set recolor "true"
-set recolor-reverse-video "true"
+# set recolor "true"
+# set recolor-reverse-video "true"
 
 # Page padding, default is 1, 4 should make it equal to my window manager border size
 set page-padding 4
