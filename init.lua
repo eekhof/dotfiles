@@ -477,6 +477,12 @@ vim.api.nvim_create_autocmd('FileType', {
         imap('$<CR>', '$<CR>$<Esc>O')
         imap('$$', '$$')
         vim.api.nvim_set_keymap('i', '$', 'strpart(getline("."), col(".")-1, 1) == "\\$" ? "\\<Right>" : "\\$\\$\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
+        -- Speed optimizations against laggy cursor in long documents (see and :h tex-slow)
+        vim.opt_local.cursorline = false -- Otherwise cursor can lag when moving/deleting characters
+        vim.opt_local.cursorcolumn = false -- Otherwise cursor can lag when moving/deleting characters
+        vim.opt_local.relativenumber = false -- Otherwise cursor can lag when moving/deleting characters
+        vim.cmd("NoMatchParen") -- Otherwise cursor can lag when moving/deleting characters
+        vim.cmd("syn sync maxlines=300")
     end,
     group = templates
 })
