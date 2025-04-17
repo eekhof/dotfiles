@@ -573,7 +573,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Set plugins and options for lazy.nvim:
 local plugins = {
     'lewis6991/gitsigns.nvim',
-    'zbirenbaum/copilot.lua',
+    -- 'zbirenbaum/copilot.lua',
     'jhawthorn/fzy',
     'cloudhead/neovim-fuzzy',
 --    'tpope/vim-repeat',
@@ -606,10 +606,10 @@ local plugins = {
     'vim-airline/vim-airline',
     'vim-airline/vim-airline-themes',
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    { 'zbirenbaum/copilot-cmp', -- See https://www.reddit.com/r/neovim/comments/twe45i/copilotlua_copilotcmp_pure_lua_plugins_for_github/ , for this installation thing see https://github.com/zbirenbaum/copilot-cmp
-        config = function()
-            require('copilot_cmp').setup()
-        end },
+    -- { 'zbirenbaum/copilot-cmp', -- See https://www.reddit.com/r/neovim/comments/twe45i/copilotlua_copilotcmp_pure_lua_plugins_for_github/ , for this installation thing see https://github.com/zbirenbaum/copilot-cmp
+    --     config = function()
+    --         require('copilot_cmp').setup()
+    --     end },
     { "kylechui/nvim-surround",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
@@ -638,20 +638,20 @@ local plugins = {
 }
 local opts = {}
 require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
-require('copilot').setup({
-    suggestion = { enabled = false },
-    panel = { enabled = false },
-    filetypes = {
-          yaml = true,
-          markdown = true,
-          help = true,
-          svn = true,
-          cvs = false,
-          gitcommit = true,
-          gitrebase = true,
-          ["."] = true,
-    },
-})
+-- require('copilot').setup({
+--     suggestion = { enabled = false },
+--     panel = { enabled = false },
+--     filetypes = {
+--           yaml = true,
+--           markdown = true,
+--           help = true,
+--           svn = true,
+--           cvs = false,
+--           gitcommit = true,
+--           gitrebase = true,
+--           ["."] = true,
+--     },
+-- })
 require('gitsigns').setup({ -- Setup gitsigns plugin, see Source: https://github.com/lewis6991/gitsigns.nvim
     preview_config = {
         -- Options passed to nvim_open_win
@@ -830,11 +830,11 @@ ls = require("luasnip")
             ['<C-o>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items, and to true to have to scroll through list to select something.
         }),
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
-            { name = 'luasnip' }, -- For luasnip users.
-            { name = 'omni' }, -- For Vimtex
-            { name = 'copilot' },
-            { name = 'path'}, -- To get filepath completion, especially important for note taking/wiki creation
+            { name = 'nvim_lsp' }, -- Primary source for coding completions
+            { name = 'omni', group_index = 2 }, -- Use only if LSP lacks certain completions (e.g., VimTeX)
+            { name = 'path', group_index = 2 }, -- Filepath completions
+            { name = 'luasnip', group_index = 2 }, -- Useful if you use snippets
+            --{ name = 'copilot', group_index = 3 }, -- Lower priority, or trigger manually
         }, {
             { name = 'buffer' },
         })
