@@ -517,8 +517,8 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'fortran' },
     callback = function()
-        imap('<F5>', '<ESC>:!gfortran % -o %:r<CR>:!./%:r<CR>') -- Compile and execute Fortran code
-        nmap('<F5>', ':!gfortran % -o %:r<CR>:!./%:r<CR>') -- Compile and execute Fortran code
+        imap('<F5>', '<ESC>:!gfortran % -o %:r && ./%:r<CR>') -- Compile and execute Fortran code
+        nmap('<F5>', ':!gfortran % -o %:r && ./%:r<CR>') -- Compile and execute Fortran code
     end,
     group = compile_execute
 })
@@ -526,8 +526,9 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c' },
     callback = function()
-        imap('<F5>', '<ESC>:!gcc % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C code
-        nmap('<F5>', ':!gcc % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C code
+        -- When building for release use "gcc -std=c99 -O3 -s -DNDEBUG", specify version, use level 3 optimization, strip debug symbols, turn off asserts
+        imap('<F5>', '<ESC>:!gcc -std=c99 -Wall -Werror -ggdb3 -O0 -fsanitize=address % -o %:r && ./%:r<CR>') -- Compile and execute C code
+        nmap('<F5>', ':!gcc -std=c99 -Wall -Werror -ggdb3 -O0 -fsanitize=address % -o %:r && ./%:r<CR>') -- Compile and execute C code
     end,
     group = compile_execute
 })
@@ -535,8 +536,8 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'cpp' },
     callback = function()
-        imap('<F5>', '<ESC>:!g++ % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C++ code
-        nmap('<F5>', ':!g++ % -o %:r<CR>:!./%:r<CR>') -- Compile and execute C++ code
+        imap('<F5>', '<ESC>:!g++ % -o %:r && ./%:r<CR>') -- Compile and execute C++ code
+        nmap('<F5>', ':!g++ % -o %:r && ./%:r<CR>') -- Compile and execute C++ code
     end,
     group = compile_execute
 })
