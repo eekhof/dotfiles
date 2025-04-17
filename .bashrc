@@ -23,7 +23,10 @@ fi
 # This must be at the end of the bashrc according to the docs, but apply it to noninteractive shell it must be here: Set up Zoxide directory history (see https://github.com/ajeetdsouza/zoxide , requires fzf, zoxide used by yazi)
 eval "$(zoxide init bash)"
 # For Zoxide to work properly/to record history:
-alias cd="z"
+# alias cd="z"
+# FZF keybindings:
+export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down'"
+# export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down,ႭჃႳ:up'" # This yields "unsupported key"
 # Yazi
 function yazi_wrapper() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
