@@ -884,7 +884,17 @@ require("cmp_git").setup()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['pyright'].setup {
+    on_attach = lsp_attach,
     capabilities = capabilities
+}
+require('lspconfig')['clangd'].setup {
+    on_attach = lsp_attach,
+    capabilities = capabilities
+}
+require('lspconfig')['fortls'].setup {
+    on_attach = lsp_attach,
+    capabilities = capabilities,
+    root_dir = vim.fn.getcwd(),
 }
 vim.keymap.set('n', '<Leader>g', function() vim.cmd('terminal export EDITOR=nvr && export GIT_EDITOR="nvr --remote-wait" && gitu') end) -- stty sane prevents black screen until key input after gitu is closed --TODO: potentially improve this with https://danielrotter.at/2023/07/06/use-external-programs-like-git-in-Neovim-commands.html
 vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, { -- Source see https://vi.stackexchange.com/questions/3670/how-to-enter-insert-mode-when-entering-neovim-terminal-pane/3765#3765
