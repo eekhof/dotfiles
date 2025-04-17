@@ -440,6 +440,7 @@ vmap('//', 'y/\\V<C-R>=escape(@",\'/\\\')<CR><CR>') -- See https://vim.fandom.co
 imap('<C-s>', '<Esc>:lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
 nmap('<C-s>', ':lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
 
+-- TODO: The following has been replaced by m4xshen/autoclose.nvim, but has been reactivated, because autoclose seems to cause unnecessary lag
 -- Brackets and Braces completion (Source: https://vim.fandom.com/wiki/Automatically_append_closing_characters) TODO: THIS CAUSES MUCH LAG WHEN TYPING IN FRONT OF CLOSING BRACKET or similar
 -- Curly Brackets:
 imap('{', '{}<Left>')
@@ -633,6 +634,7 @@ local plugins = {
             })
         end
     },
+    -- "m4xshen/autoclose.nvim", -- This seems to cause to much lag, see manual implementation below
     --"PhilGrunewald/vim-py-kid", -- TODO: This was an alternative to a jupyter notebook, but it does not work well
     "gentoo/gentoo-syntax"
 }
@@ -1094,6 +1096,21 @@ require'nvim-treesitter.configs'.setup {
         },
     },
 }
+-- This seems to cause to much lag, see manual implementation below
+-- require("autoclose").setup({
+--     options = {
+--         autoindent = false,
+--     },
+--     keys = {
+--         ["$"] = { escape = true, close = true, pair = "$$", enabled_filetypes = {'tex'} },
+--     },
+-- })
+-- Fix deindenting in latex files: -- TODO: This could be more elegantly done by editing the vimtex indentation guidelines to match my preferences
+vim.g.vimtex_indent_enabled = 0
+vim.opt.indentkeys:remove("}")
+vim.opt.indentkeys:remove(")")
+vim.opt.indentkeys:remove("]")
+
 -- Templates -----------------------------
 -- augroup templates
 -- TODO: All of these below here seem to slow the loading of vim quite a bit, even more than just using vimscript commands (?):
@@ -1190,7 +1207,6 @@ vim.o.statusline = vim.o.statusline .. '(%-3p%%)    ' -- Percentage through file
 
 vim.o.title = true                              -- Show title in window
 vim.o.titlestring = 'NVim: %F %a%r%m' -- Title of the window-- TODO: Originally, 'titlelen=70' was appended to the line, but this did get printed out literally, so it was removed, see source https://medium.com/usevim/changing-vims-title-713001d4049c
-
 
 -- TODOs -----------------------------
 -- TODO: Pyright does work, but pyright- command line commands do not work yet
