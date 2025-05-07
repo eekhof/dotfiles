@@ -1,0 +1,22 @@
+// Lucas custom Colemak-DH-Iso-Swapped-Colon-Semicolon symbols for xkb on X.Org Server 7.x
+// Put this file in /usr/share/X11/xkb/symbols , or symlink it there and run 'setxkbmap lucas && xmodmap -e "keycode 105 = dead_greek"'
+
+xkb_symbols "lucas" {
+
+    include "us(colemak_dh_iso)"
+    name[Group1]= "English (Lucas custom)";
+
+    // Swap Caps Lock and Escape
+    key <CAPS> { [ Escape ] };
+    key <ESC>  { [ Caps_Lock ] };
+
+    key <AD10> { [    colon,        semicolon,      odiaeresis,       Odiaeresis ] };
+
+    // key <ISO_Level3_Shift> {
+    //         modifiers = AltGr;
+    //         symbols[Group1] = [ dead_greek ];
+    // };
+
+    // Dead Greek key on Right Control
+    key <RCTL> { [ dead_greek, dead_greek, dead_greek, dead_greek] };
+};
