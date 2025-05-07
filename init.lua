@@ -604,8 +604,8 @@ local plugins = {
     'hrsh7th/cmp-omni', -- For Latex support, see https://github.com/lervag/vimtex/issues/2215
     'hrsh7th/cmp-cmdline',
     -- { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- For wrapping lsp inline diagnostics in new lines
-    'vim-airline/vim-airline',
-    'vim-airline/vim-airline-themes',
+    -- 'vim-airline/vim-airline', -- Airline makes sshfs files lag to unusable degrees, see similar powerline issue: https://github.com/powerline/powerline/issues/549
+    -- 'vim-airline/vim-airline-themes',
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     -- { 'zbirenbaum/copilot-cmp', -- See https://www.reddit.com/r/neovim/comments/twe45i/copilotlua_copilotcmp_pure_lua_plugins_for_github/ , for this installation thing see https://github.com/zbirenbaum/copilot-cmp
     --     config = function()
@@ -967,7 +967,7 @@ require("catppuccin").setup {
     },
 }
 vim.cmd.colorscheme('catppuccin')
-vim.cmd("AirlineTheme catppuccin") -- Set airline theme to catppuccin
+-- vim.cmd("AirlineTheme catppuccin") -- Set airline theme to catppuccin
 
 
 -- Treesitter:
