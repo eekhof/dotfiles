@@ -116,6 +116,8 @@ alias db-wifi-help='echo Wenn sich das loginportal im browser nicht öffnet, ver
 alias sshfs-cascade='sshfs cascade:/ ~/mnt/cascade -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)' # The latter options are for correct permissions, see https://wiki.ubuntuusers.de/FUSE/sshfs/#User-Mapping ; the former is to stabilize against connection drops, see https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect/639735#639735
 alias sshfs-eekhof='sshfs eekhof:/ ~/mnt/eekhof -o reconnect,ServerAliveInterval=15 -o idmap=user -o uid=$(id -u) -o gid=$(id -g)'
 
+alias yt='pipe-viewer -ls' # Alias to start pipe-viewer with listed videos from subscription
+
 # Function to set all connected monitors to the same resolution
 function screenmirror() {
     # Function to get the highest resolution of the lowest quality monitor, so all connected monitors can show the full image
