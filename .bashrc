@@ -225,7 +225,6 @@ $ANDROID_HOME/cmdline-tools/tools/bin:\
 $ANDROID_HOME/platform-tools:\
 $PATH
 
-
 # Change paths to conform to XDG Base Directory Specification: # TODO: Does not work yet
 # export XDG_CONFIG_HOME=$HOME/.config
 # export XDG_CACHE_HOME=$HOME/.cache
