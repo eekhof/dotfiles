@@ -101,7 +101,11 @@ alias anonsvimdiff='sudo -E nvim -d -c "set noundofile"'
 
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
-alias colemak='setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek" && xmodmap -e "clear Lock" -e "keycode 0x42 = Escape" -e "keycode 9 = Caps_Lock" -e "add Lock = Caps_Lock"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key, also swap functionality of Caps_Lock and Escape
+alias colemak='setxkbmap lucas && xmodmap -e "keycode 105 = dead_greek"'
+# alias colemak='setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" \
+# && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek" \
+# && xmodmap -e "clear Lock" -e "keycode 0x42 = Escape" -e "keycode 9 = Caps_Lock" -e "add Lock = Caps_Lock" \
+# && xmodmap -e "keycode 33 = colon semicolon"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key, also swap functionality of Caps_Lock and Escape, and swap ; and : between shift
 alias canary='setxkbmap canary -variant lucas "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"' # set dead greek key see [StackOverflow](https://superuser.com/a/1229239) and determine right keykode with "xev | grep keycode", e. g. "105" for Right-CTRL-Key
 alias qwerty='setxkbmap "us, de" pc105 ", nodeadkeys" "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
 alias qwertz='setxkbmap "de, us" pc105 "nodeadkeys, " "grp:alt_shift_toggle, compose:rwin" && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek"'
