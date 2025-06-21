@@ -110,7 +110,7 @@ if next(vim.fn.argv()) == nil then
 end
 
 -- Mappings -----------------------------
--- Aliases for mappings, see Source:
+-- Aliases for mappings, see Source (by default, they are all nonrecursive):
 function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
@@ -132,6 +132,9 @@ end
 function smap(shortcut, command) -- This is very niche, it applies a mapping to select mode only, while vmap applies to visual AND select mode, see :h mapmode-s or :h map-modes
     map('s', shortcut, command)
 end
+function omap(shortcut, command) -- This is very niche, it applies a mapping to select mode only, while vmap applies to visual AND select mode, see :h mapmode-s or :h map-modes
+    map('o', shortcut, command)
+end
 
 -- --------------------------
 -- Get all the default mappings from view-source:https://vim.rtorr.com/
@@ -142,6 +145,7 @@ vmap('n', 'h')
 nmap('N', 'H') -- move to top of page
 vmap('N', 'H') -- move to top of page
 imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
+omap('n', 'h') -- For text object to the left
 
 nmap('e', 'j')
 vmap('e', 'j')
@@ -160,6 +164,7 @@ nmap('o', 'l')
 vmap('o', 'l')
 nmap('O', 'L') -- move to bottom of screen
 vmap('O', 'L') -- move to bottom of screen
+omap('o', 'l') -- For text object to the right
 
 -- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
 nmap('l', 'n')
