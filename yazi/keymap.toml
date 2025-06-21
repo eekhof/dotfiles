@@ -4,15 +4,15 @@
 
 ### Begin additions from https://yazi-rs.github.io/docs/tips/
 # Smart enter:
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "o"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<Right>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<Enter>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
@@ -26,39 +26,39 @@ desc = "Enter the child directory, or open the file"
 ### End additions from yazi tips
 ### Begin additions for Plugins
 # Restore plugin
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "u"
 run = "plugin restore"
 desc = "Restore last deleted files/folders"
 # Open with plugin
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "k"
 run  = "plugin open-with-cmd"
 desc = "Open with command"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "K"
 run  = "plugin open-with-cmd --args=block"
 desc = "Open with command in the terminal"
 ### End additions for Plugins
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "A"
 run  = "create --dir"
 desc = "Create a directory"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "q"
 run  = "close"
 desc = "Close the current tab, or quit if it is last tab"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "Q"
 run  = "close --no-cwd-file"
 desc = "Close the current tab, or quit if it is last tab, without writing cwd-file"
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-c>"
 run  = "quit --no-cwd-file"
 desc = "Exit the process without writing to cwd-file"
 
 
-[manager]
+[mgr]
 
 keymap = [
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
