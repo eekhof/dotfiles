@@ -288,17 +288,17 @@ nmap("`", "'")
 -- vim.cmd('autocmd InsertEnter * let CursorColumnI = col(".")')-- TODO: Do all these in proper lua
 -- vim.cmd('autocmd CursorMovedI * let CursorColumnI = col(".")')
 -- vim.cmd('autocmd InsertLeave * if col(".") != CursorColumnI | call cursor(0, col(".")+1) | endif')
--- Map File explorer to CTRL+n
-nmap('<C-p>', ':Explore! <CR>') -- CTRL+p seems to be the convention for doing this, see https://youtu.be/DIWr3FkQnnc?feature=shared&t=164
-nmap('<Leader><C-p>', ':FuzzyOpen <CR>') -- Open fuzzy finder for file names
--- Set netrw settings:
-vim.g.netrw_list_hide = '^\\./$,^\\.\\./$'
-vim.g.netrw_hide = 1
--- vim.g.netrw_keepdir = 0 -- TODO: Does conflict with autochdir, see https://vi.stackexchange.com/questions/34557/how-can-i-use-let-gnetrw-keepdir-0-for-folders-and-autochdir-for-files -- keep working dir same as browsing dir while using netrw, see https://inlehmansterms.net/2014/09/04/sane-vim-working-directories/
--- Fix netrw bug where when jumping back to it via ctrl+o it will not actually open netrw, but a different buffer (either unnamed buffer or buffer from before), see https://www.reddit.com/r/neovim/comments/14mftou/jumplist_with_netrw/ and https://github.com/neovim/neovim/issues/24721
--- For this solution see https://www.reddit.com/r/neovim/comments/14mftou/jumplist_with_netrw/
-vim.g.netrw_fastbrowse = 2
-vim.g.netrw_keepj = ""
+-- Map File explorer to CTRL+n TODO: This all has been disabled in favor of yazi.nvim plugin
+-- nmap('<C-p>', ':Explore! <CR>') -- CTRL+p seems to be the convention for doing this, see https://youtu.be/DIWr3FkQnnc?feature=shared&t=164
+-- nmap('<Leader><C-p>', ':FuzzyOpen <CR>') -- Open fuzzy finder for file names
+-- -- Set netrw settings:
+-- vim.g.netrw_list_hide = '^\\./$,^\\.\\./$'
+-- vim.g.netrw_hide = 1
+-- -- vim.g.netrw_keepdir = 0 -- TODO: Does conflict with autochdir, see https://vi.stackexchange.com/questions/34557/how-can-i-use-let-gnetrw-keepdir-0-for-folders-and-autochdir-for-files -- keep working dir same as browsing dir while using netrw, see https://inlehmansterms.net/2014/09/04/sane-vim-working-directories/
+-- -- Fix netrw bug where when jumping back to it via ctrl+o it will not actually open netrw, but a different buffer (either unnamed buffer or buffer from before), see https://www.reddit.com/r/neovim/comments/14mftou/jumplist_with_netrw/ and https://github.com/neovim/neovim/issues/24721
+-- -- For this solution see https://www.reddit.com/r/neovim/comments/14mftou/jumplist_with_netrw/
+-- vim.g.netrw_fastbrowse = 2
+-- vim.g.netrw_keepj = ""
 
 -- Command to open buffer explorer and promt for number of desired buffer (enter number and press enter) (source see https://vim.fandom.com/wiki/Easier_buffer_switching#Switching_by_number)
 nmap('<Leader>b', ':buffers<CR>:buffer<Space>') -- To go to previous buffer use CTRL+6 or CTRL+^ by default
@@ -641,7 +641,50 @@ local plugins = {
     },
     -- "m4xshen/autoclose.nvim", -- This seems to cause to much lag, see manual implementation below
     --"PhilGrunewald/vim-py-kid", -- TODO: This was an alternative to a jupyter notebook, but it does not work well
-    "gentoo/gentoo-syntax"
+    "gentoo/gentoo-syntax",
+    {
+      "mikavilpas/yazi.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        -- check the installation instructions at
+        -- https://github.com/folke/snacks.nvim
+        "folke/snacks.nvim"
+      },
+      keys = {
+        -- 👇 in this section, choose your own keymappings!
+        {
+          "<leader><C-p>",
+          mode = { "n", "v" },
+          "<cmd>Yazi<cr>",
+          desc = "Open yazi at the current file",
+        },
+        {
+          -- Open in the current working directory
+          "<leader>cw",
+          "<cmd>Yazi cwd<cr>",
+          desc = "Open the file manager in nvim's working directory",
+        },
+        {
+          "<C-p>",
+          "<cmd>Yazi toggle<cr>",
+          desc = "Resume the last yazi session",
+        },
+      },
+      ---@type YaziConfig | {}
+      opts = {
+        -- if you want to open yazi instead of netrw, see below for more info
+        open_for_directories = true,
+        keymaps = {
+          show_help = "<f1>",
+        },
+      },
+      -- 👇 if you use `open_for_directories=true`, this is recommended
+      init = function()
+        -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+      end,
+    },
 }
 local opts = {}
 require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
