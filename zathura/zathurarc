@@ -47,7 +47,7 @@ set incremental-search true
 set page-padding 4
 
 # Font:
-set font "monospace normal 12"
+set font "noto sans mono 16"
 
 # Colorscheme Catppuccin Mocha (See https://github.com/catppuccin/zathura/blob/main/src/catppuccin-mocha), default-bg has been changed to darker (crust), so that page gaps are better visible in viewer:
 set default-fg               rgba(205,214,244,1)
