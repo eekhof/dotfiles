@@ -219,7 +219,7 @@ PATH=$HOME/.bin:\
 /usr/bin/vendor_perl:\
 /usr/bin/core_perl:\
 /home/lucas/.local/bin:\
-/usr/local/texlive/2024/bin/x86_64-linux/:\
+/usr/local/texlive/2025/bin/x86_64-linux/:\
 $HOME/.cargo/bin:\
 $ANDROID_HOME/cmdline-tools/tools/bin:\
 $ANDROID_HOME/platform-tools:\
