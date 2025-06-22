@@ -1,0 +1,24 @@
+// Lucas custom cheapino Swapped-Colon-Semicolon symbols for xkb on X.Org Server 7.x
+// Put this file in /usr/share/X11/xkb/symbols , or symlink it there and run 'setxkbmap cheapino && xmodmap -e "keycode 105 = dead_greek" && xset r rate 220 30'
+
+xkb_symbols "cheapino" {
+
+    include "us"
+    name[Group1]= "English (Lucas custom)";
+
+    // Swap colon and semicolon
+    key <AC10> { [    colon,        semicolon,      odiaeresis,       Odiaeresis ] };
+
+    // Umlauts on altgr:
+    key <AC01> {[ a,            A,          adiaeresis, Adiaeresis ]};
+    key <AD09> {[ o,            O,          odiaeresis, Odiaeresis ]};
+    key <AD07> {[ u,            U,          udiaeresis, Udiaeresis ]};
+    key <AC02> {[ s,            S,          ssharp ]};
+
+    // Dead Greek key on Altgr+G
+    // key <RCTL> { [ dead_greek, dead_greek, dead_greek, dead_greek] };
+    key <AC05> {[ g,            G,          dead_greek ]};
+
+    // For ralt/umlauts to work
+    include "level3(ralt_switch)"
+};
