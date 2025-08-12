@@ -16,6 +16,10 @@ map [index] O navigate_index expand-all
 map [index] n navigate_index collapse
 map [index] N navigate_index collapse-all
 
+# Set window title, which gets displayed in e.g. I3 window title:
+set window-title-basename true
+# set window-title-home-tilde true # This is obsolete, because window-title-basename disables the path, there does not appear to be a way to do this like in nvim with filename - path
+
 # Open document in fit-width mode by default (see https://gist.github.com/michaelmrose/9595075b43f24aa903fa)
 set adjust-open "best-fit"
 
