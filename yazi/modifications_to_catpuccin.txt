@@ -1,0 +1,2 @@
+add to extensions:
+  { name = "un~", text = "", fg = "#fab387" },
