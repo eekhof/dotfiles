@@ -56,6 +56,11 @@ desc = "Close the current tab, or quit if it is last tab, without writing cwd-fi
 on   = "<C-c>"
 run  = "quit --no-cwd-file"
 desc = "Exit the process without writing to cwd-file"
+# Drop to shell (return to current yazi instance with CTRL+D)
+[[mgr.prepend_keymap]]
+on   = "!"
+run  = 'shell "$SHELL" --block'
+desc = "Open shell here"
 
 
 [mgr]
