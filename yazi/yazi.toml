@@ -69,10 +69,10 @@ rules = [
 	# JSON
 	{ mime = "application/{json,x-ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
-	# Empty file
-	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
+	# Empty file # TODO: This does not work, for some reason inode/x-empty files get handled by the fallback opener anyway, even if this is uncommented
+	# { mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 	# Fallback
-	{ name = "*", use = [ "open", "reveal" ] },
+	{ name = "*", use = [ "edit", "open", "reveal" ] },
 ]
 
 [tasks]
