@@ -39,7 +39,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=153, ctermbg=NONE, cterm=NONE })
 
 -- General options -----------------------------
 vim.api.nvim_create_autocmd('FileType', { -- Enable spellchecking but only for text files
-    pattern = { 'tex', 'text', 'markdown', 'bib' },
+    pattern = { 'tex', 'bib', 'typ', 'text', 'markdown'},
     callback = function()
         vim.o.spell = true                              -- Enable spell checking per default
         vim.o.spelllang = 'en_us'                       -- Default spell checking language to US English
