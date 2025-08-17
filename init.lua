@@ -152,6 +152,7 @@ vmap('e', 'j')
 nmap('ge', 'gj') -- move to next line
 vmap('ge', 'gj') -- move to next line
 nmap('E', 'J') -- join lines
+vmap('E', 'J') -- join lines
 imap('<C-e>', '<C-j>') -- add linebreak at current position
 
 nmap('i', 'k')
