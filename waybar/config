@@ -1,0 +1,80 @@
+// Based off of https://github.com/kamlendras/waybar-macos-sequoia/tree/259ecb4b5a65a52ece0708fb4c65db4f57268329
+{
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "spacing": 30,
+    // "height": 5, // Waybar height (to be removed for auto height)
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["network", "cpu", "memory", "battery", "pulseaudio", "idle_inhibitor", "clock", "tray"],
+    "sway/mode": { "format": "<span style=\"italic\">{}</span>" },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": " "
+        },
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{:%d.%m.%Y  %H:%M}",
+    },
+
+    "cpu": {
+        "states": {
+            "critical": 95,  // usage ≥95%
+            "warning": 75,   // usage 75–94%
+            "neutral": 25,   // usage 25–74%
+            "good": 0        // usage <25%
+        },
+        "format": " {usage}%"
+    },
+
+    "memory": {
+        "states": {
+            "critical": 95,  // usage ≥95%
+            "warning": 75,   // usage 75–94%
+            "neutral": 25,   // usage 25–74%
+            "good": 0        // usage <25%
+        },
+        "format": " {}%"
+    },
+
+    "battery": {
+        "states": {
+            "critical": 15,  // 0–15%
+            "warning": 30,   // 16–30%
+            "neutral": 79,   // 31–79%
+            "good": 100      // 80–100%
+        },
+        "format": "󰂀 {capacity}% ",
+        "format-charging": "󰂅 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time}"
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interfac
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "󰌙 Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "󰕾 {volume}% {format_source}",
+        "format-bluetooth": "󰕾 {volume}% {format_source}",
+        "format-bluetooth-muted": "󰝟 {volume}% {format_source}",
+        "format-muted": "󰝟 {volume}% {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " {volume}%",
+        "on-click": "pavucontrol"
+    },
+
+}

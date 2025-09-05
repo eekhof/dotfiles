@@ -1,0 +1,55 @@
+@define-color base   #1e1e2e;
+@define-color text   #cdd6f4;
+@define-color blue   #89b4fa;
+
+* {
+    background-image: none;
+    box-shadow: none;
+}
+
+window {
+    background-color: rgba(30, 30, 46, 0.7); /* base with transparency */
+}
+
+/* Generic buttons */
+button {
+    border-radius: 0;
+    border: 1px solid @base;
+    color: @text;
+    background-color: @base;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    text-decoration: none;
+}
+
+/* Hover + active: blue background, base text */
+button:hover,
+button:active,
+#shutdown:hover,
+#shutdown:active,
+#reboot:hover,
+#reboot:active,
+#logout:hover,
+#logout:active {
+    background-color: @blue;
+    color: @base;
+}
+
+/* Remove GTK’s default blue outline */
+button:focus {
+    outline: none;
+    background-color: @base;
+    color: @text;
+}
+
+/* Icons only, no extra coloring */
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}

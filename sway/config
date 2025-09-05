@@ -1,0 +1,249 @@
+# Variables
+set $mod Mod4
+set $terminal alacritty
+set $browser librewolf
+
+input type:pointer {
+    # Mouse
+    accel_profile flat  # disables mouse acceleration
+}
+
+input type:keyboard {
+    # Load XKB layout (Lucas)
+    xkb_layout lucas
+    # xkb_options "" # do not set grp:caps_toggle to preserve caps<->esc mapping
+    repeat_delay 220
+    repeat_rate 30
+}
+
+input type:touchpad {
+    accel_profile adaptive # enable acceleration on touchpad, sucks otherwise
+    natural_scroll enabled # enable natural scroll on touchpad, sucks otherwise
+    middle_emulation enabled
+    tap enabled
+}
+
+input type:tablet_pad {
+    map_to_output HDMI-1
+}
+
+# Floating modifier
+floating_modifier $mod
+
+# Borders and gaps
+default_border pixel 4
+default_floating_border pixel 4
+hide_edge_borders both
+
+# Focus wrapping
+focus_wrapping no
+
+# Font for window titles
+font pango:Noto Sans Mono 17
+
+
+################################################################################
+# Workspaces
+################################################################################
+# Force first workspace to be on laptop monitor:
+workspace 1 output eDP-1
+
+# Autostart apps
+exec dunst -conf /home/lucas/static-website/longterm/dunstrc
+exec nextcloud
+exec xfce4-clipman -b
+
+
+################################################################################
+# Keybindings
+################################################################################
+# Terminal
+bindsym $mod+Return exec $terminal
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Launcher (specify output to be the currently focused one):
+bindsym $mod+d exec tofi-run --output $(swaymsg -t get_outputs | jq -r '.[] | select(.focused ).name') | xargs swaymsg exec --
+
+# Focus movement
+bindsym $mod+n focus left
+bindsym $mod+e focus down
+bindsym $mod+i focus up
+bindsym $mod+o focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+n move left
+bindsym $mod+Shift+e move down
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+o move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move focused workspace to the output on the left or right (or up or down, sway will try to execute both and one will silently fail):
+bindsym $mod+less  move workspace to output left; move workspace to output up
+bindsym $mod+greater move workspace to output right; move workspace to output down
+
+# Split orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Layout changes
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+w layout toggle split
+
+# Fullscreen
+bindsym $mod+f fullscreen
+
+# Floating toggle / focus mode toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Resize mode
+mode "resize" {
+    bindsym n resize shrink width 10 px or 10 ppt
+    bindsym e resize grow height 10 px or 10 ppt
+    bindsym i resize shrink height 10 px or 10 ppt
+    bindsym o resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Reload / restart / exit
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+q exec wlogout
+
+# Media keys
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+bindsym XF86AudioPlay exec playerctl play-pause
+
+# Extra app shortcuts
+bindsym $mod+Shift+v exec xfce4-clipman-history
+bindsym $mod+F1 exec $terminal -e bash -ilc 'source ~/.bashrc && yazi_wrapper && exec bash -i'
+bindsym $mod+F2 exec $browser
+bindsym $mod+F3 exec pavucontrol
+bindsym $mod+F10 exec vlc ~/Sonstiges/Musik/Playlist/files/
+
+# Screenshooter has to use grim because of wayland (See https://wiki.gentoo.org/wiki/Sway#Taking_screenshots):
+set $ps1 Print
+set $ps2 Control+Print
+set $ps3 Alt+Print
+set $ps4 Alt+Control+Print
+set $ps5 $mod+shift+s
+set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+bindsym $ps1 exec grim - | wl-copy
+bindsym $ps2 exec grim -g "$(slurp)" - | wl-copy
+bindsym $ps3 exec grim $psf
+bindsym $ps4 exec grim -g "$(slurp)" $psf
+# Snipping tool-like behavior:
+bindsym $ps5 exec grim -g "$(slurp)" - | wl-copy
+
+################################################################################
+# Monitors
+################################################################################
+# Laptop monitor:
+output "BOE 0x0872 Unknown" {
+    resolution 1920x1080
+    scale 1
+    position 0,0
+    transform normal
+    adaptive_sync on
+}
+# Office monitor:
+output "BNQ BenQ PD2700U ETH7N02000SL0" {
+    resolution 3840x2160
+    scale 2
+    transform normal
+    adaptive_sync on
+}
+
+# On laptop, disable laptop screen when laptop is closed, but leave on other connected screens:
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+# Font configuration is done by editing ~/.config/fontconfig/fonts.conf and running "fc-cache -f -v"
+
+
+### Colors, source https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha
+set $rosewater #f5e0dc
+set $flamingo #f2cdcd
+set $pink #f5c2e7
+set $mauve #cba6f7
+set $red #f38ba8
+set $maroon #eba0ac
+set $peach #fab387
+set $yellow #f9e2af
+set $green #a6e3a1
+set $teal #94e2d5
+set $sky #89dceb
+set $sapphire #74c7ec
+set $blue #89b4fa
+set $lavender #b4befe
+set $text #cdd6f4
+set $subtext1 #bac2de
+set $subtext0 #a6adc8
+set $overlay2 #9399b2
+set $overlay1 #7f849c
+set $overlay0 #6c7086
+set $surface2 #585b70
+set $surface1 #45475a
+set $surface0 #313244
+set $base #1e1e2e
+set $mantle #181825
+set $crust #11111b
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $red   $overlay0  $red
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+###
+
+# Background:
+output * bg $base solid_color
+
+# Kill old waybar if existent and start new:
+exec_always --no-startup-id waybar

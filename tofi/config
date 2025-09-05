@@ -1,0 +1,13 @@
+text-color = #cdd6f4
+prompt-color = #f38ba8
+selection-color = #1e1e2e
+# Vim cursor background:
+selection-background = #f5e0dc
+# Original selection color from source (https://github.com/catppuccin/tofi/blob/main/themes/catppuccin-mocha)
+selection-background = #f9e2af
+background-color = #1e1e2e
+outline-color = #b4befe
+border-width = 0
+text-cursor = true
+prompt-text = "Run: "
+font= "/usr/share/fonts/noto/NotoSansMono-Regular.ttf" # May lead to significant speedup, see https://github.com/ZachIndigo/tofi-dmenu?tab=readme-ov-file#performance
