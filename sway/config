@@ -199,6 +199,15 @@ output "BOE 0x0872 Unknown" {
 output "BNQ BenQ PD2700U ETH7N02000SL0" {
     resolution 3840x2160
     scale 2
+    position 0,-1080
+    transform normal
+    adaptive_sync on
+}
+# GF Office Monitor:
+output "Acer Technologies Acer CB241HY T53EE0014201" {
+    resolution 1920x1080
+    scale 1
+    position 0,-1080
     transform normal
     adaptive_sync on
 }
