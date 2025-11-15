@@ -80,11 +80,13 @@ vim.o.smarttab = true                           -- Enable smarttabs
 vim.o.softtabstop = 4                           -- Set width for tabs
 vim.o.expandtab = true                          -- Use spaces instead of tabs
 vim.o.autoindent = true                         -- Autoindent new lines
-vim.o.tabstop = 4                              -- Set display tab width to 4 spaces, otherwise arrows as tab symbols get elongated
-vim.o.list = true                             -- Configure this for display of tabs and spaces characters, see comment on Source: https://vi.stackexchange.com/questions/31811/neovim-lua-config-how-to-append-to-listchars/37971#37971
+vim.o.tabstop = 4                               -- Set display tab width to 4 spaces, otherwise arrows as tab symbols get elongated
+vim.o.list = true                               -- Configure this for display of tabs and spaces characters, see comment on Source: https://vi.stackexchange.com/questions/31811/neovim-lua-config-how-to-append-to-listchars/37971#37971
 vim.o.listchars = 'tab:――►,space:·'             -- Show tabs and spaces
-vim.o.wrap = false                             -- Disable line wrapping
-vim.o.showbreak = '↪'                          -- Show this character when a line is wrapped
+vim.o.wrap = true                              -- Disable line wrapping
+vim.o.showbreak = ' │'                           -- Show this character when a line is wrapped
+vim.o.linebreak = true                          -- Break only at this character
+vim.o.breakindent = true                        -- Break only at this character
 vim.api.nvim_set_hl(0, 'NonText', {ctermbg='NONE', ctermfg='DarkGray'}) -- Disable background highlighting of linebreak/linewrap characters (Also affects other non-text characters)
 vim.o.showmatch = true--TODO: Is this done later on again, making this redundant?                          -- Show matching brackets
 vim.o.syntax = 'on'                             -- Syntax highlighting (Enables e. g. whitespace marker coloring)
