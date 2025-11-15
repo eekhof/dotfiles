@@ -66,7 +66,6 @@ vim.api.nvim_create_autocmd('TextYankPost', { -- Highlight yanked text, useful i
     end,
 })
 
--- vim.cmd('autocmd BufEnter * lcd %:p:h')-- TODO: Rework in proper lua         -- Change current bash working directory to current file directory on opening file
 -- Remember folded text:
 -- vim.api.nvim_create_autocmd({"BufWinLeave"}, {
 --   pattern = {"*.*"},
