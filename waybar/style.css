@@ -10,6 +10,7 @@
 * {
     font-family: "Noto Sans Mono";
     font-size: 21px;
+    /* With 21, the bar takes up exactly one line of terminal on the laptop screen */
     /* min-height: 36px; */
 }
 
