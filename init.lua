@@ -1219,6 +1219,15 @@ vim.opt.indentkeys:remove("]")
         end,
         group = templates
     })
+--     Typst
+    vim.api.nvim_create_autocmd("BufNewFile", {
+        pattern = "*.typ",
+        callback = function()
+            vim.api.nvim_put({ '#import "@local/eekhof:0.1.0": *', '#show: eekhof', '', '', '', '// vim: wrap :' }, 'l', false, false) -- Insert template
+            vim.api.nvim_win_set_cursor(0, { 3, 1 }) -- Go to position where the title is to be written
+        end,
+        group = templates
+    })
 --     Markdown
     vim.api.nvim_create_autocmd("BufNewFile", {
         pattern = "*.md",
