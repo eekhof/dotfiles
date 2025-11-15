@@ -90,6 +90,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "typst",
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+  end,
+  desc = "Set indentation for Typst files"
+})
+
 vim.o.autochdir = true                          -- Change current bash working directory to current file directory on opening file (may not work as well as the ones above with the plugin, see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file#Automatically_change_the_current_directory)
 vim.o.lazyredraw = true                         -- Dont update screen during macro and script execution to save resources
 vim.o.ttyfast = true                            -- Speed up scrolling in Vim
