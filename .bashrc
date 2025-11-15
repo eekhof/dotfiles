@@ -27,6 +27,7 @@ eval "$(zoxide init bash)"
 # FZF keybindings:
 export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down'"
 # export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down,ႭჃႳ:up'" # This yields "unsupported key"
+
 # Yazi
 function yazi_wrapper() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -101,8 +102,10 @@ alias anonsvimdiff='sudo -E nvim -d -c "set noundofile"'
 
 alias topdf='f(){ convert ${*%${!#}} -quality 00 -auto-orient ${@:$#}.pdf; unset -f f; }; f' # To convert images to pdf with imagemagick (First put all input files in right order, the last argument will be the name of the pdf-file, but must not include file ending) # TODO Quality is still not optimal, potentiall use setting "-quality 100" or "-density 300"
 
+# The colemake alias is also hardcoded to be executed on login shell startup in the ~/.profile, so also include changes there
 alias cheapino='setxkbmap cheapino && xset r rate 220 30' # TODO add altgr bindings for umlauts like in colemak to the xkbmap file
 alias colemak='setxkbmap lucas && xmodmap -e "keycode 105 = dead_greek" && xset r rate 220 30'
+alias gallium='setxkbmap gallium && xmodmap -e "keycode 105 = dead_greek" && xset r rate 220 30'
 # alias colemak='setxkbmap us -variant colemak_dh_iso "grp:alt_shift_toggle, compose:rwin" \
 # && xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek" \
 # && xmodmap -e "clear Lock" -e "keycode 0x42 = Escape" -e "keycode 9 = Caps_Lock" -e "add Lock = Caps_Lock" \
