@@ -19,6 +19,6 @@ xkb_symbols "lucas" {
     //         symbols[Group1] = [ dead_greek ];
     // };
 
-    // Dead Greek key on Right Control (does not work yet, use xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek")
-    // key <RCTL> { [ dead_greek ] };
+    // Dead Greek key on Right Control (TODO Has been recently added, appears to work. If it does not work or break anything else, use xmodmap -e "keycode 105 = dead_greek dead_greek dead_greek dead_greek")
+    key <RCTL> { [ dead_greek ] };
 };
