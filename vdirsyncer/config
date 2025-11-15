@@ -16,7 +16,7 @@ fileext = ".vcf"
 type = "carddav"
 url = "https://cloud.eekhof.org/remote.php/dav"
 username = "lucas"
-password.fetch = ["command", "pass", "websites/eekhof.org/lucas"]
+password.fetch = ["command", "pass", "cloud.eekhof.org/lucas"]
 
 [pair my_calendar]
 a = "my_calendar_local"
@@ -34,4 +34,4 @@ fileext = ".ics"
 type = "caldav"
 url = "https://cloud.eekhof.org/remote.php/dav"
 username = "lucas"
-password.fetch = ["command", "pass", "websites/eekhof.org/lucas"]
+password.fetch = ["command", "pass", "cloud.eekhof.org/lucas"]
