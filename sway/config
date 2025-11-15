@@ -38,8 +38,8 @@ hide_edge_borders both
 # Focus wrapping
 focus_wrapping no
 
-# Font for window titles
-font pango:Noto Sans Mono 17
+# Font for window titles (With 11, the window titles take up exactly one line of terminal on the laptop screen)
+font pango:Noto Sans Mono 11
 
 
 ################################################################################
