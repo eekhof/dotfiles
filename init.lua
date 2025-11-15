@@ -512,6 +512,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         imap('<F5>', '<ESC>:!python3 %<CR>') -- Execute python code
         nmap('<F5>', ':!python3 %<CR>') -- Execute python code
+        vim.bo.tw = 79 -- Set textwidth to 79 for python, as recommended in PEP8
     end,
     group = compile_execute
 })
