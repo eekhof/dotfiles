@@ -2,6 +2,9 @@
 
 set $mod Mod4
 
+# Source current xr database so e.g. dpi-values get set accordingly:
+exec_always --no-startup-id sh -c 'xrdb -query | xrdb -merge'
+
 ### Colors, source https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha
 set $rosewater #f5e0dc
 set $flamingo #f2cdcd
@@ -42,7 +45,7 @@ client.background        $base
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Mono 8
+font pango:Noto Sans Mono 17 # 17 is a magic number: Height of the titlebar cannot be manually set. But a specific height is needed so the titlebar height is exactly the height of one terminal line height, so the space is maximally used. 17 is the magic number that makes this work for font size 13 anywhere else.
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -145,7 +148,7 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
+# reload the configuration file (note: some settings do not properly get updated this way (e.g. statusbar scaling), for this use full restart with "i3-msg restart")
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -181,8 +184,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
         status_command i3status -c ~/static-website/longterm/i3statusconfig_$(cat /etc/hostname) # TODO: Temporarily use this slower solution instead of $HOSTNAME because on arch laptop the hostname variable is blank shortly after session start for some reason
-        font pango:Noto Sans Mono 13
-        height 26
+        # font pango:Noto Sans Mono 13
+        height 36
         separator_symbol " ⁞ "
         position top
   colors {
