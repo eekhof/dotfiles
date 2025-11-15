@@ -30,12 +30,12 @@ ueberzug_scale  = 1
 ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
+open = [
+	{ run = 'xdg-open "$1"', desc = "Open", orphan=true, for = "linux" },
+]
 # TODO: Make some of these orphan = true , this ensures that e.g. image viewer continues to run after yazi closes. But for some this is undesired, e.g. when editing, there block=true may be desired. see https://yazi-rs.github.io/docs/configuration/yazi/#opener
 edit = [
 	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
-]
-open = [
-	{ run = 'xdg-open "$1"', desc = "Open", orphan=true, for = "linux" },
 ]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
@@ -52,15 +52,7 @@ xournalpp = [
 ]
 
 [open]
-rules = [
-	# Folder
-	{ name = "*/", use = [ "edit", "open", "reveal" ] },
-	# Text
-	{ mime = "text/*", use = [ "edit", "reveal" ] },
-	# Image
-	{ mime = "image/*", use = [ "open", "reveal" ] },
-	# Media
-	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+prepend_rules = [
     # Xournal++ (needs to be defined before "Archive", since xopp is recognized as mime type gzip)
     { name = "*.xopp", use = [ "xournalpp", "reveal" ] },
 	# Archive
@@ -69,10 +61,6 @@ rules = [
 	# JSON
 	{ mime = "application/{json,x-ndjson}", use = [ "edit", "reveal" ] },
 	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
-	# Empty file # TODO: This does not work, for some reason inode/x-empty files get handled by the fallback opener anyway, even if this is uncommented
-	# { mime = "inode/x-empty", use = [ "edit", "reveal" ] },
-	# Fallback
-	{ name = "*", use = [ "edit", "open", "reveal" ] },
 ]
 
 [tasks]
