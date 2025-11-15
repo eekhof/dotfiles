@@ -29,10 +29,20 @@ input type:touchpad {
     natural_scroll enabled # enable natural scroll on touchpad, sucks otherwise
     middle_emulation enabled
     tap enabled
+    drag_lock enabled # because default is enabled_sticky, and it is annoying. But enabled lets user continue drag by using multiple fingers, eliminating reach problems
 }
 
+# Tablet pointer position:
+input type:tablet_tool {
+    map_to_output HDMI-1
+    map_to_output HDMI-A-1
+    map_to_output eDP-1
+}
+# Tablet button output:
 input type:tablet_pad {
     map_to_output HDMI-1
+    map_to_output HDMI-A-1
+    map_to_output eDP-1
 }
 
 # Floating modifier
