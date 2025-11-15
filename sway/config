@@ -1,7 +1,15 @@
+# For issue with not being able to click on second monitor see https://forum.endeavouros.com/t/mouse-input-not-being-detected-on-second-monitor/74681
+
 # Variables
 set $mod Mod4
 set $terminal alacritty
 set $browser librewolf
+
+# To make screensharing work, see https://forum.endeavouros.com/t/unable-to-share-screen-with-sway-wm/46654/4 :
+include /etc/sway/config.d/*
+
+# To make some electron apps (like mattermost-desktop and signal-desktop) not be pixelated on high dpi screens the following environment variable needs to be set. The problem is that where the envvar is set depends on the init system and/or the login greeter. In my case I set this in .bash_profile, but this might change later. Source: https://blog.raduzaharia.com/fractional-scaling-wayland-and-blurriness-in-electron-applications-0a891d014969
+# export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 input type:pointer {
     # Mouse
