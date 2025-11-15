@@ -484,6 +484,11 @@ imap("\'", "\'\'<Left>")
 imap("\'<CR>", "\'<CR>\'<Esc>O")
 imap("\'\'", "\'")
 vim.api.nvim_set_keymap('i', "'", 'strpart(getline("."), col(".")-1, 1) == "\'" ? "\\<Right>" : "\'\'\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
+-- Backtick:
+imap("`", "``<Left>")
+imap("`<CR>", "`<CR>`<Esc>O")
+imap("``", "`")
+vim.api.nvim_set_keymap('i', "`", 'strpart(getline("."), col(".")-1, 1) == "`" ? "\\<Right>" : "``\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
 -- Dollar Sign (only in tex and bib files, annoying otherwise):
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'tex', 'bib' },
