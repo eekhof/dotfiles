@@ -78,6 +78,18 @@ vim.api.nvim_create_autocmd('TextYankPost', { -- Highlight yanked text, useful i
 --   desc = "load view (folds), when opening file",
 --   command = "silent! loadview"
 -- })
+
+-- Set the titlestring, which is displayed e.g. in the window titles in I3:
+vim.o.title = true
+local augroup = vim.api.nvim_create_augroup("SetTitleString", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  group = augroup,
+  callback = function()
+    vim.opt.titlestring = "%t%( %M%)%( (%{expand('%:~:h')})%)%a - Nvim"
+  end,
+})
+
 vim.o.autochdir = true                          -- Change current bash working directory to current file directory on opening file (may not work as well as the ones above with the plugin, see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file#Automatically_change_the_current_directory)
 vim.o.lazyredraw = true                         -- Dont update screen during macro and script execution to save resources
 vim.o.ttyfast = true                            -- Speed up scrolling in Vim
