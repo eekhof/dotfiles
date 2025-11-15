@@ -203,7 +203,7 @@ bindsym $ps4 exec grim -g "$(slurp)" $psf
 bindsym $ps5 exec grim -g "$(slurp)" - | wl-copy
 
 ################################################################################
-# Monitors
+# Monitors (Get parameters with `swaymsg -t get_outputs`)
 ################################################################################
 # Laptop monitor:
 output "BOE 0x0872 Unknown" {
