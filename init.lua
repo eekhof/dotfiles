@@ -219,8 +219,9 @@ nmap('gp', "`[v`]")
 nmap('S', ':%s//gI<Left><Left><Left>')-- TODO: Maybe polish this with below call command?                 -- Map capital S to replace all, I tag needed to make case sensitive after o.ignorecase or so has been set
 -- :autocmd FileType tex          iabbrev fr \frac{ENUMERATOR}{DENOMINATOR}<Esc>?ENUMERATOR<CR>dwh:call InsertInput("Enumerator")<CR><Esc>?DENOMINATOR<CR>dwh:call InsertInput("Denominator")<CR>a<right>
 
-nmap('kk', 'o<Esc>')                           -- Insert empty line below current line
-nmap('KK', 'O<Esc>')                            -- Insert empty line above current line
+-- TODO: This is legacy, since neovim 0.11 the bindings [<Space and ]<Space do this
+-- nmap('kk', 'o<Esc>')                           -- Insert empty line below current line
+-- nmap('KK', 'O<Esc>')                            -- Insert empty line above current line
 
 -- Delete without yanking
 nmap('d', '"_d')
@@ -312,6 +313,11 @@ nmap('<Leader>Z', ']s1z=gi<ESC>l')
 
 -- LSP mappings:
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts) -- source https://blog.pabuisson.com/2022/08/neovim-modern-features-treesitter-and-lsp/
+-- Default mappings provided since neovim 0.11 (see https://gpanders.com/blog/whats-new-in-neovim-0-11/):
+-- vim.lsp.buf.rename() is mapped to grn
+-- vim.lsp.buf.references() is mapped to grr
+-- vim.lsp.buf.implementation() is mapped to gri
+-- vim.lsp.buf.document_symbol() is mapped to gO
 
 
 -- Map capital U to redo instead of ctrl+r and restore state of last changed line to leader+capital U instead of capital U:
