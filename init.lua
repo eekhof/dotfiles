@@ -67,6 +67,17 @@ vim.api.nvim_create_autocmd('TextYankPost', { -- Highlight yanked text, useful i
 })
 
 -- vim.cmd('autocmd BufEnter * lcd %:p:h')-- TODO: Rework in proper lua         -- Change current bash working directory to current file directory on opening file
+-- Remember folded text:
+-- vim.api.nvim_create_autocmd({"BufWinLeave"}, {
+--   pattern = {"*.*"},
+--   desc = "save view (folds), when closing file",
+--   command = "mkview",
+-- })
+-- vim.api.nvim_create_autocmd({"BufWinEnter"}, {
+--   pattern = {"*.*"},
+--   desc = "load view (folds), when opening file",
+--   command = "silent! loadview"
+-- })
 vim.o.autochdir = true                          -- Change current bash working directory to current file directory on opening file (may not work as well as the ones above with the plugin, see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file#Automatically_change_the_current_directory)
 vim.o.lazyredraw = true                         -- Dont update screen during macro and script execution to save resources
 vim.o.ttyfast = true                            -- Speed up scrolling in Vim
