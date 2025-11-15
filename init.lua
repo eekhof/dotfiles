@@ -630,8 +630,13 @@ local plugins = {
     'jhawthorn/fzy',
     'cloudhead/neovim-fuzzy',
 --    'tpope/vim-repeat',
-    'neovim/nvim-lspconfig',
+    'neovim/nvim-lspconfig', -- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
     'lervag/vimtex', -- TODO: On the vimtex github it says not to lazyload vimtex, as it will cause inverse search to fail
+    { 'chomosuke/typst-preview.nvim',
+      ft = 'typst', -- or lazy = false
+      version = '1.*',
+      opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+    },
     { 'iamcco/markdown-preview.nvim',
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
         ft = { 'markdown' },
