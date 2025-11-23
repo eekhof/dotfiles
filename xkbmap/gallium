@@ -1,0 +1,50 @@
+// Lucas custom gallium Swapped-Colon-Semicolon symbols for xkb on X.Org Server 7.x, adapted from https://github.com/GalileoBlues/Gallium/blob/main/Linux/gallium_angle . The file has been heavily modified to better reflect the Gallium_colstag layout, because in training this I also train for the ortholinear endgame. Also Slash and Apostrophe have been swapped and semicolon and colon have swapped uppercase and lowercase.
+// Put this file in /usr/share/X11/xkb/symbols , or symlink it there and run 'setxkbmap cheapino && xmodmap -e "keycode 105 = dead_greek" && xset r rate 220 30'
+
+default partial
+xkb_symbols "gallium" {
+    include "us(basic)"
+
+    name[Group1] = "Gallium";
+
+    key <AD01> {[ b, B ]};
+    key <AD02> {[ l, L ]};
+    key <AD03> {[ d, D ]};
+    key <AD04> {[ c, C ]};
+    key <AD05> {[ v, V ]};
+    key <AD06> {[ j, J ]};
+    key <AD07> {[ y, Y ]};
+    key <AD08> {[ o, O, odiaeresis, Odiaeresis ]};
+    key <AD09> {[ u, U, udiaeresis, Udiaeresis ]};
+    //key <AD10> {[ comma, less ]};
+    key <AD10> {[ colon, semicolon ]};
+    key <AC01> {[ n, N ]};
+    key <AC02> {[ r, R ]};
+    key <AC03> {[ t, T ]};
+    key <AC04> {[ s, S, ssharp ]};
+    key <AC05> {[ g, G, dead_greek ]};
+    key <AC06> {[ p, P ]};
+    key <AC07> {[ h, H ]};
+    key <AC08> {[ a, A, adiaeresis, Adiaeresis ]};
+    key <AC09> {[ e, E ]};
+    key <AC10> {[ i, I ]};
+    key <AC11> {[ apostrophe, quotedbl ]};
+    key <LSGT> {[ x, X ]};
+    key <AB01> {[ q, Q ]};
+    key <AB02> {[ m, M ]};
+    key <AB03> {[ w, W ]};
+    key <AB04> {[ z, Z ]};
+    key <AB05> {[ backslash, bar ]};
+    key <AB06> {[ k, K ]};
+    key <AB07> {[ f, F ]};
+    //key <AB08> {[ slash, question ]};
+    key <AB08> {[ comma, less ]};
+    //key <AB09> {[ semicolon, colon ]};
+    key <AB09> {[ period, greater ]};
+    //key <AB10> {[ period, greater ]};
+    key <AB10> {[ slash, question ]};
+
+    // key <RCTL> {[ dead_greek, dead_greek, dead_greek, dead_greek]};
+    // For ralt/umlauts to work
+    include "level3(ralt_switch)"
+};
