@@ -47,4 +47,8 @@ xkb_symbols "gallium" {
     // key <RCTL> {[ dead_greek, dead_greek, dead_greek, dead_greek]};
     // For ralt/umlauts to work
     include "level3(ralt_switch)"
+
+    // Swap Caps Lock and Escape
+    key <CAPS> { [ Escape ] };
+    key <ESC>  { [ Caps_Lock ] };
 };
