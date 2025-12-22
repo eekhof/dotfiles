@@ -116,7 +116,7 @@ vim.o.tabstop = 4                               -- Set display tab width to 4 sp
 vim.o.list = true                               -- Configure this for display of tabs and spaces characters, see comment on Source: https://vi.stackexchange.com/questions/31811/neovim-lua-config-how-to-append-to-listchars/37971#37971
 vim.o.listchars = 'tab:――►,space:·'             -- Show tabs and spaces
 vim.o.wrap = true                              -- Disable line wrapping
-vim.o.showbreak = ' │'                           -- Show this character when a line is wrapped
+vim.o.showbreak = '│'                           -- Show this character when a line is wrapped
 vim.o.linebreak = true                          -- Break only at this character
 vim.o.breakindent = true                        -- Break only at this character
 vim.api.nvim_set_hl(0, 'NonText', {ctermbg='NONE', ctermfg='DarkGray'}) -- Disable background highlighting of linebreak/linewrap characters (Also affects other non-text characters)
