@@ -581,9 +581,33 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c' },
     callback = function()
-        -- When building for release use "gcc -std=c99 -O3 -s -DNDEBUG", specify version, use level 3 optimization, strip debug symbols, turn off asserts
-        imap('<F5>', '<ESC>:!gcc -std=c99 -Wall -Werror -ggdb3 -O0 -fsanitize=address % -o %:r && ./%:r<CR>') -- Compile and execute C code
-        nmap('<F5>', ':!gcc -std=c99 -Wall -Werror -ggdb3 -O0 -fsanitize=address % -o %:r && ./%:r<CR>') -- Compile and execute C code
+        -- Development build (F5)
+        vim.keymap.set("n", "<F5>", function()
+            vim.bo.makeprg = "gcc -std=c99 -ggdb3 -O0 -fsanitize=address % -o %:r" -- ggdb3 is for additional debug info, O0 is for keeping all variables visible by doing no optimization (-Og would still do this, even if it says in the manual that it is better for debugging), -fsanitize=address is a tracer (?) against memory leaks
+            vim.cmd("make | if !empty(getqflist()) | copen | endif") -- make, and show output, then open quickfix list but if it is non-empty (I believe qfl gets populated by "make")
+            end, { buffer = true })
+        vim.keymap.set("i", "<F5>", function()
+            vim.cmd("stopinsert")
+            vim.cmd("write")
+            vim.bo.makeprg = "gcc -std=c99 -ggdb3 -O0 -fsanitize=address % -o %:r"
+            vim.cmd("make | if !empty(getqflist()) | copen | endif")
+            end, { buffer = true })
+        -- Production build (Shift-F5 => F17)
+        vim.keymap.set("n", "<F17>", function()
+            vim.bo.makeprg = "gcc -std=c99 -Wall -Werror -O3 -s -DNDEBUG % -o %:r" -- specify version, all warnings as errors, use level 3 optimization, strip debug symbols, turn off asserts
+            vim.cmd("make | if !empty(getqflist()) | copen | endif")
+            end, { buffer = true })
+        vim.keymap.set("i", "<F17>", function()
+            vim.cmd("stopinsert")
+            vim.cmd("write")
+            vim.bo.makeprg = "gcc -std=c99 -Wall -Werror -O3 -s -DNDEBUG % -o %:r" -- specify version, all warnings as errors, use level 3 optimization, strip debug symbols, turn off asserts
+            vim.cmd("make | if !empty(getqflist()) | copen | endif")
+            end, { buffer = true })
+        -- -- When building for release use "gcc -std=c99 -O3 -s -DNDEBUG", specify version, use level 3 optimization, strip debug symbols, turn off asserts
+        -- imap('<F5>', '<ESC>:!gcc -std=c99 -ggdb3 -Og -fsanitize=address -fdiagnostics-color=always % -o %:r && ./%:r<CR>') -- Compile and execute C code for debugging and development
+        -- nmap('<F5>', ':!gcc -std=c99 -ggdb3 -Og -fsanitize=address -fdiagnostics-color=always % -o %:r && ./%:r<CR>') -- Compile and execute C code for debugging and development
+        -- imap('<F17>', '<ESC>:!gcc -std=c99 -Wall -Werror -O3 -s -DNDEBUG -fsanitize=address -fdiagnostics-color=always % -o %:r && ./%:r<CR>') -- Compile and execute C code for production (Press Shift-F5 for this)
+        -- nmap('<F17>', ':!gcc -std=c99 -Wall -Werror -O3 -s -DNDEBUG -fsanitize=address -fdiagnostics-color=always % -o %:r && ./%:r<CR>') -- Compile and execute C code for production (Press Shift-F5 for this)
     end,
     group = compile_execute
 })
