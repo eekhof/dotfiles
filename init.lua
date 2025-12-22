@@ -189,6 +189,7 @@ nmap('E', 'J') -- join lines
 vmap('E', 'J') -- join lines
 imap('<C-e>', '<C-j>') -- add linebreak at current position
 
+-- vim.keymap.del('v', 'i') -- Remove waiting for text object after pressing i in visual mode -- TODO somehow like this i should be able to eliminate lag
 nmap('i', 'k')
 vmap('i', 'k') -- TODO: This works, but in visual mode i first waits for another character because of text objects, e.g. "i(", this leads to delay and accidental overpresses of i. For possible solution see https://www.reddit.com/r/vim/comments/be2sik/remap_textobject_commands/
 nmap('gi', 'gk') -- move to previous line
@@ -226,6 +227,7 @@ nmap('k', 'o')
 vmap('k', 'o') -- move to other end of marked area
 vmap('K', 'O') -- move to other end of block
 nmap('<C-k>', '<C-o>') -- go to older position in jumplist
+omap('k', 'i') -- For text object to the bottom
 --nmap('K', 'O') this has been done above with kk and KK
 
 -- TODO: Add colemak mappings for CTRL-W + hjkl for changing split windows, and also rearranging them
