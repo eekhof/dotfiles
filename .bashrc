@@ -212,6 +212,9 @@ HISTFILESIZE=5000 # Number of commands to log in histfile after terminal session
 # Add Android development tools/flutter to path:
 export ANDROID_HOME=/usr/src/debug/android-sdk
 
+# Add kernel config file for persistent edits across laptop and desktop:
+export KCONFIG_CONFIG=/home/lucas/Sonstiges/Computer/kernelconfigfiles/.config
+
 # TODO Why is the following line needed?:
 PATH=$HOME/.bin:\
 /usr/local/bin:\
