@@ -3,7 +3,8 @@
 # Variables
 set $mod Mod4
 set $terminal alacritty
-set $browser librewolf
+# set $browser librewolf
+set $browser qutebrowser
 
 # To make screensharing work, see https://forum.endeavouros.com/t/unable-to-share-screen-with-sway-wm/46654/4 :
 include /etc/sway/config.d/*
@@ -18,7 +19,7 @@ input type:pointer {
 
 input type:keyboard {
     # Load XKB layout (Lucas, the other layouts can be switched with Mod+F12 and `swaymsg input type:keyboard xkb_switch_layout next`)
-    xkb_layout lucas,de,gallium
+    xkb_layout gallium,lucas,de
     # xkb_options "" # do not set grp:caps_toggle to preserve caps<->esc mapping
     repeat_delay 220
     repeat_rate 30
@@ -69,7 +70,13 @@ workspace 1 output eDP-1
 # Autostart apps
 exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 exec nextcloud
-exec xfce4-clipman -b
+# exec xfce4-clipman -b # This does not work on wayland, look for wl-clipboard manager
+
+# Default session for work:
+workspace 10; exec mattermost-desktop
+workspace 9; exec signal-desktop
+workspace 3; exec qutebrowser
+workspace 2; exec alacritty --working-directory ~/Studium/Doktorarbeit/software -e bash
 
 
 ################################################################################
