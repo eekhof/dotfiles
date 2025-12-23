@@ -15,7 +15,8 @@
 -- TODO: Fuer Jupyter-Support nutze Molten.Nvim, https://github.com/benlubas/molten-nvim , ist ein successor von https://github.com/dccsillag/magma-nvim . Eigentlich wäre https://www.vim.org/scripts/script.php?script_id=6064 also https://github.com/PhilGrunewald/vim-py-kid cooler, aber funktioniert nicht
 -- TODO: Remap Ctrl+6 so that it goes to last existing buffer instead of last buffer, otherwise going back a buffer breaks when using the vim file browser
 -- TODO: Use yazi as file browser
--- TODO: Make F5 execution only execute the program if compilation was successful
+-- TODO: Make F5 execution only execute the program if compilation was successful DONE?
+-- TODO: TODO: Add a autocmd BufWritePost that will copy the file over on save with w | !cp % .REMOTE_DIR/% if a softlink .REMOTE_DIR is present in the current directory
 
 -- Colorscheme -----------------------------
 -- vim.cmd.colorscheme('evening')
@@ -170,51 +171,51 @@ function omap(shortcut, command) -- This is very niche, it applies a mapping to 
     map('o', shortcut, command)
 end
 
--- --------------------------
+-- -------------------------- gallium recommendations
+-- In qute, "a" and "e" are not bound, making remapping to gallium very easy, since "h" just stays where it is (shifted one to right from querty). So I just have to remap the movements, and their capitals, and i for inserting into field to k (see below)
+-- hjkl -> haei
+-- aei -> ljk : a zu l weil leicht erreichbar um in insert mode zu wechseln, e zu j weil e nicht so oft gebraucht wird, und j ist schwer zu erreichen, i zu k weil i für insert mode und leicht zu erreichen, und auch in vim wichtig für diw zum Beispiel
+-- -------------------------- older colemak settings
 -- Get all the default mappings from view-source:https://vim.rtorr.com/
--- TODO: Potentially switch up l and j, because there seems to be no way to make ij mapping work only in visual mode, thus ylw would be much easier to do than yjw, see vmap(i) mapping
--- Map navkeys to neio colemak homerow
-nmap('n', 'h')
-vmap('n', 'h')
-nmap('N', 'H') -- move to top of page
-vmap('N', 'H') -- move to top of page
-imap('<C-n>', '<C-h>') -- delete character before cursor in insert mode
-omap('n', 'h') -- For text object to the left
+-- === H does not need to be remapped, because h is an graphite homerow
+-- === J
+nmap('a', 'j')
+vmap('a', 'j')
+nmap('ga', 'gj') -- move to next line
+vmap('ga', 'gj') -- move to next line
+nmap('A', 'J') -- join lines
+vmap('A', 'J') -- join lines
+imap('<C-a>', '<C-j>') -- add linebreak at current position
 
-nmap('e', 'j')
-vmap('e', 'j')
-nmap('ge', 'gj') -- move to next line
-vmap('ge', 'gj') -- move to next line
-nmap('E', 'J') -- join lines
-vmap('E', 'J') -- join lines
-imap('<C-e>', '<C-j>') -- add linebreak at current position
+nmap('l', 'a') -- Append
+vmap('l', 'a') -- Append
+nmap('gl', 'ga') -- Display hexal/octal of number under cursor
+vmap('gl', 'ga') -- Display hexal/octal of number under cursor
+nmap('L', 'A') -- Append at end of line
+vmap('L', 'A') -- Append at end of line
+-- imap('<C-L>', '<C-A>') -- This is not needed because by default C-A does nothing in vim and this would require remapping the C-L escape sequence
+
+-- === K
 
 -- vim.keymap.del('v', 'i') -- Remove waiting for text object after pressing i in visual mode -- TODO somehow like this i should be able to eliminate lag
-nmap('i', 'k')
-vmap('i', 'k') -- TODO: This works, but in visual mode i first waits for another character because of text objects, e.g. "i(", this leads to delay and accidental overpresses of i. For possible solution see https://www.reddit.com/r/vim/comments/be2sik/remap_textobject_commands/
-nmap('gi', 'gk') -- move to previous line
-vmap('gi', 'gk') -- move to previous line
-nmap('I', 'K') -- open manpage for word under cursor
+nmap('e', 'k')
+vmap('e', 'k') -- TODO: This works, but in visual mode i first waits for another character because of text objects, e.g. "i(", this leads to delay and accidental overpresses of i. For possible solution see https://www.reddit.com/r/vim/comments/be2sik/remap_textobject_commands/
+nmap('ge', 'gk') -- move to previous line
+vmap('ge', 'gk') -- move to previous line
+nmap('E', 'K') -- open manpage for word under cursor
 
-nmap('o', 'l')
-vmap('o', 'l')
-nmap('O', 'L') -- move to bottom of screen
-vmap('O', 'L') -- move to bottom of screen
-omap('o', 'l') -- For text object to the right
+nmap('j', 'e')
+vmap('j', 'e')
+nmap('gj', 'ge')
+vmap('gj', 'ge')
+nmap('J', 'E')
 
--- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
-nmap('l', 'n')
-vmap('l', 'n')
-nmap('L', 'N') -- search in other direction
-vmap('L', 'N') -- search in other direction
-imap('<C-l>', '<C-n>') -- insert (auto-complete) next match before the cursor during insert mode
-
-nmap('h', 'e')
-vmap('h', 'e')
-nmap('H', 'E') -- back word end
-vmap('H', 'E') -- back word end
-nmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
-vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+-- === L
+nmap('i', 'l')
+vmap('i', 'l')
+nmap('I', 'L') -- move to bottom of screen
+vmap('I', 'L') -- move to bottom of screen
+omap('i', 'l') -- For text object to the right
 
 nmap('j', 'i')
 nmap('J', 'I') -- insert at beginning of line
@@ -223,12 +224,33 @@ vmap('J', 'I') -- insert at beginning of line
 nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
 -- TODO: Eventuell ib, iB und it in visual mode
 
-nmap('k', 'o')
-vmap('k', 'o') -- move to other end of marked area
-vmap('K', 'O') -- move to other end of block
-nmap('<C-k>', '<C-o>') -- go to older position in jumplist
-omap('k', 'i') -- For text object to the bottom
---nmap('K', 'O') this has been done above with kk and KK
+-- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
+-- nmap('l', 'n')
+-- vmap('l', 'n')
+-- nmap('L', 'N') -- search in other direction
+-- vmap('L', 'N') -- search in other direction
+-- imap('<C-l>', '<C-n>') -- insert (auto-complete) next match before the cursor during insert mode
+
+-- nmap('h', 'e')
+-- vmap('h', 'e')
+-- nmap('H', 'E') -- back word end
+-- vmap('H', 'E') -- back word end
+-- nmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+-- vmap('<C-h>', '<C-e>') -- move screen down one line without moving cursor
+
+-- nmap('j', 'i')
+-- nmap('J', 'I') -- insert at beginning of line
+-- vmap('j', 'i')
+-- vmap('J', 'I') -- insert at beginning of line
+-- nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
+-- -- TODO: Eventuell ib, iB und it in visual mode
+--
+-- nmap('k', 'o')
+-- vmap('k', 'o') -- move to other end of marked area
+-- vmap('K', 'O') -- move to other end of block
+-- nmap('<C-k>', '<C-o>') -- go to older position in jumplist
+-- omap('k', 'i') -- For text object to the bottom
+-- --nmap('K', 'O') this has been done above with kk and KK
 
 -- TODO: Add colemak mappings for CTRL-W + hjkl for changing split windows, and also rearranging them
 
@@ -546,7 +568,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         imap('<F5>', '<ESC>:!python3 %<CR>') -- Execute python code
         nmap('<F5>', ':!python3 %<CR>') -- Execute python code
-        vim.bo.tw = 79 -- Set textwidth to 79 for python, as recommended in PEP8
+        -- vim.bo.tw = 79 -- Set textwidth to 79 for python, as recommended in PEP8 -- TODO: This has been turned off because it does not break strings intelligently, resulting in frustrating formatting
     end,
     group = compile_execute
 })
@@ -676,7 +698,7 @@ local plugins = {
     --'evesdropper/luasnip-latex-snippets.nvim', -- Do work, but are not good. See also plugin friendly-snippets.
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
-    'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp
+    'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp -- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
     'nvim-treesitter/nvim-treesitter',
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-refactor', -- Use refactor functionality to implement jump to definition etc, see https://github.com/nvim-treesitter/nvim-treesitter-refactor?tab=readme-ov-file#navigation
@@ -821,10 +843,10 @@ end
 })
 -- require'lspconfig'.pyright.setup{} -- Setup pyright language server for python - IF THIS FAILS, MAY NEED TO RUN CONSOLE COMMAND 'npm i -g pyright', see Source: https://github.com/neovim/nvim-lspconfig -- TODO: In the github it says: "nvim-lspconfig does not set keybindings or enable completion by default" - so look at "suggested configuration" paragraph -- TODO: Install html, shell and latex language servers/lsps # TODO: Add suggested keybindings, especially for "jump to definition"
 -- TODO: For basedpyright install see https://github.com/LazyVim/LazyVim/discussions/3350
-require'lspconfig'.bashls.setup{} -- Setup bash language server, for config of filetypes see https://smarttech101.com/nvim-lsp-configure-language-servers-shortcuts-highlights/#configure_each_server_separately
+require'lspconfig'.bashls.setup{} -- Setup bash language server, for config of filetypes see https://smarttech101.com/nvim-lsp-configure-language-servers-shortcuts-highlights/#configure_each_server_separately -- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
 require("luasnip.loaders.from_vscode").lazy_load() -- This is needed in case of luasnips, otherwise vim may load very slowly, see https://github.com/rafamadriz/friendly-snippets#with-lazynvim
 --
--- Texlab latex language server setup:
+-- Texlab latex language server setup: -- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
 require'lspconfig'.texlab.setup{
     settings = {
         texlab = {
@@ -841,6 +863,14 @@ require'lspconfig'.texlab.setup{
                 labelDefinitionPrefixes = {{'incfig', 'fig:'}},
             }
         }
+    }
+}
+-- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
+require("lspconfig")["tinymist"].setup {
+    settings = {
+        formatterMode = "typstyle",
+        exportPdf = "onSave",
+        semanticTokens = "enable",
     }
 }
 -- See e.g. https://github.com/latex-lsp/texlab/wiki/Configuration#texlabexperimentalfollowpackagelinks
@@ -888,7 +918,7 @@ vim.api.nvim_create_autocmd("FileType", {
                 vim.cmd("VimtexCompileSS")
             end
         end, { buffer = true })
-        -- Overwrite save command to do a single shot compile if vimtex_compile flag is true:
+        -- Overwrite save command to do a single shot compile if vimtex_compile flag is true: -- TODO: instead use a autocmd BufWritePost for filetype tex, so that w does not get overwritten for e.g. bib files
         function compile_tex_ifflag()
             if vim.b.vimtex_compile then
                 vim.cmd("VimtexCompileSS")  -- Trigger VimtexCompileSS for LaTeX compilation
