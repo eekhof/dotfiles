@@ -39,7 +39,7 @@ desc = "Open with command"
 on   = "K"
 run  = "plugin open-with-cmd --args=block"
 desc = "Open with command in the terminal"
-### End additions for Plugins
+### End additions for Plugins, begin own custom keymaps:
 [[mgr.prepend_keymap]]
 on   = "A"
 run  = "create --dir"
