@@ -74,8 +74,8 @@ keymap = [
 	{ on = "<C-z>", run = "suspend",            desc = "Suspend the process" },
 
 	# Hopping
-	{ on = "i", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "e", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "e", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "a", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",    run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>",  run = "arrow 1",  desc = "Move cursor down" },
@@ -94,18 +94,18 @@ keymap = [
 	{ on = "G",          run = "arrow bot",  desc = "Move cursor to the bottom" },
 
 	# Navigation
-	{ on = "n", run = "leave", desc = "Go back to the parent directory" },
-	{ on = "o", run = "enter", desc = "Enter the child directory" },
+	{ on = "h", run = "leave", desc = "Go back to the parent directory" },
+	{ on = "i", run = "enter", desc = "Enter the child directory" },
 
 	{ on = "<Left>",  run = "leave",    desc = "Go back to the parent directory" },
 	{ on = "<Right>", run = "enter",    desc = "Enter the child directory" },
 
-	{ on = "N", run = "back",    desc = "Go back to the previous directory" },
-	{ on = "O", run = "forward", desc = "Go forward to the next directory" },
+	{ on = "H", run = "back",    desc = "Go back to the previous directory (history)" },
+	{ on = "I", run = "forward", desc = "Go forward to the next directory (history)" },
 
 	# Seeking
-	{ on = "I", run = "seek -5", desc = "Seek up 5 units in the preview" },
-	{ on = "E", run = "seek 5",  desc = "Seek down 5 units in the preview" },
+	{ on = "E", run = "seek -5", desc = "Seek up 5 units in the preview" },
+	{ on = "A", run = "seek 5",  desc = "Seek down 5 units in the preview" },
 
 	# Selection
 	{ on = "<Space>", run = [ "toggle --state=none", "arrow 1" ], desc = "Toggle the current selection state" },
@@ -221,8 +221,8 @@ keymap = [
 	{ on = "<C-c>", run = "close", desc = "Close task manager" },
 	{ on = "w",     run = "close", desc = "Close task manager" },
 
-	{ on = "i", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "e", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "e", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "a", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
@@ -243,8 +243,8 @@ keymap = [
 	{ on = "<C-c>",   run = "close",          desc = "Cancel selection" },
 	{ on = "<Enter>", run = "close --submit", desc = "Submit the selection" },
 
-	{ on = "i", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "e", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "e", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "a", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
@@ -263,16 +263,16 @@ keymap = [
 	{ on = "<C-[>",   run = "escape",         desc = "Go back the normal mode, or cancel input" },
 
 	# Mode
-	{ on = "i", run = "insert",                              desc = "Enter insert mode" },
-	{ on = "a", run = "insert --append",                     desc = "Enter append mode" },
-	{ on = "I", run = [ "move -999", "insert" ],             desc = "Move to the BOL, and enter insert mode" },
-	{ on = "A", run = [ "move 999", "insert --append" ],     desc = "Move to the EOL, and enter append mode" },
+	{ on = "j", run = "insert",                              desc = "Enter insert mode" },
+	{ on = "l", run = "insert --append",                     desc = "Enter append mode" },
+	{ on = "J", run = [ "move -999", "insert" ],             desc = "Move to the BOL, and enter insert mode" },
+	{ on = "L", run = [ "move 999", "insert --append" ],     desc = "Move to the EOL, and enter append mode" },
 	{ on = "v", run = "visual",                              desc = "Enter visual mode" },
 	{ on = "V", run = [ "move -999", "visual", "move 999" ], desc = "Enter visual mode and select all" },
 
 	# Character-wise movement
-	{ on = "n",       run = "move -1", desc = "Move back a character" },
-	{ on = "o",       run = "move 1",  desc = "Move forward a character" },
+	{ on = "h",       run = "move -1", desc = "Move back a character" },
+	{ on = "i",       run = "move 1",  desc = "Move forward a character" },
 	{ on = "<Left>",  run = "move -1", desc = "Move back a character" },
 	{ on = "<Right>", run = "move 1",  desc = "Move forward a character" },
 	{ on = "<C-b>",   run = "move -1", desc = "Move back a character" },
@@ -335,8 +335,8 @@ keymap = [
 	{ on = "n", run = "close",          desc = "Cancel the confirm" },
 	{ on = "y", run = "close --submit", desc = "Submit the confirm" },
 
-	{ on = "i", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "e", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "e", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "a", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
@@ -353,8 +353,8 @@ keymap = [
 	{ on = "<Tab>",   run = "close --submit",                             desc = "Submit the completion" },
 	{ on = "<Enter>", run = [ "close --submit", "close_input --submit" ], desc = "Submit the completion and input" },
 
-	{ on = "<A-i>", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "<A-e>", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "<A-e>", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "<A-a>", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
@@ -376,8 +376,8 @@ keymap = [
 	{ on = "<C-c>", run = "close",  desc = "Hide the help" },
 
 	# Navigation
-	{ on = "i", run = "arrow -1", desc = "Move cursor up" },
-	{ on = "e", run = "arrow 1",  desc = "Move cursor down" },
+	{ on = "e", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "a", run = "arrow 1",  desc = "Move cursor down" },
 
 	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
 	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
