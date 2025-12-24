@@ -215,13 +215,13 @@ nmap('i', 'l')
 vmap('i', 'l')
 nmap('I', 'L') -- move to bottom of screen
 vmap('I', 'L') -- move to bottom of screen
-omap('i', 'l') -- For text object to the right
+-- omap('i', 'l') -- For text object to the right -- UNCOMMENTING THIS BREAKS THINGS LIKE delete in braces, i.e. di(
 
 nmap('j', 'i')
 nmap('J', 'I') -- insert at beginning of line
 vmap('j', 'i')
 vmap('J', 'I') -- insert at beginning of line
-nmap('<C-j>', '<C-i>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist
+nmap('<C-j>', '<Tab>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist -- See nvim api documentation, it says: NOTE: In the GUI and in a terminal supporting tui-modifyOtherKeys or tui-csiu, CTRL-I can be mapped separately from <Tab>, on the condition that both keys are mapped, otherwise the mapping applies 
 -- TODO: Eventuell ib, iB und it in visual mode
 
 -- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
@@ -323,21 +323,21 @@ vmap('<Leader>s', 's')
 nmap('cc', '_"_C') -- need "_ so yank also gets blackholed
 -- TODO: Maybe make CC use the old behavior of cc, so that it deletes the indentation? But would mean delay when using single C
 
--- Map for easier window tile navigation
-nmap('<C-e>', '<C-W><C-J>')
-nmap('ႭჃႳ', '<C-W><C-K>') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
-nmap('<C-o>', '<C-W><C-L>')
-nmap('<C-n>', '<C-W><C-H>')
-nmap('<C-E>', '<C-W>J')
-nmap('ႴႭჃႳ', '<C-W>K') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
-nmap('<C-O>', '<C-W>L')
-nmap('<C-N>', '<C-W>H')
--- Map for easier window tile resizing
-nmap('<C-Up>', '<C-W>+')
-nmap('<C-Down>', '<C-W>-')
-nmap('<C-Left>', '<C-W><')
-nmap('<C-Right>', '<C-W>>')
-nmap('<C-M>', '<C-W>=')
+-- -- Map for easier window tile navigation
+-- nmap('<C-e>', '<C-W><C-J>')
+-- nmap('ႭჃႳ', '<C-W><C-K>') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
+-- nmap('<C-o>', '<C-W><C-L>')
+-- nmap('<C-n>', '<C-W><C-H>')
+-- nmap('<C-E>', '<C-W>J')
+-- nmap('ႴႭჃႳ', '<C-W>K') -- see alacritty config for the meaning of this symbol, mapped to ctrl+i binding, see https://medium.com/@jogarcia/alacritty-with-tmux-escape-sequence-for-custom-binding-47df5e401c51
+-- nmap('<C-O>', '<C-W>L')
+-- nmap('<C-N>', '<C-W>H')
+-- -- Map for easier window tile resizing
+-- nmap('<C-Up>', '<C-W>+')
+-- nmap('<C-Down>', '<C-W>-')
+-- nmap('<C-Left>', '<C-W><')
+-- nmap('<C-Right>', '<C-W>>')
+-- nmap('<C-M>', '<C-W>=')
 
 -- Map to switch jumping to marks accent aigu and apostrophe, because accent aigu does not work when dead keys are enabled, and jumping to line and column is more important:
 nmap("'", '`')

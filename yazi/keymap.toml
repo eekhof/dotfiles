@@ -5,7 +5,7 @@
 ### Begin additions from https://yazi-rs.github.io/docs/tips/
 # Smart enter:
 [[mgr.prepend_keymap]]
-on   = "o"
+on   = "i"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 [[mgr.prepend_keymap]]
