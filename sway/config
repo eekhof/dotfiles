@@ -92,20 +92,20 @@ bindsym $mod+q kill
 bindsym $mod+d exec tofi-run --output $(swaymsg -t get_outputs | jq -r '.[] | select(.focused ).name') | xargs swaymsg exec --
 
 # Focus movement
-bindsym $mod+n focus left
-bindsym $mod+e focus down
-bindsym $mod+i focus up
-bindsym $mod+o focus right
+bindsym $mod+h focus left
+bindsym $mod+a focus down
+bindsym $mod+e focus up
+bindsym $mod+i focus right
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move windows
-bindsym $mod+Shift+n move left
-bindsym $mod+Shift+e move down
-bindsym $mod+Shift+i move up
-bindsym $mod+Shift+o move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+a move down
+bindsym $mod+Shift+e move up
+bindsym $mod+Shift+i move right
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -115,8 +115,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+less  move workspace to output left; move workspace to output up
 bindsym $mod+greater move workspace to output right; move workspace to output down
 
-# Split orientation
-bindsym $mod+h split h
+# Split orientation (c is close to v)
+bindsym $mod+c split h
 bindsym $mod+v split v
 
 # Layout changes
