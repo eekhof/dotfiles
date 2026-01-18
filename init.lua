@@ -187,13 +187,13 @@ nmap('A', 'J') -- join lines
 vmap('A', 'J') -- join lines
 imap('<C-a>', '<C-j>') -- add linebreak at current position
 
-nmap('l', 'a') -- Append
-vmap('l', 'a') -- Append
-nmap('gl', 'ga') -- Display hexal/octal of number under cursor
-vmap('gl', 'ga') -- Display hexal/octal of number under cursor
-nmap('L', 'A') -- Append at end of line
-vmap('L', 'A') -- Append at end of line
--- imap('<C-L>', '<C-A>') -- This is not needed because by default C-A does nothing in vim and this would require remapping the C-L escape sequence
+nmap('k', 'a') -- Append
+vmap('k', 'a') -- Append
+nmap('gk', 'ga') -- Display hexal/octal of number under cursor
+vmap('gk', 'ga') -- Display hexal/octal of number under cursor
+nmap('K', 'A') -- Append at end of line
+vmap('K', 'A') -- Append at end of line
+-- imap('<C-K>', '<C-A>') -- This is not needed because by default C-A does nothing in vim
 
 -- === K
 
@@ -388,7 +388,7 @@ nmap('<Leader>p', 'a <ESC>p')
 nmap('<Leader>P', 'pbJ')
 
 -- Mapping to split line at cursor (inverse to capital J) (and also remove trailing space if there is one in the remaining upper line):
-nmap('<Leader>E', 'i<CR><ESC>k:s/ $//<CR>$')
+nmap('<Leader>A', 'i<CR><ESC>k:s/ $//<CR>$')
 
 -- Mappings for terminal mode, see https://gist.github.com/mahemoff/8967b5de067cffc67cec174cb3a9f49d
 nmap('<Leader>t', ':terminal<CR>')
