@@ -182,7 +182,7 @@ c.url.searchengines = {
     'gh':      'https://github.com/search?o=desc&q={}&s=stars',
     'm':       'https://www.google.com/maps/search/{}',
     'w':       'https://en.wikipedia.org/wiki/{}',
-    'mc':       'https://en.wikipedia.org/wiki/{}',
+    'mc':       'https://minecraft.wiki/w/{}',
 }
 
 config.bind(',t', 'spawn -o sh -c "curl --silent --show-error {url} | pandoc -f html -t plain"')
