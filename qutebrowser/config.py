@@ -171,7 +171,7 @@ config.bind('E', 'tab-prev')
 config.bind('gI', 'tab-move -')
 config.bind('I', 'forward')
 
-config.bind('k', 'mode-enter insert')
+config.bind('l', 'mode-enter insert')
 
 
 # Search engines:
