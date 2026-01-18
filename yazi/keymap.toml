@@ -32,16 +32,16 @@ run = "plugin restore"
 desc = "Restore last deleted files/folders"
 # Open with plugin
 [[mgr.prepend_keymap]]
-on   = "k"
+on   = "l"
 run  = "plugin open-with-cmd"
 desc = "Open with command"
 [[mgr.prepend_keymap]]
-on   = "K"
-run  = "plugin open-with-cmd --args=block"
+on   = "L"
+run  = "plugin open-with-cmd --args='--block'"
 desc = "Open with command in the terminal"
 ### End additions for Plugins, begin own custom keymaps:
 [[mgr.prepend_keymap]]
-on   = "A"
+on   = "K"
 run  = "create --dir"
 desc = "Create a directory"
 [[mgr.prepend_keymap]]
@@ -115,8 +115,8 @@ keymap = [
 	{ on = "<C-r>",   run = "toggle_all --state=none",            desc = "Inverse selection of all files" },
 
 	# Operation
-	# { on = "k",         run = "open",                        desc = "Open selected files" },
-	# { on = "K",         run = "open --interactive",          desc = "Open selected files interactively" },
+	# { on = "l",         run = "open",                        desc = "Open selected files" },
+	# { on = "L",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
@@ -130,7 +130,7 @@ keymap = [
 	{ on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
 	{ on = "d",         run = "remove",                      desc = "Trash selected files" },
 	# { on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
-	{ on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
+	{ on = "k",         run = "create",                      desc = "Create a file (ends with / for directories)" },
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
