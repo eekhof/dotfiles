@@ -150,6 +150,8 @@ config.bind(';M', 'hint --rapid links spawn mpv {hint-url}')
 
 config.set('auto_save.session', True)               # Keep Tabs
 config.set('content.blocking.method', 'both')       # Block ads and trackers
+c.content.blocking.adblock.lists = [ 'https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://easylist.to/easylistgermany/easylistgermany.txt', 'https://easylist-downloads.adblockplus.org/abp-filters-anti-cv.txt', 'https://easylist-downloads.adblockplus.org/antiadblockfilters.txt', ] # general adblocking # tracker blocking # german specific adblocking # quickly evolving list against ads that try to circumvent adblocking # prevent messages about disabling adblockers
+# do not use the easycookielist, as it allows some cookies that it deems necessary instead of just hiding banners or rejecting all
 config.set('content.cookies.accept', 'no-3rdparty') # Privacy
 config.set('scrolling.smooth', True)
 config.set('url.default_page', 'https://qwant.com')
