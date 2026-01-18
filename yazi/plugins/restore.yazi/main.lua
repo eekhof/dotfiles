@@ -67,7 +67,7 @@ end
 local function get_trash_volume()
 	local cwd = get_cwd()
 	local trash_volumes_stream, cmr_err =
-		Command("trash-list"):args({ "--volumes" }):stdout(Command.PIPED):stderr(Command.PIPED):output()
+		Command("trash-list"):arg({ "--volumes" }):stdout(Command.PIPED):stderr(Command.PIPED):output()
 
 	local matched_vol_path = nil
 	if trash_volumes_stream then
@@ -96,7 +96,7 @@ local function get_latest_trashed_items(curr_working_volume)
 	local restorable_items = {}
 	local fake_enter = Command("printf"):stderr(Command.PIPED):stdout(Command.PIPED):spawn():take_stdout()
 	local trash_list_stream, err_cmd = Command(shell)
-		:args({ "-c", "trash-restore " .. path_quote(curr_working_volume) })
+		:arg({ "-c", "trash-restore " .. path_quote(curr_working_volume) })
 		:stdin(fake_enter)
 		:stdout(Command.PIPED)
 		:stderr(Command.PIPED)
