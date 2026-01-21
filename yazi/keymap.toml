@@ -37,7 +37,7 @@ run  = "plugin open-with-cmd"
 desc = "Open with command"
 [[mgr.prepend_keymap]]
 on   = "L"
-run  = "plugin open-with-cmd --args='--block'"
+run  = "plugin open-with-cmd -- block"
 desc = "Open with command in the terminal"
 ### End additions for Plugins, begin own custom keymaps:
 [[mgr.prepend_keymap]]
