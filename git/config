@@ -1,0 +1,34 @@
+[user]
+	name = Lucas Eekhof
+	email = 105216949+eekhof@users.noreply.github.com
+
+[merge]
+    conflictstyle = zdiff3   # display original, modified and current version in case of merge conflict
+
+[commit]
+    verbose = true           # display diff in commit window
+
+[help]
+    autocorrect = prompt     # autocorrect misspelled commands with confirmation
+
+[diff]
+    algorithm = patience     # more readable diffs at slight performance cost
+    tool = vimdiff           # open vimdiff with git difftool
+    colorMoved = plain       # highlight moved lines
+    colorMovedWS = allow-indentation-change  # treat indentation changes as moved lines
+
+[difftool]
+    prompt = false           # disable prompt before opening difftool
+
+[log]
+    date = iso               # better date/time format
+
+[branch]
+    sort = -committerdate    # sort branches by most recent commit
+
+[remote]
+    pushDefault = origin     # default remote to push to
+
+[core]
+    editor = nvim -c 'startinsert'   # use Neovim as default editor
+    excludesfile = ~/.config/git/ignore

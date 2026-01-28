@@ -25,7 +25,7 @@ eval "$(zoxide init bash)"
 # For Zoxide to work properly/to record history:
 # alias cd="z"
 # FZF keybindings:
-export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down'"
+export FZF_DEFAULT_OPTS="--bind 'ctrl-a:down' --bind 'ctrl-e:up'"
 # export FZF_DEFAULT_OPTS="--bind 'ctrl-e:down,ႭჃႳ:up'" # This yields "unsupported key"
 
 # Yazi
