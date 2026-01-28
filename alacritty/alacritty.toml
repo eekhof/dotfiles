@@ -10,7 +10,7 @@ title = "Terminal"
 class = { instance = "Alacritty", general = "Alacritty" }
 
 [font]
-size = 13
+size = 16
 [font.bold]
 family = "monospace"
 style = "Bold"
@@ -39,4 +39,5 @@ bindings = [
     { key = "Back", mods= "Control|Shift", chars="\u0015"}, # Delete back line
     { key = "Left", mods = "Control|Shift", chars = "\u0001"}, # Go to beginning of line, alternative to Ctrl+a
     { key = "Right", mods = "Control|Shift", chars = "\u0005"}, # Go to end of line, alternative to Ctrl+e
+    { key = "Space", mods = "Control", chars = "Ⴔ"}, # For tmux ctrl+space to work, because otherwise alacritty sends ctrl+space as the null character ^@ which cannot be bound by tmux
 ]
