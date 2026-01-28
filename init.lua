@@ -976,10 +976,9 @@ ls = require("luasnip")
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-            -- ["<C-i>"] = cmp.mapping.select_prev_item(), -- previous suggestion -- see alacritty config for the meaning of the character, or link above
-            -- The above mapping cannot work with the special character bound to ctrl i in alacritty, since nvim-cmp only checks for specific alphanumeric characters and certain ascii ones, see https://github.com/hrsh7th/nvim-cmp/pull/2073 and for a solution see code below, and also https://github.com/hrsh7th/nvim-cmp/issues/1849
-            ["ႭჃႳ"] = cmp.mapping.select_prev_item(),
-            ["<C-e>"] = cmp.mapping.select_next_item(),
+            -- The mapping of C-i cannot work with the special character bound to ctrl i in alacritty, since nvim-cmp only checks for specific alphanumeric characters and certain ascii ones, see https://github.com/hrsh7th/nvim-cmp/pull/2073 and for a solution see code below, and also https://github.com/hrsh7th/nvim-cmp/issues/1849
+            ["<C-e>"] = cmp.mapping.select_prev_item(),
+            ["<C-a>"] = cmp.mapping.select_next_item(),
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
