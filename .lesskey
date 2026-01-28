@@ -1,6 +1,6 @@
-e      forw-line
-i      back-line
-E      forw-screen
-I      back-screen
-o      forw-window
-n      back-window
+a      forw-line
+e      back-line
+A      forw-screen
+E      back-screen
+i      forw-window
+h      back-window
