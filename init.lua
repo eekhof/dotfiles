@@ -217,11 +217,11 @@ nmap('I', 'L') -- move to bottom of screen
 vmap('I', 'L') -- move to bottom of screen
 -- omap('i', 'l') -- For text object to the right -- UNCOMMENTING THIS BREAKS THINGS LIKE delete in braces, i.e. di(
 
-nmap('j', 'i')
-nmap('J', 'I') -- insert at beginning of line
-vmap('j', 'i')
-vmap('J', 'I') -- insert at beginning of line
-nmap('<C-j>', '<Tab>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist -- See nvim api documentation, it says: NOTE: In the GUI and in a terminal supporting tui-modifyOtherKeys or tui-csiu, CTRL-I can be mapped separately from <Tab>, on the condition that both keys are mapped, otherwise the mapping applies 
+nmap('l', 'i')
+nmap('L', 'I') -- insert at beginning of line
+vmap('l', 'i')
+vmap('L', 'I') -- insert at beginning of line
+nmap('<C-L>', '<Tab>') -- ATTENTION: This cannot be mapped, mapping Ctrl+i will break the tab key, since Ctrl+i is its terminal composed character sequence. See https://unix.stackexchange.com/questions/563469/conflict-ctrl-i-with-tab-in-normal-mode and https://vi.stackexchange.com/questions/25473/tab-does-not-work-with-vim-for-me -- go to newer position in jumplist -- See nvim api documentation, it says: NOTE: In the GUI and in a terminal supporting tui-modifyOtherKeys or tui-csiu, CTRL-I can be mapped separately from <Tab>, on the condition that both keys are mapped, otherwise the mapping applies 
 -- TODO: Eventuell ib, iB und it in visual mode
 
 -- Map default behavior of neio keys to hjkl, in the way that: l does now what n did, h does now what e did, j does now what i did, k does now what o did:
