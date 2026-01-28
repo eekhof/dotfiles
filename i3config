@@ -98,8 +98,8 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
+# split in horizontal orientation (c is close to v)
+bindsym $mod+c split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -119,7 +119,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+k focus parent
 
 # focus the child container (has to be reboudn because of dmenu, has to be bound because mod+a for jump to parent exists)
 bindsym $mod+y focus child
