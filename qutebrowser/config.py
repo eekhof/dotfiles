@@ -136,7 +136,7 @@ config.set('content.local_content_can_access_file_urls', False, 'file:///home/lu
 # config.set('colors.webpage.darkmode.enabled', True)
 config.set("colors.webpage.preferred_color_scheme", "dark")
 import catppuccin
-catppuccin.setup(c, 'mocha', True)
+catppuccin.setup(c, 'latte', True)
 
 config.set('fonts.default_size', '13pt')
 
