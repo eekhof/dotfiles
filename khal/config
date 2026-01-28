@@ -7,6 +7,8 @@ path = ~/.local/share/vdirsyncer/calendar/ehrenamt/
 path = ~/.local/share/vdirsyncer/calendar/personal/
 [[gesundheit]]
 path = ~/.local/share/vdirsyncer/calendar/gesundheit/
+[[contact_birthdays]]
+path = ~/.local/share/vdirsyncer/calendar/contact_birthdays/
 
 [locale]
 local_timezone= Europe/Berlin
