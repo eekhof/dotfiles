@@ -75,7 +75,8 @@ suppress_preload = false
 
 fetchers = [
 	# Mimetype
-	{ id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
+	{ id = "mime", url = "*", run = "mime.local", prio = "high" },
+	{ id = "mime", url = "*/", run = "mime.dir", prio = "high" },
 ]
 preloaders = [
 	# Image
