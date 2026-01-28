@@ -1,20 +1,27 @@
-# Colemak mappings:
-map n scroll left
-map e scroll down
-map i scroll up
-map o scroll right
-map l search forward
-map L search backward
-map k focus_inputbar :open 
-map K focus_inputbar :open  append_filepath
+# For default bindings see https://pwmt.org/projects/zathura/documentation/
+# For namess of commands do `man zathurarc`
+
+# Gallium mappings:
+map h scroll left
+map a scroll down
+map A scroll full-down
+map e scroll up
+map E scroll full-up
+map i scroll right
+map l focus_inputbar :open\ 
+# TODO the following does not work properly:
+# map L focus_inputbar :open\ append_filepath
+
+# This is normally bound to a:
+map k adjust_window best-fit
 
 # Navigation in the bookmark/index window opened with tab:
-map [index] e navigate_index down
-map [index] i navigate_index up
-map [index] o navigate_index expand
-map [index] O navigate_index expand-all
-map [index] n navigate_index collapse
-map [index] N navigate_index collapse-all
+map [index] a navigate_index down
+map [index] e navigate_index up
+map [index] i navigate_index expand
+map [index] I navigate_index expand-all
+map [index] h navigate_index collapse
+map [index] H navigate_index collapse-all
 
 # Set window title, which gets displayed in e.g. I3 window title:
 set window-title-basename true
@@ -28,10 +35,10 @@ set zoom-step 20
 set scroll-step 100
 set scroll-page-aware "true" # So when jumping pages it will align with top of page regardless of scroll step
 # zoom mappings (Overlap with default jumplist bindings, remap those to ctrl shift)
-map <C-i> zoom in
-map <C-o> zoom out
-map <C-O> jumplist backward
-map <C-I> jumplist forward
+map <C-a> zoom in
+map <C-e> zoom out
+map <C-l> jumplist backward
+map <C-o> jumplist forward
 
 # copy selection to system clipboard
 set selection-clipboard clipboard
