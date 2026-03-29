@@ -787,6 +787,14 @@ local plugins = {
         vim.g.loaded_netrwPlugin = 1
       end,
     },
+    {
+        "salkin-mada/openscad.nvim",
+        config = function()
+            vim.g.openscad_load_snippets = true
+            require("openscad")
+        end,
+        dependencies = { "L3MON4D3/LuaSnip", "junegunn/fzf.vim" },
+    },
 }
 local opts = {}
 require("lazy").setup({ plugins, opts }) -- Start lazy.nvim TODO: Lazyloading does need to be enabled explicitly, but some plugins may need to be excluded from lazyloading, see http://www.lazyvim.org/configuration/lazy.nvim and e.g. https://github.com/lervag/vimtex/issues/2996#issuecomment-2359489726
