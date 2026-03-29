@@ -1279,6 +1279,15 @@ vim.opt.indentkeys:remove("]")
 -- Templates -----------------------------
 -- augroup templates
 -- TODO: All of these below here seem to slow the loading of vim quite a bit, even more than just using vimscript commands (?):
+--     C script
+    vim.api.nvim_create_autocmd("BufNewFile", {
+        pattern = "*.c",
+        callback = function()
+            vim.api.nvim_put({ '//usr/bin/gcc "$0" -o "$0".SCIPTOUTPUT && ./"$0".SCIPTOUTPUT "$@" && rm "$0".SCIPTOUTPUT; exit', '// Run `chmod +x ./SCRIPTNAME.c` and then execute with `./test.c`', '#include <stdio.h>', '', 'int main(){', '    float result;', '', '    ', '', '    printf("Result: %f\\n", result);', '    return 0;', '}'}, 'l', false, false) -- Insert template
+            vim.api.nvim_win_set_cursor(0, { 8, 4 }) -- Go to position where the title is to be written
+        end,
+        group = templates
+    })
 --     LaTeX
     vim.api.nvim_create_autocmd("BufNewFile", {
         pattern = "*.tex",
