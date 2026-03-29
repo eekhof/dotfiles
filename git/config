@@ -32,3 +32,6 @@
 [core]
     editor = nvim -c 'startinsert'   # use Neovim as default editor
     excludesfile = ~/.config/git/ignore
+
+[init]
+    defaultBranch = "master"
