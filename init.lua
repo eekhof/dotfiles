@@ -340,8 +340,8 @@ nmap('cc', '_"_C') -- need "_ so yank also gets blackholed
 -- nmap('<C-M>', '<C-W>=')
 
 -- Map to switch jumping to marks accent aigu and apostrophe, because accent aigu does not work when dead keys are enabled, and jumping to line and column is more important:
-nmap("'", '`')
-nmap("`", "'")
+-- nmap("'", '`')
+-- nmap("`", "'")
 
 -- Prevent cursor from shifting to left after enter-leaving the insert mode: -- TODO: Disabled experimentally
 -- vim.g.CursorColumnI = 0                        -- the cursor column position in INSERT
@@ -510,40 +510,42 @@ vmap('//', 'y/\\V<C-R>=escape(@",\'/\\\')<CR><CR>') -- See https://vim.fandom.co
 imap('<C-s>', '<Esc>:lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
 nmap('<C-s>', ':lua if vim.bo.modified then vim.cmd("w") end if #vim.fn.getbufinfo({buflisted = 1}) > 1 then vim.cmd("bd") else vim.cmd("q") end<CR>')
 
+-- =====================================
 -- TODO: The following has been replaced by m4xshen/autoclose.nvim, but has been reactivated, because autoclose seems to cause unnecessary lag
 -- Brackets and Braces completion (Source: https://vim.fandom.com/wiki/Automatically_append_closing_characters) TODO: THIS CAUSES MUCH LAG WHEN TYPING IN FRONT OF CLOSING BRACKET or similar
 -- Curly Brackets:
-imap('{', '{}<Left>')
-imap('{<CR>', '{<CR>}<Esc>O')
-imap('{{', '{')
-imap('{}', '{}')
-imap('}', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"}\" ? \"\\<lt>Right>\" : \"}\"<CR>')-- Skip placement of closing brackets if already present, used backward compatible vim version which does not use <expr> matching but register instead, because otherwise it would not work with lua, see https://vim.fandom.com/wiki/Automatically_append_closing_characters#Backwards-compatible_closing_brace_skip
--- Parentheses:
-imap('(', '()<Left>')
-imap('(<CR>', '(<CR>)<Esc>O')
-imap('((', '(')
-imap('()', '()')
-imap(')', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \")\" ? \"\\<lt>Right>\" : \")\"<CR>')-- Skip placement of closing brackets if already present
--- Square Brackets:
-imap('[', '[]<Left>')
-imap('[<CR>', '[<CR>]<Esc>O')
-imap('[[', '[')
-imap('[]', '[]')
-imap(']', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"]\" ? \"\\<lt>Right>\" : \"]\"<CR>')-- Skip placement of closing brackets if already present
--- Double Quotes (Same character comletions are a little different in the last line, see source):
-imap('\"', '\"\"<Left>')
-imap('\"<CR>', '\"<CR>\"<Esc>O')
-imap('\"\"', '\"')
-vim.api.nvim_set_keymap('i', '"', 'strpart(getline("."), col(".")-1, 1) == "\\"" ? "\\<Right>" : "\\"\\"\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present (Notice the expr option in contrast to the default imap function)
--- Single Quotes:
-imap("\'", "\'\'<Left>")
-imap("\'<CR>", "\'<CR>\'<Esc>O")
-imap("\'\'", "\'")
-vim.api.nvim_set_keymap('i', "'", 'strpart(getline("."), col(".")-1, 1) == "\'" ? "\\<Right>" : "\'\'\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
--- Backtick:
-imap("`", "``<Left>")
-imap("`<CR>", "`<CR>`<Esc>O")
-imap("``", "`")
+-- imap('{', '{}<Left>')
+-- imap('{<CR>', '{<CR>}<Esc>O')
+-- imap('{{', '{')
+-- imap('{}', '{}')
+-- imap('}', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"}\" ? \"\\<lt>Right>\" : \"}\"<CR>')-- Skip placement of closing brackets if already present, used backward compatible vim version which does not use <expr> matching but register instead, because otherwise it would not work with lua, see https://vim.fandom.com/wiki/Automatically_append_closing_characters#Backwards-compatible_closing_brace_skip
+-- -- Parentheses:
+-- imap('(', '()<Left>')
+-- imap('(<CR>', '(<CR>)<Esc>O')
+-- imap('((', '(')
+-- imap('()', '()')
+-- imap(')', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \")\" ? \"\\<lt>Right>\" : \")\"<CR>')-- Skip placement of closing brackets if already present
+-- -- Square Brackets:
+-- imap('[', '[]<Left>')
+-- imap('[<CR>', '[<CR>]<Esc>O')
+-- imap('[[', '[')
+-- imap('[]', '[]')
+-- imap(']', '<C-R>=strpart(getline(\'.\'), col(\'.\')-1, 1) == \"]\" ? \"\\<lt>Right>\" : \"]\"<CR>')-- Skip placement of closing brackets if already present
+-- -- Double Quotes (Same character comletions are a little different in the last line, see source):
+-- imap('\"', '\"\"<Left>')
+-- imap('\"<CR>', '\"<CR>\"<Esc>O')
+-- imap('\"\"', '\"')
+-- vim.api.nvim_set_keymap('i', '"', 'strpart(getline("."), col(".")-1, 1) == "\\"" ? "\\<Right>" : "\\"\\"\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present (Notice the expr option in contrast to the default imap function)
+-- -- Single Quotes:
+-- imap("\'", "\'\'<Left>")
+-- imap("\'<CR>", "\'<CR>\'<Esc>O")
+-- imap("\'\'", "\'")
+-- vim.api.nvim_set_keymap('i', "'", 'strpart(getline("."), col(".")-1, 1) == "\'" ? "\\<Right>" : "\'\'\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
+-- -- Backtick:
+-- imap("`", "``<Left>")
+-- imap("`<CR>", "`<CR>`<Esc>O")
+-- imap("``", "`")
+-- =====================================
 vim.api.nvim_set_keymap('i', "`", 'strpart(getline("."), col(".")-1, 1) == "`" ? "\\<Right>" : "``\\<Left>"', { expr = true, noremap = true, silent = true }) -- Skip placement of closing quotes if already present
 -- Dollar Sign (only in tex and bib files, annoying otherwise):
 vim.api.nvim_create_autocmd('FileType', {
