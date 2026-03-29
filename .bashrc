@@ -202,12 +202,12 @@ bind '"\e[B": history-search-forward'
 bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
 
-# CONTROL FLAG TO IGNORE COMMANDS WITH LEADING SPACES FROM HISTORY
-HISTCONTROL=ignorespace
-
-# SET HISTORY SIZE
+# SET HISTORY OPTIONS
+HISTFILE=~/.local/state/bash/bash_history
+HISTCONTROL=ignorespace # CONTROL FLAG TO IGNORE COMMANDS WITH LEADING SPACES FROM HISTORY
 HISTSIZE=5000 # Number of commands to log in one terminal session
 HISTFILESIZE=5000 # Number of commands to log in histfile after terminal session is closed
+PROMPT_COMMAND='history -a' # Append to history immediately, not only when ending shell session. Could also clear memory and reload with -c -r, but this would make multiple sessions interfere with each other
 
 # Add Android development tools/flutter to path:
 export ANDROID_HOME=/usr/src/debug/android-sdk
