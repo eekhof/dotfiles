@@ -1319,7 +1319,7 @@ vim.opt.indentkeys:remove("]")
     vim.api.nvim_create_autocmd("BufNewFile", {
         pattern = "*.sh",
         callback = function()
-            vim.api.nvim_put({ '#!/bin/sh', ''}, 'l', false, true) -- Insert template and follow cursor to position where code is to be written
+            vim.api.nvim_put({ '#!/bin/bash', ''}, 'l', false, true) -- Insert template and follow cursor to position where code is to be written
         end,
         group = templates
     })
