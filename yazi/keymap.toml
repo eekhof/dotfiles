@@ -23,6 +23,11 @@ desc = "Enter the child directory, or open the file"
 #	shell 'echo "$@" | xfce4-clipman -i -selection clipboard -t text/uri-list' --confirm
 #''', "yank" ]
 # TODO: Fix clipboard, add drag and drop, whab is Close input by once Esc press, show git, prevent netrw, etc, see tips
+# Ripdrag (TODO fix this, this does not yet work):
+# [[manager.prepend_keymap]]
+# on  = "<C-k>"
+# run = "shell 'ripdrag \"$@\" -x 2>/dev/null &' --confirm"
+# desc = "Open ripdrag window"
 ### End additions from yazi tips
 ### Begin additions for Plugins
 # Restore plugin

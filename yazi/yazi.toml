@@ -35,7 +35,8 @@ open = [
 ]
 # TODO: Make some of these orphan = true , this ensures that e.g. image viewer continues to run after yazi closes. But for some this is undesired, e.g. when editing, there block=true may be desired. see https://yazi-rs.github.io/docs/configuration/yazi/#opener
 edit = [
-	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+  { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" }, # Open editor in same alacritty window as yazi
+  # { run = 'alacritty -e nvim "$@"', orphan = true, desc = "nvim (new Alacritty window)" } # Open in different Window TODO: When doing this, rename will not work anymore
 ]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },

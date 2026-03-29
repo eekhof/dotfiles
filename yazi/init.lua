@@ -2,6 +2,7 @@ require("folder-rules"):setup()
 require("zoxide"):setup {
 	update_db = true,
 }
+layout = "layout.lua"
 
 -- TODO: The restore plugin needs some fixes in the confirmation dialog, and is likely going to be revamped soon, see github for update, load accordingly
 require("restore"):setup({
@@ -54,3 +55,8 @@ function Status:name()
 	end
 	return ui.Line(" " .. h.name .. linked)
 end
+
+-- Make smart enter able to open multiple selected files:
+require("smart-enter"):setup {
+	open_multi = true,
+}
