@@ -182,12 +182,15 @@ screentablet() {
     # Set the tablet to the right of the primary monitor
     TABLETID=$(xinput | grep -oP 'Huion Tablet Pen Pen.*\tid=\K[0-9]+') # the (0) in the tablet name was left out because it causes problems with the grep command
     get_connected_monitors
-    OUTPUT=${1:-${connected_monitors[0]}}
+    # OUTPUT=${1:-${connected_monitors[1]}}
+    OUTPUT=HDMI-1
+    echo $OUTPUT
     xinput map-to-output "$TABLETID" "$OUTPUT"
     echo "Set tablet $TABLETID to output $OUTPUT"
 }
 
 # set -o vi # Enable bash mode mode to use vim keybindings
+# TODO: Customize these bindings to colemak, see https://unix.stackexchange.com/questions/74075/custom-key-bindings-for-vi-shell-mode-ie-set-o-vi
 bind '"jk":vi-movement-mode' # Use jk to exit normal vim mode in bash and go back to insert mode, see https://unix.stackexchange.com/questions/74075/custom-key-bindings-for-vi-shell-mode-ie-set-o-vi/74079#74079
 # Add some handy emacs-bindings for bash terminal eventhough vi mode is activated:
 bind '"\C-k":kill-line' # Use CTRL+k to kill rest of line behind cursor
