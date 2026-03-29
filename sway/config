@@ -4,7 +4,7 @@
 set $mod Mod4
 set $terminal alacritty
 # set $browser librewolf
-set $browser qutebrowser
+set $browser librewolf
 
 # To make screensharing work, see https://forum.endeavouros.com/t/unable-to-share-screen-with-sway-wm/46654/4 :
 include /etc/sway/config.d/*
@@ -75,8 +75,9 @@ exec nextcloud
 # Default session for work:
 workspace 10; exec mattermost-desktop
 workspace 9; exec signal-desktop
-workspace 3; exec qutebrowser
+workspace 3; exec librewolf
 workspace 2; exec alacritty --working-directory ~/Studium/Doktorarbeit/software -e bash
+workspace 1; exec alacritty --working-directory ~/Studium/Doktorarbeit/software -e yazi
 
 
 ################################################################################
