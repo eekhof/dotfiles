@@ -67,6 +67,9 @@ font pango:Noto Sans Mono 11
 # Force first workspace to be on laptop monitor:
 workspace 1 output eDP-1
 
+# Start workspaces tabbed by default:
+# workspace_layout tabbed
+
 # Autostart apps
 exec dunst -conf /home/lucas/static-website/longterm/dunstrc
 exec nextcloud
@@ -209,6 +212,18 @@ bindsym $ps3 exec grim $psf
 bindsym $ps4 exec grim -g "$(slurp)" $psf
 # Snipping tool-like behavior:
 bindsym $ps5 exec grim -g "$(slurp)" - | wl-copy
+
+
+# Bind specific app types to specific windows (get info on these with `swaymsg -t get_tree` and `assign [app_id="firefox"] workspace number 3` (TODO: The line below causes a rendering issue where the yazi window is created on workspace 1 and it is switched there, but there is a weird ghost-alacritty tab open that disappears when trying to go to it, the explicit switch to workspace n 1 is only there because otherwise there is another bug where the view sticks to workspace 2):
+# for_window [title=".*Yazi.*" app_id="Alacritty"] move container to workspace number 1; workspace number 1
+# for_window [app_id="Alacritty" title="(?!.*Yazi).*"] move container to workspace number 2
+# assign [app_id="librewolf"] workspace number 3
+# assign [con_mark="Signal"] workspace number 9
+# assign [class="whatsdesk"] workspace number 9
+# assign [con_mark="Mattermost Desktop App"] workspace number 10
+
+# Follow newly opened windows to workspace (Match anything except ueberzugpp because otherwise yazi loses focus every time a preview is shown):
+# for_window [app_id="^(?!ueberzugpp.*).*$"] focus
 
 ################################################################################
 # Monitors (Get parameters with `swaymsg -t get_outputs`)
