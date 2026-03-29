@@ -141,7 +141,8 @@ catppuccin.setup(c, 'latte', True)
 config.set('fonts.default_size', '13pt')
 
 config.bind(',p', 'spawn --userscript qute-pass --dmenu-invocation tofi')
-config.bind(',P', 'spawn --userscript qute-pass --password-only --dmenu-invocation "tofi"')
+# config.bind(',P', 'spawn --userscript qute-pass --password-only --dmenu-invocation "tofi"')
+config.bind(',P', 'spawn --userscript qute-pass --unfiltered --dmenu-invocation "tofi"')
 # TODO: To get default binds and reconfigure them to colemak look at qute://help/settings.html#bindings.default
 # config.set('tabs.position', 'left')
 config.bind(',m', 'spawn umpv {url}')
@@ -177,8 +178,9 @@ config.bind('l', 'mode-enter insert')
 # Search engines:
 # use these by typing e.g. o for open, then "g testquery", so the command is "open -t g testquery". One could also add e.g. "!" in front of the letters to differentiate from letter searches, but in practice this never interferes
 c.url.searchengines = {
-    'DEFAULT':  'https://qwant.com/search?hl=en&q={}',
+    'DEFAULT':       'https://google.com/search?udm=14&q={}', # Google without ai and such
     'g':       'https://google.com/search?udm=14&q={}', # Google without ai and such
+    'q':  'https://qwant.com/search?hl=en&q={}',
     'gh':      'https://github.com/search?o=desc&q={}&s=stars',
     'm':       'https://www.google.com/maps/search/{}',
     'w':       'https://en.wikipedia.org/wiki/{}',
