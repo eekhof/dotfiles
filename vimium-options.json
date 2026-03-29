@@ -1,0 +1,6 @@
+{
+  "keyMappings": "map l enterInsertMode\n\nmap a scrollDown\nmap e scrollUp\nmap i scrollRight\n\nmap I goForward\n\nmap E nextTab\nmap A previousTab\n\nmap d removeTab\nmap u restoreTab\nmap DD closeOtherTabs\nmap D< closeTabsOnLeft\nmap D> closeTabsOnRight",
+  "linkHintCharacters": "nrtshaei",
+  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\n# google without ai etc.:\ng: https://google.com/search?udm=14&q=%s GoogleDebloated\nm: https://www.google.com/maps/search/%s Maps\nq: https://qwant.com/search?hl=en&q=%s Qwant\ngh: https://github.com/search?o=desc&q=%s&s=stars GitHub\nmc: https://minecraft.wiki/w/%s MinecraftWiki\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s\n# qw: https://www.qwant.com/?q=%s Qwant",
+  "settingsVersion": "2.3.1"
+}
