@@ -215,6 +215,7 @@ nmap('i', 'l')
 vmap('i', 'l')
 nmap('I', 'L') -- move to bottom of screen
 vmap('I', 'L') -- move to bottom of screen
+nmap('<C-k>', '<C-i>') -- bind to k instead of i because ctrl+l is hard to press in gallium
 -- omap('i', 'l') -- For text object to the right -- UNCOMMENTING THIS BREAKS THINGS LIKE delete in braces, i.e. di(
 
 nmap('l', 'i')
@@ -988,7 +989,9 @@ ls = require("luasnip")
         mapping = cmp.mapping.preset.insert({
             -- The mapping of C-i cannot work with the special character bound to ctrl i in alacritty, since nvim-cmp only checks for specific alphanumeric characters and certain ascii ones, see https://github.com/hrsh7th/nvim-cmp/pull/2073 and for a solution see code below, and also https://github.com/hrsh7th/nvim-cmp/issues/1849
             ["<C-e>"] = cmp.mapping.select_prev_item(),
+            ["<S-Tab>"] = cmp.mapping.select_prev_item(),
             ["<C-a>"] = cmp.mapping.select_next_item(),
+            ["<Tab>"] = cmp.mapping.select_next_item(),
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
@@ -1020,10 +1023,12 @@ ls = require("luasnip")
     cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline({
             -- The following mappings deviate in syntax from those in insert mode. This is necessary for it to work, but is considered to be a bug, see the link afterwards. If this gets fixed, adjust this to follow consistent syntax. Source: https://github.com/hrsh7th/nvim-cmp/issues/1835
-            ["ႭჃႳ"] = { c = cmp.mapping.select_prev_item() },
-            ["<C-e>"] = { c = cmp.mapping.select_next_item() },
-            ["<C-n>"] = { c = cmp.mapping.abort() },
-            ["<C-o>"] = { c = cmp.mapping.confirm() },
+            ["<C-e>"] = { c = cmp.mapping.select_prev_item() },
+            ["<S-Tab>"] = { c = cmp.mapping.select_prev_item() },
+            ["<C-a>"] = { c = cmp.mapping.select_next_item() },
+            ["<Tab>"] = { c = cmp.mapping.select_next_item() },
+            ["<C-h>"] = { c = cmp.mapping.abort() },
+            ["ႭჃႳ"] = { c = cmp.mapping.confirm() },
 
         }),
         sources = {
@@ -1034,10 +1039,12 @@ ls = require("luasnip")
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline({
             -- The following mappings deviate in syntax from those in insert mode. This is necessary for it to work, but is considered to be a bug, see the link afterwards. If this gets fixed, adjust this to follow consistent syntax. Source: https://github.com/hrsh7th/nvim-cmp/issues/1835
-            ["ႭჃႳ"] = { c = cmp.mapping.select_prev_item() },
-            ["<C-e>"] = { c = cmp.mapping.select_next_item() },
-            ["<C-n>"] = { c = cmp.mapping.abort() },
-            ["<C-o>"] = { c = cmp.mapping.confirm() },
+            ["<C-e>"] = { c = cmp.mapping.select_prev_item() },
+            ["<S-Tab>"] = { c = cmp.mapping.select_prev_item() },
+            ["<C-a>"] = { c = cmp.mapping.select_next_item() },
+            ["<Tab>"] = { c = cmp.mapping.select_next_item() },
+            ["<C-h>"] = { c = cmp.mapping.abort() },
+            ["ႭჃႳ"] = { c = cmp.mapping.confirm() },
         }),
         sources = cmp.config.sources({
             { name = 'path' }
