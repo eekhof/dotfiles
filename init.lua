@@ -702,9 +702,64 @@ local plugins = {
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/nvim-cmp', -- Completions, but needs setup to work for each specific language
     'hrsh7th/cmp-nvim-lsp', -- For this and the following three plugins see recommended config on https://github.com/hrsh7th/nvim-cmp -- TODO: This is legacy since neovim 0.11+ does it natively, see https://gpanders.com/blog/whats-new-in-neovim-0-11/
-    'nvim-treesitter/nvim-treesitter',
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      event = { "BufReadPost", "BufNewFile" },
+
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = { "c", "python", "lua", "fortran" },
+          sync_install = false,
+          auto_install = true,
+          ignore_install = { "javascript" },
+
+          highlight = {
+            enable = true,
+            disable = function(lang, buf)
+              local max_filesize = 100 * 1024
+              local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+              if ok and stats and stats.size > max_filesize then
+                return true
+              end
+              if lang == "latex" then
+                return true
+              end
+            end,
+            additional_vim_regex_highlighting = false,
+          },
+
+          textobjects = {
+            enable = true,
+            select = {
+              enable = true,
+              lookahead = true,
+              keymaps = {
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+              },
+            },
+          },
+
+          refactor = {
+            navigation = {
+              enable = true,
+              keymaps = {
+                goto_definition = "gnd",
+                list_definitions = "gnD",
+                list_definitions_toc = "gO",
+                goto_next_usage = "<a-*>",
+                goto_previous_usage = "<a-#>",
+              },
+            },
+          },
+        })
+      end,
+    },
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-refactor', -- Use refactor functionality to implement jump to definition etc, see https://github.com/nvim-treesitter/nvim-treesitter-refactor?tab=readme-ov-file#navigation
+
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'petertriho/cmp-git',
@@ -1177,97 +1232,6 @@ vim.cmd.colorscheme('catppuccin')
 --         },
 --     },
 -- }
-require'nvim-treesitter.configs'.setup {
-    -- A list of parser names, or "all" (the five listed parsers should always be installed)
-    ensure_installed = { "c", "python", "lua", "fortran" },
-
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
-
-    -- Automatically install missing parsers when entering buffer
-    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-    auto_install = true,
-
-    -- List of parsers to ignore installing (or "all")
-    ignore_install = { "javascript" },
-
-    ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-    -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-    highlight = {
-        enable = true,
-
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        -- disable = { "c", "rust" },
-        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-        disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-                return true
-            end
-            -- Disable for filetype latex, because vimtex highlighting better than treesitter, see https://blog.epheme.re/software/nvim-latex.html :
-            if lang == 'latex' then
-                return true
-            end
-        end,
-
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
-    textobjects = {
-        enable = true,
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-            },
-        },
-        move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = { [']m'] = '@function.outer', [']]'] = '@class.outer' },
-            goto_next_end = { [']M'] = '@function.outer', [']['] = '@class.outer' },
-            goto_previous_start = { ['[m'] = '@function.outer', ['[['] = '@class.outer' },
-            goto_previous_end = { ['[M'] = '@function.outer', ['[]'] = '@class.outer' },
-        },
-        swap = {
-            enable = true,
-            swap_next = { ['<leader>>'] = '@parameter.inner' },
-            swap_previous = { ['<leader><'] = '@parameter.outer' },
-        },
-        lsp_interop = {
-            enable = true,
-            peek_definition_code = {
-                ['gD'] = '@function.outer',
-            },
-        },
-    },
-    refactor = {
-        navigation = {
-            enable = true,
-            -- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
-            keymaps = {
-                goto_definition = "gnd",
-                list_definitions = "gnD",
-                list_definitions_toc = "gO",
-                goto_next_usage = "<a-*>",
-                goto_previous_usage = "<a-#>",
-            },
-        },
-    },
-}
 -- This seems to cause to much lag, see manual implementation below
 -- require("autoclose").setup({
 --     options = {
